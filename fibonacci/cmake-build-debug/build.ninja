@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/cmake-build-debug/
+cmake_ninja_workdir = /home/alexbs01/proyectosGit/algoritmos/fibonacci/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target fibonacci
 
@@ -49,19 +49,19 @@ cmake_ninja_workdir = /home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/cma
 
 build cmake_object_order_depends_target_fibonacci: phony || CMakeFiles/fibonacci.dir
 
-build CMakeFiles/fibonacci.dir/funcionesFibonacci.c.o: C_COMPILER__fibonacci_Debug /home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/funcionesFibonacci.c || cmake_object_order_depends_target_fibonacci
+build CMakeFiles/fibonacci.dir/funcionesFibonacci.c.o: C_COMPILER__fibonacci_Debug /home/alexbs01/proyectosGit/algoritmos/fibonacci/funcionesFibonacci.c || cmake_object_order_depends_target_fibonacci
   DEP_FILE = CMakeFiles/fibonacci.dir/funcionesFibonacci.c.o.d
   FLAGS = -g -std=gnu11
-  INCLUDES = -I/home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/.
+  INCLUDES = -I/home/alexbs01/proyectosGit/algoritmos/fibonacci/.
   OBJECT_DIR = CMakeFiles/fibonacci.dir
   OBJECT_FILE_DIR = CMakeFiles/fibonacci.dir
   TARGET_COMPILE_PDB = CMakeFiles/fibonacci.dir/
   TARGET_PDB = fibonacci.pdb
 
-build CMakeFiles/fibonacci.dir/main.c.o: C_COMPILER__fibonacci_Debug /home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/main.c || cmake_object_order_depends_target_fibonacci
+build CMakeFiles/fibonacci.dir/main.c.o: C_COMPILER__fibonacci_Debug /home/alexbs01/proyectosGit/algoritmos/fibonacci/main.c || cmake_object_order_depends_target_fibonacci
   DEP_FILE = CMakeFiles/fibonacci.dir/main.c.o.d
   FLAGS = -g -std=gnu11
-  INCLUDES = -I/home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/.
+  INCLUDES = -I/home/alexbs01/proyectosGit/algoritmos/fibonacci/.
   OBJECT_DIR = CMakeFiles/fibonacci.dir
   OBJECT_FILE_DIR = CMakeFiles/fibonacci.dir
   TARGET_COMPILE_PDB = CMakeFiles/fibonacci.dir/
@@ -89,7 +89,7 @@ build fibonacci: C_EXECUTABLE_LINKER__fibonacci_Debug CMakeFiles/fibonacci.dir/f
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/cmake-build-debug && /snap/clion/206/bin/cmake/linux/bin/ccmake -S/home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci -B/home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/cmake-build-debug
+  COMMAND = cd /home/alexbs01/proyectosGit/algoritmos/fibonacci/cmake-build-debug && /snap/clion/206/bin/cmake/linux/bin/ccmake -S/home/alexbs01/proyectosGit/algoritmos/fibonacci -B/home/alexbs01/proyectosGit/algoritmos/fibonacci/cmake-build-debug
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -101,7 +101,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/cmake-build-debug && /snap/clion/206/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci -B/home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/cmake-build-debug
+  COMMAND = cd /home/alexbs01/proyectosGit/algoritmos/fibonacci/cmake-build-debug && /snap/clion/206/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/alexbs01/proyectosGit/algoritmos/fibonacci -B/home/alexbs01/proyectosGit/algoritmos/fibonacci/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -117,7 +117,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 
 #############################################
-# Folder: /home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/cmake-build-debug
+# Folder: /home/alexbs01/proyectosGit/algoritmos/fibonacci/cmake-build-debug
 
 build all: phony fibonacci
 

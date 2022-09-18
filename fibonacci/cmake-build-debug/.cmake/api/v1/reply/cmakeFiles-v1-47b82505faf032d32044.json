@@ -395,8 +395,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/cmake-build-debug",
-		"source" : "/home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci"
+		"build" : "/home/alexbs01/proyectosGit/algoritmos/fibonacci/cmake-build-debug",
+		"source" : "/home/alexbs01/proyectosGit/algoritmos/fibonacci"
 	},
 	"version" : 
 	{

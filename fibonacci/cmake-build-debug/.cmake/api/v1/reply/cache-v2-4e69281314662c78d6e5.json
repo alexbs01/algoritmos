@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/cmake-build-debug"
+			"value" : "/home/alexbs01/proyectosGit/algoritmos/fibonacci/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -463,7 +463,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci"
+			"value" : "/home/alexbs01/proyectosGit/algoritmos/fibonacci"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -995,7 +995,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci/cmake-build-debug"
+			"value" : "/home/alexbs01/proyectosGit/algoritmos/fibonacci/cmake-build-debug"
 		},
 		{
 			"name" : "fibonacci_IS_TOP_LEVEL",
@@ -1019,7 +1019,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/alexbs01/proyectosGit/C/src/algoritmos/fibonacci"
+			"value" : "/home/alexbs01/proyectosGit/algoritmos/fibonacci"
 		}
 	],
 	"kind" : "cache",
