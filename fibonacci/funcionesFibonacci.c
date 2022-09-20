@@ -83,41 +83,58 @@ double microsegundos() {
 
 void tiempoFib1(int numero) {
     double tiempoInicial, tiempoFinal;
-    int count = 0;
-    tiempoInicial = microsegundos();
+    int count = 1;
+
     do {
-        fib1(numero);
-        tiempoFinal = microsegundos();
-        count++;
+    tiempoInicial = microsegundos();
+        for(int i = 0; i < count; i++) {
+            fib1(numero);
+            tiempoFinal = microsegundos();
+        }
+
+        if(tiempoFinal - tiempoInicial <= 500) {
+            count *= 10;
+        }
     } while(tiempoFinal - tiempoInicial <= 500);
-    printf("Tiempo de fib1 para n = %d: %15lf us\n", numero, (tiempoFinal - tiempoInicial)/count);
+    printf("Tiempo de fib1 para n = %d: %15lf us de media en %d ciclos\n", numero, (tiempoFinal - tiempoInicial)/count, count);
 
 }
 
 void tiempoFib2(int numero) {
     double tiempoInicial, tiempoFinal;
-    int count = 0;
-    tiempoInicial = microsegundos();
+    int count = 1;
     do {
-        fib2(numero);
-        tiempoFinal = microsegundos();
-        count++;
+        tiempoInicial = microsegundos();
+        for(int i = 0; i < count; i++) {
+            fib2(numero);
+            tiempoFinal = microsegundos();
+        }
+
+        if(tiempoFinal - tiempoInicial <= 500) {
+            count *= 10;
+        }
     } while(tiempoFinal - tiempoInicial <= 500);
-    printf("Tiempo de fib2 para n = %d: %15lf us\n", numero, (tiempoFinal - tiempoInicial)/count);
+    printf("Tiempo de fib1 para n = %d: %15lf us de media en %d ciclos\n", numero, (tiempoFinal - tiempoInicial)/count, count);
 
 }
 
 void tiempoFib3(int numero) {
     double tiempoInicial, tiempoFinal;
-    int count = 0;
-    tiempoInicial = microsegundos();
-    do {
-        fib3(numero);
-        tiempoFinal = microsegundos();
-        count++;
-    } while(tiempoFinal - tiempoInicial <= 500);
-    printf("Tiempo de fib3 para n = %10d: %15lf us\n", numero, (tiempoFinal - tiempoInicial)/count);
+    int count = 1;
 
+    do {
+        tiempoInicial = microsegundos();
+        for(int i = 0; i < count; i++) {
+            fib3(numero);
+            tiempoFinal = microsegundos();
+        }
+
+        if(tiempoFinal - tiempoInicial <= 500) {
+            count *= 10;
+        }
+    } while(tiempoFinal - tiempoInicial <= 500);
+
+    printf("Tiempo de fib1 para n = %d: %15lf us de media en %d ciclos\n", numero, (tiempoFinal - tiempoInicial)/count, count);
 }
 
 void medicionDeTiempos() {
