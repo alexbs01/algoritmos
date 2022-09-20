@@ -11,7 +11,6 @@ función fib1 (n);
     fin si
 fin función
 */
-
 int fib1(int n) { // Algoritmo recursivo, el más lento de los 3
     if(n < 2) {
         return n;
@@ -30,7 +29,6 @@ función fib2 (n);
     devolver j
 fin función
 */
-
 int fib2(int n) { // Realiza un bucle intercambiando variables
     int i, j, k;
     i = 1;
@@ -83,7 +81,7 @@ double microsegundos() {
     return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 
-double tiempoFib1(int numero) {
+void tiempoFib1(int numero) {
     double tiempoInicial, tiempoFinal;
     int count = 0;
     tiempoInicial = microsegundos();
@@ -93,11 +91,10 @@ double tiempoFib1(int numero) {
         count++;
     } while(tiempoFinal - tiempoInicial <= 500);
     printf("Tiempo de fib1 para n = %d: %15lf us\n", numero, (tiempoFinal - tiempoInicial)/count);
-    return (tiempoFinal - tiempoInicial)/count;
 
 }
 
-double tiempoFib2(int numero) {
+void tiempoFib2(int numero) {
     double tiempoInicial, tiempoFinal;
     int count = 0;
     tiempoInicial = microsegundos();
@@ -107,11 +104,10 @@ double tiempoFib2(int numero) {
         count++;
     } while(tiempoFinal - tiempoInicial <= 500);
     printf("Tiempo de fib2 para n = %d: %15lf us\n", numero, (tiempoFinal - tiempoInicial)/count);
-    return (tiempoFinal - tiempoInicial)/count;
 
 }
 
-double tiempoFib3(int numero) {
+void tiempoFib3(int numero) {
     double tiempoInicial, tiempoFinal;
     int count = 0;
     tiempoInicial = microsegundos();
@@ -121,7 +117,6 @@ double tiempoFib3(int numero) {
         count++;
     } while(tiempoFinal - tiempoInicial <= 500);
     printf("Tiempo de fib3 para n = %10d: %15lf us\n", numero, (tiempoFinal - tiempoInicial)/count);
-    return (tiempoFinal - tiempoInicial)/count;
 
 }
 
