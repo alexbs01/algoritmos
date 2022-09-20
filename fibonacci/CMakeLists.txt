@@ -9,3 +9,5 @@ add_executable(fibonacci
         funcionesFibonacci.c
         funcionesFibonacci.h
         main.c)
+
+target_link_libraries(fibonacci -lm)
