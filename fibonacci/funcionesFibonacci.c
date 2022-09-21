@@ -61,12 +61,18 @@ double microsegundos() {
 
 double tiempoFib1(int numero) {
     double tiempoInicial, tiempoFinal;
-    int count = 0;
-    tiempoInicial = microsegundos();
+    int count = 1;
+
     do {
-        fib1(numero);
-        tiempoFinal = microsegundos();
-        count++;
+        tiempoInicial = microsegundos();
+        for(int i = 0; i < count; i++) {
+            fib1(numero);
+            tiempoFinal = microsegundos();
+        }
+
+        if(tiempoFinal - tiempoInicial <= 500) {
+            count *= 10;
+        }
     } while(tiempoFinal - tiempoInicial <= 500);
 
     return((tiempoFinal - tiempoInicial)/count);
@@ -76,13 +82,20 @@ double tiempoFib1(int numero) {
 
 double tiempoFib2(int numero) {
     double tiempoInicial, tiempoFinal;
-    int count = 0;
-    tiempoInicial = microsegundos();
+    int count = 1;
+
     do {
-        fib2(numero);
-        tiempoFinal = microsegundos();
-        count++;
+        tiempoInicial = microsegundos();
+        for(int i = 0; i < count; i++) {
+            fib2(numero);
+            tiempoFinal = microsegundos();
+        }
+
+        if(tiempoFinal - tiempoInicial <= 500) {
+            count *= 10;
+        }
     } while(tiempoFinal - tiempoInicial <= 500);
+
     return((tiempoFinal - tiempoInicial)/count);
 }
 
@@ -90,13 +103,20 @@ double tiempoFib2(int numero) {
 
 double tiempoFib3(int numero) {
     double tiempoInicial, tiempoFinal;
-    int count = 0;
-    tiempoInicial = microsegundos();
+    int count = 1;
+
     do {
-        fib3(numero);
-        tiempoFinal = microsegundos();
-        count++;
+        tiempoInicial = microsegundos();
+        for(int i = 0; i < count; i++) {
+            fib3(numero);
+            tiempoFinal = microsegundos();
+        }
+
+        if(tiempoFinal - tiempoInicial <= 500) {
+            count *= 10;
+        }
     } while(tiempoFinal - tiempoInicial <= 500);
+
     return((tiempoFinal - tiempoInicial)/count);
 }
 
@@ -153,7 +173,7 @@ void tablaCotas() {
 
 
     printf("\n    n\t|\t  fb1(n)\t|\tCota subestimada   |   Cote Exacta   |\tCota Sobreestimada\t|\n");
-    printf("--------|---------------|----------------------|-----------------|----------------------|\n");
+    printf("--------|-----------------------|--------------------------|-----------------|----------------------|\n");
 
     for(int i = 0; i < sizeof(valoresParaFib1)/sizeof(valoresParaFib1[0]); i++) {
         cotasFib1(valoresParaFib1[i]);
@@ -162,7 +182,7 @@ void tablaCotas() {
     printf("\n");
 
     printf("\n    n\t|\t  fb1(n)\t|\tCota subestimada   |   Cote Exacta   |\tCota Sobreestimada\t|\n");
-    printf("--------|---------------|----------------------|-----------------|----------------------|\n");
+    printf("--------|-----------------------|--------------------------|-----------------|----------------------|\n");
 
 
     for(int i = 0; i < sizeof(valoresParaFib1)/sizeof(valoresParaFib1[0]); i++) {
@@ -172,7 +192,7 @@ void tablaCotas() {
     printf("\n");
 
     printf("\n    n\t|\t  fb1(n)\t|\tCota subestimada   |   Cote Exacta   |\tCota Sobreestimada\t|\n");
-    printf("--------|---------------|----------------------|-----------------|----------------------|\n");
+    printf("--------|-----------------------|--------------------------|-----------------|----------------------|\n");
 
 
     for(int i = 0; i < sizeof(valoresParaFib1)/sizeof(valoresParaFib1[0]); i++) {
@@ -183,7 +203,7 @@ void tablaCotas() {
 /*--------------------------------------------------------------------------------------------------------------------*/
 
 void test(int n) {
-    printf("\n    n\t|\t  fb1(n)\t|\t fb2(n) \t|  \t fb3(n) \t|\n");
+    printf("\n    n\t|\t  fib1(n)\t|\t fib2(n) \t|  \t fib3(n) \t|\n");
     printf("--------|---------------|---------------|---------------|\n");
 
     for(int i = 1; i <= n; i++) {
