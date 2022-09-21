@@ -17,7 +17,7 @@ double tiempoFib1(int numero);  // Calcula los tiempos en usando cada función d
 double tiempoFib2(int numero);
 double tiempoFib3(int numero);
 
-void cotasFib1(int numero);
+void cotasFib1(int numero);     // Calcula las cotas de cada función
 void cotasFib2(int numero);
 void cotasFib3(int numero);
 
