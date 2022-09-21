@@ -1,7 +1,0 @@
-# ninja log v5
-25	40	1663694642440713814	fibonacci	dcb67b6fdf63add9
-0	22	1663694470721414011	CMakeFiles/fibonacci.dir/main.c.o	5c58a348f048d9d2
-0	25	1663694642424713873	CMakeFiles/fibonacci.dir/funcionesFibonacci.c.o	8eb82b431fa905a
-0	65	1663756765938560279	CMakeFiles/fibonacci.dir/main.c.o	77e20ebb3d4e37c6
-1	128	1663756766002592457	CMakeFiles/fibonacci.dir/funcionesFibonacci.c.o	a188c989d7372c32
-128	270	1663756766142662798	fibonacci	dcb67b6fdf63add9
