@@ -66,7 +66,7 @@ countTemp tiempoFib1(int numero) {
         tiempoFinal = microsegundos();
 
         if(tiempoFinal - tiempoInicial <= 500) { // Comprobamos si tardó menos de 500 us en ejecutarse
-            count *= 10;    // Si es el caso se vuelve a ejecutar multiplicando el número de iteraciones por 10
+            count *= 100;    // Si es el caso se vuelve a ejecutar multiplicando el número de iteraciones por 10
         }
     } while(tiempoFinal - tiempoInicial <= 500);
 
@@ -88,7 +88,7 @@ countTemp tiempoFib2(int numero) {
         tiempoFinal = microsegundos();
 
         if(tiempoFinal - tiempoInicial <= 500) {
-            count *= 10;
+            count *= 100;
         }
     } while(tiempoFinal - tiempoInicial <= 500);
 
@@ -110,7 +110,7 @@ countTemp tiempoFib3(int numero) {
         tiempoFinal = microsegundos();
 
         if(tiempoFinal - tiempoInicial <= 500) {
-            count *= 10;
+            count *= 100;
         }
     } while(tiempoFinal - tiempoInicial <= 500);
 
@@ -177,7 +177,7 @@ void tablaCotas() {
 
     printf("\n");
 
-    printf("\n    n\t  | Media de x iteraciones |\t  TiempoFib1(n)\t|\tCota subestimada   |   Cota Ajustada   |\tCota Sobreestimada\t|\n");
+    printf("\n    n\t  | Media de x iteraciones |\t  TiempoFib2(n)\t|\tCota subestimada   |   Cota Ajustada   |\tCota Sobreestimada\t|\n");
     printf("----------|------------------------|--------------------|--------------------------|-------------------|--------------------------------|\n");
 
     for(int i = 0; i < sizeof(valoresParaFib2y3)/sizeof(valoresParaFib2y3[0]); i++) {
@@ -186,7 +186,7 @@ void tablaCotas() {
 
     printf("\n");
 
-    printf("\n    n\t  | Media de x iteraciones |\t  TiempoFib1(n)\t|\tCota subestimada   |   Cota Ajustada   |\tCota Sobreestimada\t|\n");
+    printf("\n    n\t  | Media de x iteraciones |\t  TiempoFib3(n)\t|\tCota subestimada   |   Cota Ajustada   |\tCota Sobreestimada\t|\n");
     printf("----------|------------------------|--------------------|--------------------------|-------------------|--------------------------------|\n");
 
     for(int i = 0; i < sizeof(valoresParaFib2y3)/sizeof(valoresParaFib2y3[0]); i++) {
