@@ -54,7 +54,7 @@ double microsegundos() {
 }
 
 /* Función para calcular cuanto tarda Fib1 */
-double tiempoFib1(int numero) {
+struct chrono tiempoFib1(int numero) {
     double tiempoInicial, tiempoFinal;
     int count = 1;
 
@@ -70,11 +70,13 @@ double tiempoFib1(int numero) {
         }
     } while(tiempoFinal - tiempoInicial <= 500);
 
-    return((tiempoFinal - tiempoInicial)/count); // Retornamos la media de lo que tardó
+    struct chrono c = {count, ((tiempoFinal - tiempoInicial) / count)};
+
+    return c; // Retornamos la media de lo que tardó
 }
 
 /* Función para calcular cuanto tarda Fib2 */
-double tiempoFib2(int numero) {
+struct chrono tiempoFib2(int numero) {
     double tiempoInicial, tiempoFinal;
     int count = 1;
 
@@ -90,11 +92,13 @@ double tiempoFib2(int numero) {
         }
     } while(tiempoFinal - tiempoInicial <= 500);
 
-    return((tiempoFinal - tiempoInicial)/count);
+    struct chrono c = {count, ((tiempoFinal - tiempoInicial) / count)};
+
+    return c; // Retornamos la media de lo que tardó
 }
 
 /* Función para calcular cuanto tarda Fib3 */
-double tiempoFib3(int numero) {
+struct chrono tiempoFib3(int numero) {
     double tiempoInicial, tiempoFinal;
     int count = 1;
 
@@ -110,7 +114,9 @@ double tiempoFib3(int numero) {
         }
     } while(tiempoFinal - tiempoInicial <= 500);
 
-    return((tiempoFinal - tiempoInicial)/count);
+    struct chrono c = {count, ((tiempoFinal - tiempoInicial) / count)};
+
+    return c; // Retornamos la media de lo que tardó
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -118,10 +124,11 @@ double tiempoFib3(int numero) {
 /* Función para mostrar la tabla de las cotas de Fib1 */
 
 void cotasFib1(int n) {
-    double tiempoFib = tiempoFib1(n);
-    double cotaSubestimada = tiempoFib1(n) / pow(1.1, n);
-    double cotaAjustada = tiempoFib1(n) / pow(((1+sqrt(5)) / 2), n);
-    double cotaSobreestimada = tiempoFib1(n) / pow(2, n);
+
+    double tiempoFib = tiempoFib1(n).temp;
+    double cotaSubestimada = tiempoFib1(n).temp / pow(1.1, n);
+    double cotaAjustada = tiempoFib1(n).temp / pow(((1+sqrt(5)) / 2), n);
+    double cotaSobreestimada = tiempoFib1(n).temp / pow(2, n);
 
     printf("%8d|%15lf|%22lf|%17lf|%22lf|\n", n, tiempoFib, cotaSubestimada, cotaAjustada, cotaSobreestimada);
 }
@@ -129,10 +136,11 @@ void cotasFib1(int n) {
 /* Función para mostrar la tabla de las cotas de Fib2 */
 
 void cotasFib2(int n) {
-    double tiempoFib = tiempoFib2(n);
-    double cotaSubestimada = tiempoFib2(n) / pow(n, 0.8);
-    double cotaAjustada = tiempoFib2(n) / n;
-    double cotaSobreestimada = tiempoFib2(n) / (n * log10(n));
+
+    double tiempoFib = tiempoFib2(n).temp;
+    double cotaSubestimada = tiempoFib2(n).temp / pow(n, 0.8);
+    double cotaAjustada = tiempoFib2(n).temp / n;
+    double cotaSobreestimada = tiempoFib2(n).temp / (n * log10(n));
 
     printf("%8d|%15lf|%22lf|%17lf|%22lf|\n", n, tiempoFib, cotaSubestimada, cotaAjustada , cotaSobreestimada);
 }
@@ -140,10 +148,11 @@ void cotasFib2(int n) {
 /* Función para mostrar la tabla de las cotas de Fib3 */
 
 void cotasFib3(int n) {
-    double tiempoFib = tiempoFib3(n);
-    double cotaSubestimada = tiempoFib3(n) / sqrt(log10(n));
-    double cotaAjustada = tiempoFib3(n) / log10(n);
-    double cotaSobreestimada = tiempoFib3(n) / pow(n, 0.5);
+
+    double tiempoFib = tiempoFib3(n).temp;
+    double cotaSubestimada = tiempoFib3(n).temp / sqrt(log10(n));
+    double cotaAjustada = tiempoFib3(n).temp / log10(n);
+    double cotaSobreestimada = tiempoFib3(n).temp / pow(n, 0.5);
 
     printf("%8d|%15lf|%22lf|%17lf|%22lf|\n", n, tiempoFib, cotaSubestimada, cotaAjustada, cotaSobreestimada);
 }
@@ -159,19 +168,19 @@ void medicionDeTiempos() {
     /* En cada bucle se mide el tiempo antes y después de ejecutar la sucesión de Fibonacci para ver cuanto tarda cada algoritmo */
 
     for(int i = 0; i < sizeof(valoresParaFib1)/sizeof(valoresParaFib1[0]); i++) {
-        printf("Tiempo de fib1 para n = %10d: %15lf us\n", valoresParaFib1[i], tiempoFib1(valoresParaFib1[i]));
+        printf("Tiempo de fib1 para n = %d: %15lf us  *: %8d\n", valoresParaFib1[i], tiempoFib1(valoresParaFib1[i]).temp, tiempoFib1(valoresParaFib1[i]).count);
     }
 
     printf("\n");
 
     for(int i = 0; i < sizeof(valoresParaFib2y3)/sizeof(valoresParaFib2y3[0]); i++) {
-        printf("Tiempo de fib2 para n = %10d: %15lf us\n", valoresParaFib2y3[i], tiempoFib2(valoresParaFib2y3[i]));
+        printf("Tiempo de fib2 para n = %d: %15lf us  *: %8d\n", valoresParaFib2y3[i], tiempoFib2(valoresParaFib1[i]).temp, tiempoFib2(valoresParaFib1[i]).count);
     }
 
     printf("\n");
 
     for(int i = 0; i < sizeof(valoresParaFib2y3)/sizeof(valoresParaFib2y3[0]); i++) {
-        printf("Tiempo de fib3 para n = %10d: %15lf us\n", valoresParaFib2y3[i], tiempoFib3(valoresParaFib2y3[i]));
+        printf("Tiempo de fib3 para n = %d: %15lf us  *: %8d\n", valoresParaFib2y3[i], tiempoFib3(valoresParaFib1[i]).temp, tiempoFib3(valoresParaFib1[i]).count);
     }
 }
 
@@ -212,14 +221,14 @@ void tablaCotas() {
 /*--------------------------------------------------------------------------------------------------------------------*/
 
 void test(int n) {
-    printf("\n    n\t|\t  fib1(n)\t|\t fib2(n) \t|  \t fib3(n) \t|\n");
-    printf("--------|-----------------------|---------------|---------------|\n");
+    printf("\n\tn\t|\t fib1(n) \t|\t fib2(n) \t|\t fib3(n) \t|\n");        // ESTO ESTA NO TOCAR
+    printf("--------|---------------|---------------|---------------|\n"); // ESTO ESTA NO TOCAR
 
     for(int i = 0; i <= n; i++) {
-        printf("%8d|%15d|%15d|%15d|\n", i + 1, fib1(i), fib2(i), fib3(i));
+        printf("%8d|%15d|%15d|%15d|\n", i + 1, fib1(i), fib2(i), fib3(i)); // ESTO ESTA NO TOCAR
     }
-
     printf("\n");
+
     medicionDeTiempos();
     tablaCotas();
 }
