@@ -10,21 +10,21 @@
 #include <sys/time.h>
 
 
-struct chrono {
+typedef struct chrono {
     int count;
     double temp;
-};
+} countTemp;
 
 
-struct chrono tiempoFib3(int numero);
+//struct chrono tiempoFib3(int numero);
 
 int fib1(int n);            // Función recursiva
 int fib2(int n);            // Utiliza intercambios de variables
 int fib3(int n);
 
-struct chrono tiempoFib1(int numero);  // Calcula los tiempos en usando cada función de fib
-struct chrono tiempoFib2(int numero);
-struct chrono tiempoFib3(int numero);
+countTemp tiempoFib1(int numero);  // Calcula los tiempos en usando cada función de fib
+countTemp tiempoFib2(int numero);
+countTemp tiempoFib3(int numero);
 
 void cotasFib1(int numero);     // Calcula las cotas de cada función
 void cotasFib2(int numero);
