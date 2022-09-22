@@ -130,7 +130,7 @@ void cotasFib1(int n) {
     double cotaAjustada = tiempoFib1(n).temp / pow(((1+sqrt(5)) / 2), n);
     double cotaSobreestimada = tiempoFib1(n).temp / pow(2, n);
 
-    printf("%8d|%15lf|%22lf|%17lf|%22lf|\n", n, tiempoFib, cotaSubestimada, cotaAjustada, cotaSobreestimada);
+    printf("%8d|\t %15lf|    %22lf|  %17lf|\t  %22lf|\n", n, tiempoFib, cotaSubestimada, cotaAjustada, cotaSobreestimada);
 }
 
 /* Función para mostrar la tabla de las cotas de Fib2 */
@@ -142,7 +142,7 @@ void cotasFib2(int n) {
     double cotaAjustada = tiempoFib2(n).temp / n;
     double cotaSobreestimada = tiempoFib2(n).temp / (n * log10(n));
 
-    printf("%8d|%15lf|%22lf|%17lf|%22lf|\n", n, tiempoFib, cotaSubestimada, cotaAjustada , cotaSobreestimada);
+    printf("%8d|\t %15lf|    %22lf|  %17lf|\t  %22lf|\n", n, tiempoFib, cotaSubestimada, cotaAjustada , cotaSobreestimada);
 }
 
 /* Función para mostrar la tabla de las cotas de Fib3 */
@@ -154,7 +154,7 @@ void cotasFib3(int n) {
     double cotaAjustada = tiempoFib3(n).temp / log10(n);
     double cotaSobreestimada = tiempoFib3(n).temp / pow(n, 0.5);
 
-    printf("%8d|%15lf|%22lf|%17lf|%22lf|\n", n, tiempoFib, cotaSubestimada, cotaAjustada, cotaSobreestimada);
+    printf("%8d|\t %15lf|    %22lf|  %17lf|\t  %22lf|\n", n, tiempoFib, cotaSubestimada, cotaAjustada, cotaSobreestimada);
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -191,7 +191,7 @@ void tablaCotas() {
 
 
     printf("\n    n\t|\t  TiempoFib1(n)\t|\tCota subestimada   |   Cota Ajustada   |\tCota Sobreestimada\t|\n");
-    printf("--------|-----------------------|--------------------------|-----------------|----------------------|\n");
+    printf("--------|-----------------------|--------------------------|-------------------|--------------------------------|\n");
 
     for(int i = 0; i < sizeof(valoresParaFib1)/sizeof(valoresParaFib1[0]); i++) {
         cotasFib1(valoresParaFib1[i]);
@@ -200,8 +200,7 @@ void tablaCotas() {
     printf("\n");
 
     printf("\n    n\t|\t  TiempoFib2(n)\t|\tCota subestimada   |   Cota Ajustada   |\tCota Sobreestimada\t|\n");
-    printf("--------|-----------------------|--------------------------|-----------------|----------------------|\n");
-
+    printf("--------|-----------------------|--------------------------|-------------------|--------------------------------|\n");
 
     for(int i = 0; i < sizeof(valoresParaFib1)/sizeof(valoresParaFib1[0]); i++) {
         cotasFib2(valoresParaFib2y3[i]);
@@ -210,7 +209,7 @@ void tablaCotas() {
     printf("\n");
 
     printf("\n    n\t|\t  TiempoFib3(n)\t|\tCota subestimada   |   Cota Ajustada   |\tCota Sobreestimada\t|\n");
-    printf("--------|-----------------------|--------------------------|-----------------|----------------------|\n");
+    printf("--------|-----------------------|--------------------------|-------------------|--------------------------------|\n");
 
 
     for(int i = 0; i < sizeof(valoresParaFib1)/sizeof(valoresParaFib1[0]); i++) {
@@ -222,10 +221,10 @@ void tablaCotas() {
 
 void test(int n) {
     printf("\n\tn\t|\t fib1(n) \t|\t fib2(n) \t|\t fib3(n) \t|\n");        // ESTO ESTA NO TOCAR
-    printf("--------|---------------|---------------|---------------|\n"); // ESTO ESTA NO TOCAR
+    printf("----------------|-----------------------|-----------------------|-----------------------|\n"); // ESTO ESTA NO TOCAR
 
-    for(int i = 0; i <= n; i++) {
-        printf("%8d|%15d|%15d|%15d|\n", i + 1, fib1(i), fib2(i), fib3(i)); // ESTO ESTA NO TOCAR
+    for(int i = 1; i <= n; i++) {
+        printf("\t%8d|\t %15d|\t %15d|\t %15d|\n", i, fib1( i - 1), fib2(i - 1), fib3( i - 1)); // ESTO ESTA NO TOCAR
     }
     printf("\n");
 
