@@ -13,7 +13,7 @@ int main() {
 
     aleatorio(arrayNumeros, numeroElementos);
 
-    test(arrayNumeros);
+    test(arrayNumeros, numeroElementos);
 
     ord_ins(arrayNumeros, numeroElementos);
 
