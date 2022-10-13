@@ -15,7 +15,15 @@ void aleatorio(int v [], int n) {
 void ascendente(int v [], int n) {
     int i;
 
-    for (i = 0; i < n; i++) {
+    for(i = 0; i < n; i++) {
         v[i] = i;
+    }
+}
+
+void descendente(int v[], int n) {
+    int i;
+
+    for(i = 0; i < n; i++) {
+        v[i] = n - i;
     }
 }
