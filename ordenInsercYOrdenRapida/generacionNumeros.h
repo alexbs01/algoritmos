@@ -1,3 +1,9 @@
+/*
+ * AUTOR 1: Adrián Rego Criado
+ * AUTOR 2: Miguel Cortón Debén
+ * AUTOR 3: Alejandro Becerra Suárez
+ * */
+
 #ifndef ORDENINSERCYORDENRAPIDA_GENERACIONNUMEROS_H
 #define ORDENINSERCYORDENRAPIDA_GENERACIONNUMEROS_H
 

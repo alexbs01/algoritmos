@@ -1,3 +1,9 @@
+/*
+ * AUTOR 1: Adrián Rego Criado
+ * AUTOR 2: Miguel Cortón Debén
+ * AUTOR 3: Alejandro Becerra Suárez
+ * */
+
 #include "algoritmosOrdenacion.h"
 #include "generacionNumeros.h"
 
@@ -66,20 +72,19 @@ void intercambiar(int *a, int *b) {
 }
 
 void ordenarAux(int V[], int first, int last) {
-    int size = last + 1;                            //sizeof(V)/sizeof(V[0]);
     int x, i , j, pivote;
 
-    if(V[first] + UMBRAL <= size) {
+    if(first + UMBRAL <= last) {
         x = rand() % (last - first + 1) + first;
         pivote = V[x];
 
         intercambiar(&V[first], &V[x]);
 
-        i = V[first] + 1;
-        j = V[last];
+        i = first + 1;
+        j = last;
 
         while(i <= j) {
-            while((i <= V[size]) && (V[i] < pivote)) {
+            while((i <= last) && (V[i] < pivote)) {
                 i++;
             }
             while(V[j] > pivote) {
@@ -95,12 +100,13 @@ void ordenarAux(int V[], int first, int last) {
         intercambiar(&V[first], &V[j]);
 
         ordenarAux(V, first, j - 1);
-        ordenarAux(V, j + 1, size - 1);
+        ordenarAux(V, j + 1, last);
     }
 }
 
 void ordenacionRapida(int V[], int size) {
     ordenarAux(V, 0, size - 1);
+
     if(UMBRAL > 1) {
         ord_ins(V, size);
     }
