@@ -33,7 +33,7 @@ chrono tiempoOrdenacionInsercion(int array[], int size) {
 
     c.count = count;
     c.tiempoMedio = (tiempoFinal - tiempoInicial) / count;
-    printf("count: %d, tiempoMedio: %lf\n", c.count, c.tiempoMedio);
+   // printf("count: %d, tiempoMedio: %lf\n", c.count, c.tiempoMedio);
 
     return c;
 }
@@ -58,7 +58,7 @@ chrono tiempoOrdenacionQuicksort(int array[], int size) {
 
     c.count = count;
     c.tiempoMedio = (tiempoFinal - tiempoInicial) / count;
-    printf("count: %d, tiempoMedio: %lf\n", c.count, c.tiempoMedio);
+   // printf("count: %d, tiempoMedio: %lf\n", c.count, c.tiempoMedio);
 
     return c;
 }
