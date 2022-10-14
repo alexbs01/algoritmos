@@ -12,7 +12,7 @@
 
 int main() {
     inicializar_semilla(); // Inicializamos la seed para obtener números aleatorios
-    int numeroElementosInicial = 10, elementosTotales = 1000;
+    int numeroElementosInicial = 10, elementosTotales = 10000;
     int numeroElementos = numeroElementosInicial;
 
     // Inicializamos el array con el número de elementos que tendrá al final de la última prueba
@@ -28,7 +28,7 @@ int main() {
         dato = tiempoOrdenacionInsercion(arrayNumeros, numeroElementos);
 
         TSu = dato.tiempoMedio / pow(numeroElementos, 1.9);   //tiempo/cotaSubestimada
-        TA= dato.tiempoMedio / pow(numeroElementos, 2);       //tiempo/cotaAjustada
+        TA= dato.tiempoMedio / pow(numeroElementos, 2)/2;     //tiempo/cotaAjustada
         TSo= dato.tiempoMedio / pow(numeroElementos, 2.1);    //Alomejor pow(n, 2.2); tiempo/cotaSobreestimada
 
         printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
@@ -65,9 +65,9 @@ int main() {
         ascendente(arrayNumeros, numeroElementos);
         dato = tiempoOrdenacionInsercion(arrayNumeros, numeroElementos);
 
-        //double cotaSubestimada = dato.tiempoMedio / pow(1.1, n);
-        //double cotaAjustada = dato.tiempoMedio / pow(((1+sqrt(5)) / 2), n);
-        //double cotaSobreestimada = dato.tiempoMedio / pow(2, n);
+        TSu = dato.tiempoMedio / pow(numeroElementos, 1.9);   //tiempo/cotaSubestimada
+        TA= dato.tiempoMedio / pow(numeroElementos, 2)/2;     //tiempo/cotaAjustada
+        TSo= dato.tiempoMedio / pow(numeroElementos, 2.1);    //Alomejor pow(n, 2.2); tiempo/cotaSobreestimada
 
         printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
                numeroElementos, dato.count, dato.tiempoMedio, TSu, TA, TSo);
@@ -103,9 +103,9 @@ int main() {
         descendente(arrayNumeros, numeroElementos);
         dato = tiempoOrdenacionInsercion(arrayNumeros, numeroElementos);
 
-        //double cotaSubestimada = dato.tiempoMedio / pow(1.1, n);
-        //double cotaAjustada = dato.tiempoMedio / pow(((1+sqrt(5)) / 2), n);
-        //double cotaSobreestimada = dato.tiempoMedio / pow(2, n);
+        TSu = dato.tiempoMedio / pow(numeroElementos, 1.9);   //tiempo/cotaSubestimada
+        TA= dato.tiempoMedio / pow(numeroElementos, 2)/2;     //tiempo/cotaAjustada
+        TSo= dato.tiempoMedio / pow(numeroElementos, 2.1);    //Alomejor pow(n, 2.2); tiempo/cotaSobreestimada
 
         printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
                numeroElementos, dato.count, dato.tiempoMedio, TSu, TA, TSo);
@@ -130,7 +130,7 @@ int main() {
 
         numeroElementos *= 10;
     } while(numeroElementos <= elementosTotales);
-    
+
     return 0;
 }
 
