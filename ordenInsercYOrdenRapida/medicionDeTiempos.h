@@ -17,7 +17,6 @@ typedef struct chrono {
 }chrono;
 
 double microsegundos();
-chrono tiempoOrdenacionInsercion(int array[], int size);
-chrono tiempoOrdenacionQuicksort(int array[], int size);
+chrono tardanza(int array[], int size, void (*tipoArray)(int v [], int n), void (*tipoOrd)(int v [], int n));
 
 #endif //ORDENINSERCYORDENRAPIDA_MEDICIONDETIEMPOS_H

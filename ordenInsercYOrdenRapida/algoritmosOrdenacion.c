@@ -7,7 +7,7 @@
 #include "algoritmosOrdenacion.h"
 #include "generacionNumeros.h"
 
-#define UMBRAL 1
+#define UMBRAL 1    //1 10 100
 
 bool isOrd(int array[], int size) {
     int j = 1, i;
@@ -104,7 +104,7 @@ void ordenarAux(int V[], int first, int last) {
     }
 }
 
-void ordenacionRapida(int V[], int size) {
+void ordRapida(int V[], int size) {
     ordenarAux(V, 0, size - 1);
 
     if(UMBRAL > 1) {

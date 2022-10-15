@@ -5,6 +5,7 @@
  * */
 
 #include "medicionDeTiempos.h"
+#include "generacionNumeros.h"
 
 double microsegundos() {
     struct timeval t;
@@ -13,32 +14,47 @@ double microsegundos() {
     return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 
-chrono tiempoOrdenacionInsercion(int array[], int size) {
-    double tiempoInicial, tiempoFinal;
+chrono tardanza(int array[], int size, void (*tipoArray)(int v [], int n),
+                void (*tipoOrd)(int v [], int n)) {
+
+    double tInicial, tFinal, ta, tb, Tiempo;
     int count = 1, i;
-    chrono c = {count, ((tiempoFinal - tiempoInicial) / count)};
+    chrono c = {count, (Tiempo / count)};
 
-    do {
-        tiempoInicial = microsegundos();
+    tipoArray(array, size);
+    tInicial = microsegundos();
+    tipoOrd(array, size);
+    tFinal = microsegundos();
+    Tiempo = tFinal - tInicial;
+
+    while(Tiempo <= 500) {
+        count *= 10;
+
+        tInicial = microsegundos();
         for(i = 0; i <= count; i++) {
-            ord_ins(array, size);
+            tipoArray(array, size);
+            tipoOrd(array, size);
         }
-        tiempoFinal = microsegundos();
+        tFinal = microsegundos();
+        ta = tFinal - tInicial;
 
-        if(tiempoFinal - tiempoInicial <= 500) {
-            count *= 10;
+        tInicial = microsegundos();
+        for(i = 0; i <= count; i++) {
+            tipoArray(array, size);
         }
+        tFinal = microsegundos();
+        tb = tFinal - tInicial;
 
-    } while(tiempoFinal - tiempoInicial <= 500);
+        Tiempo = ta - tb;
+    }
 
     c.count = count;
-    c.tiempoMedio = (tiempoFinal - tiempoInicial) / count;
-   // printf("count: %d, tiempoMedio: %lf\n", c.count, c.tiempoMedio);
+    c.tiempoMedio = Tiempo / count;
 
     return c;
 }
 
-chrono tiempoOrdenacionQuicksort(int array[], int size) {
+/*chrono tiempoOrdenacionQuicksort(int array[], int size) {
     double tiempoInicial, tiempoFinal;
     int count = 1, i;
     chrono c = {count, ((tiempoFinal - tiempoInicial) / count)};
@@ -62,3 +78,4 @@ chrono tiempoOrdenacionQuicksort(int array[], int size) {
 
     return c;
 }
+*/
