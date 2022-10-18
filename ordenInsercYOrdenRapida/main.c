@@ -13,7 +13,7 @@
 
 int main() {
     inicializar_semilla(); // Inicializamos la seed para obtener números aleatorios
-    int inicialSize = 500, totalSize = 64000;
+    int inicialSize = 500, totalSize = 128000;
     int actualSize = inicialSize;
 
     // Inicializamos el array con el número de elementos que tendrá al final de la última prueba
