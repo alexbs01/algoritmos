@@ -331,25 +331,29 @@ ajustada se sitúa entre 0.002650 y 0.003093.
 ### Algoritmo de Ordenación por Inserción
 
 Este algoritmo se puso a prueba con tres tipos de arrays, siendo estos con 
-números al azar, en orden ascendente y en orden descendente.  
+**números al azar**, en **orden ascendente** y en **orden descendente**.  
 
-En la ordenación de números al azar obtuvo tiempos normales, comparándolo con 
-los otros dos tipos de arrays.  
+En la **ordenación** de números **al azar** obtuvo **tiempos normales**, 
+comparándolo con los otros dos tipos de arrays.  
 
-Sin embargo, el mejor de los tiemps se midió en la ordenación ascendente. Ya, 
-que gracias al propio funcionamiento del algoritmo, es capaz de determinar si 
-la lista de números está ordenada o no recorriéndolo una única vez. Este 
-algoritmo funciona muy bien cuando es una lista de números casi ordenados.  
+Sin embargo, el **mejor** de los **tiempo** se midió en la **ordenación 
+ascendente**. Ya que gracias al propio funcionamiento del algoritmo, es capaz 
+de determinar si la lista de números está ordenada o no recorriéndolo una única 
+vez. Este algoritmo funciona muy bien cuando es una lista de números casi 
+ordenados.  
 
-El peor de los tiempos se obtuvo con la colección de números en orden 
-descendente, por el mismo motivo que con el array ordenado. Por cada iteración, 
-solo desplaza cada número para delante o para atrás en una posición. Por lo 
-que, si están todos los números al revés, deberá recorrer el array N*N veces.  
+El **peor** de los **tiempos** se obtuvo con la colección de números en **orden 
+descendente**, por el mismo motivo que con el array ordenado. Por cada 
+iteración, solo desplaza cada número para delante o para atrás en una posición. 
+Por lo que, si están todos los números al revés, deberá **recorrer el 
+array N*N veces**.  
 
-La ordenación por inserción funciona muy bien con colecciones de números casi 
-ordenados, ya que en su mejor situación no existe otro algoritmo que lo haga 
-más rápido que este. En cambio, si se da la casualidad de que los números estén 
-en orden descendente este algoritmo será terriblemente lento.  
+La ordenación por inserción funciona **muy bien** con colecciones de **números 
+casi ordenados**, ya que en su mejor situación no existe otro algoritmo que lo 
+haga más rápido que este. En cambio, si se da la casualidad de que los números 
+estén en orden descendente este algoritmo será terriblemente lento.  
+
+-----
 
 ### Algoritmo Quicksort
 
@@ -390,6 +394,8 @@ gran tamaño. Pero con vectores más pequeños y aleatorios no se puede decir qu
 uno sea más rápido que otro, si están ordenados ascendentemente o 
 descendentemente, sí que se puede decir que con el umbral 100 es más rápido con 
 el umbral 10.  
+
+-----
 
 ### Conclusión mixta
 
