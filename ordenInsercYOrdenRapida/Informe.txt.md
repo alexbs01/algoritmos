@@ -29,7 +29,7 @@ en 500 (500, 1000, 2000, ...) y terminando 128000.
 
 ## Nomenclatura de las tablas
 - **N**: Cantidad de números a ordenar.  
-- **I**: Numero de veces que se repite el algoritmo.  
+- **I**: Número de veces que se repite el algoritmo.  
 - **T**: Tiempo medio de ejecución del algoritmo en microsegundos (us).  
 - **T/CSub**: Tiempo medio entre la Cota Subestimada.  
 - **T/CAjus**: Tiempo medio entre la Cota Ajustada.  
@@ -41,15 +41,15 @@ en 500 (500, 1000, 2000, ...) y terminando 128000.
 
 |   [N]  | [I] |       [T]       | [T/CSub] | [T/CAjus] | [T/CSobre] |
 |-------:|----:|----------------:|---------:|----------:|-----------:|
-|   500  |  10 |      253.500000 | 0.003514 |  0.001079 |  0.000293  |
-| 1000   |   1 |      831.000000 | 0.003308 | 0.000890  | 0.000209   |
-| 2000   |   1 |     3448.000000 | 0.003942 | 0.000930  | 0.000188   |
-| 4000   |   1 |    18623.000000 | 0.006114 | 0.001265  | 0.000222   |
-| 8000   |   1 |    72083.000000 | 0.006796 | 0.001232  | 0.000187   |
-| 16000  |   1 |   257491.000000 | 0.006972 | 0.001108  | 0.000145   |
-| 32000  |   1 |  1061693.000000 | 0.008255 | 0.001150  | 0.000130   |
-| 64000  |   1 |  4027408.000000 | 0.008993 | 0.001098  | 0.000108   |
-| 128000 |   1 | 16656883.000000 | 0.010681 | 0.001144  | 0.000097   |
+|    500 |  10 |      253.500000 | 0.003514 |  0.001079 |   0.000293 |
+|   1000 |   1 |      831.000000 | 0.003308 | 0.000890  |   0.000209 |
+|   2000 |   1 |     3448.000000 | 0.003942 | 0.000930  |   0.000188 |
+|   4000 |   1 |    18623.000000 | 0.006114 | 0.001265  |   0.000222 |
+|   8000 |   1 |    72083.000000 | 0.006796 | 0.001232  |   0.000187 |
+|  16000 |   1 |   257491.000000 | 0.006972 | 0.001108  |   0.000145 |
+|  32000 |   1 |  1061693.000000 | 0.008255 | 0.001150  |   0.000130 |
+|  64000 |   1 |  4027408.000000 | 0.008993 | 0.001098  |   0.000108 |
+| 128000 |   1 | 16656883.000000 | 0.010681 | 0.001144  |   0.000097 |
 
 - **CSub**: pow(N, 1.8)  
 - **CAjus**: pow(N, 1.99)  
@@ -64,15 +64,15 @@ se aproxima a 0.001144.
   
 |   [N]  | [I] |       [T]       | [T/CSub] | [T/CAjus] | [T/CSobre] |
 |-------:|----:|----------------:|---------:|----------:|-----------:|
-|    500 |1000 |        3.979000 | 0.027580 |  0.007958 |  0.002296  |
-|   1000 | 100 |        6.890000 | 0.027430 |  0.006890 |  0.001731  |
-|   2000 | 100 |       13.560000 | 0.031005 |  0.006780 |  0.001483  |
-|   4000 | 100 |       44.300000 | 0.058178 |  0.011075 |  0.002108  |
-|   8000 |  10 |       80.500000 | 0.060719 |  0.010063 |  0.001668  |
-|  16000 |  10 |       78.300000 | 0.033921 |  0.004894 |  0.000706  |
-|  32000 |  10 |      226.200000 | 0.056282 |  0.007069 |  0.000888  |
-|  64000 |  10 |      732.900000 | 0.104737 |  0.011452 |  0.001252  |
-| 128000 |   1 |     1403.000000 | 0.115157 |  0.010961 |  0.001043  |
+|    500 |1000 |        3.979000 | 0.027580 |  0.007958 |   0.002296 |
+|   1000 | 100 |        6.890000 | 0.027430 |  0.006890 |   0.001731 |
+|   2000 | 100 |       13.560000 | 0.031005 |  0.006780 |   0.001483 |
+|   4000 | 100 |       44.300000 | 0.058178 |  0.011075 |   0.002108 |
+|   8000 |  10 |       80.500000 | 0.060719 |  0.010063 |   0.001668 |
+|  16000 |  10 |       78.300000 | 0.033921 |  0.004894 |   0.000706 |
+|  32000 |  10 |      226.200000 | 0.056282 |  0.007069 |   0.000888 |
+|  64000 |  10 |      732.900000 | 0.104737 |  0.011452 |   0.001252 |
+| 128000 |   1 |     1403.000000 | 0.115157 |  0.010961 |   0.001043 |
 
 - **CSub**: pow(N, 0.8)  
 - **CAjus**: N  
@@ -322,16 +322,84 @@ ajustada parece estar entre 0.003211 y 0.003346.
 Y con esta última prueba vemos que también tiene tiempos buenos y que la cota 
 ajustada se sitúa entre 0.002650 y 0.003093.  
 
+-----
 
+## Conclusiones
 
+**No se detectaron mediciones anómalas**.  
 
+### Algoritmo de Ordenación por Inserción
 
+Este algoritmo se puso a prueba con tres tipos de arrays, siendo estos con 
+números al azar, en orden ascendente y en orden descendente.  
 
+En la ordenación de números al azar obtuvo tiempos normales, comparándolo con 
+los otros dos tipos de arrays.  
 
+Sin embargo, el mejor de los tiemps se midió en la ordenación ascendente. Ya, 
+que gracias al propio funcionamiento del algoritmo, es capaz de determinar si 
+la lista de números está ordenada o no recorriéndolo una única vez. Este 
+algoritmo funciona muy bien cuando es una lista de números casi ordenados.  
 
+El peor de los tiempos se obtuvo con la colección de números en orden 
+descendente, por el mismo motivo que con el array ordenado. Por cada iteración, 
+solo desplaza cada número para delante o para atrás en una posición. Por lo 
+que, si están todos los números al revés, deberá recorrer el array N*N veces.  
 
+La ordenación por inserción funciona muy bien con colecciones de números casi 
+ordenados, ya que en su mejor situación no existe otro algoritmo que lo haga 
+más rápido que este. En cambio, si se da la casualidad de que los números estén 
+en orden descendente este algoritmo será terriblemente lento.  
 
+### Algoritmo Quicksort
 
+Este algoritmo a parte de tener las mismas pruebas que el de ordenación por 
+inserción, también se le sometió con dos variantes distintas. Tener un umbral 
+a partir del cual se utilice la ordenación por inserción, los umbrales elegidos 
+fueron 1, 10 y 100. El umbral indica a partir de que tamaño de las semimitades, 
+creadas por Quicksort, se ordenarán por el anterior algoritmo aprovechando la 
+velocidad de ordenación de arrays casi ordenados.  
 
+#### Quicksort con umbral 1
+
+Es Quicksort de principio a fin, no se utiliza la ordenación por inserción para 
+nada.  
+
+En los tres tipos de array tiene unos tiempos bastante más similares entre sí 
+que el anterior algoritmo. Ya que el mejor y el peor de los casos no viene 
+definido por el tamaño de la entrada, sino por donde cuadran los pivotes 
+(mejor situación en el centro del intervalo y la peor en los extremos).  
+
+#### Quicksort con umbral 10
+
+Con este umbral se usará la inserción cuando las mitades tengan un tamaño de 
+10 elementos. De esta forma nos evitamos hacer más llamadas recursivas para tan 
+pocos números.  
+
+Para esta situación, los tiempos son más dispares (en especial con los 
+elementos de forma aleatoria), sin embargo, obtiene unos tiempos mucho mejores 
+que con el umbral 1.  
+
+#### Quicksort con umbral 100
+
+De la misma forma que con las otras situaciones, se usará la ordenación por 
+inserción cuando las mitades tengan 100 elementos.  
+
+Por muy poco se obtinen tiempos mejores con este tipo de umbral en arrays de 
+gran tamaño. Pero con vectores más pequeños y aleatorios no se puede decir que 
+uno sea más rápido que otro, si están ordenados ascendentemente o 
+descendentemente, sí que se puede decir que con el umbral 100 es más rápido con 
+el umbral 10.  
+
+### Conclusión mixta
+
+Ambos algoritmos tienen sus ventajas y desventajas, la ordenación por inserción 
+es el más rápido en ordenar vectores de números ordenados o casi ordenados, y 
+el Quicksort con un umbral de 100 en el resto de situaciones.  
+
+Así que, si en un proyecto debemos ordenar elementos a azar, el Quicksort será 
+el ideal por su "propósito general" teniendo tiempos bajos y siendo más 
+independiente a la cantidad elementos que tiene el array. Y si hay colecciónes 
+de elementos casi ordenados la mejor opción será el primero.  
 
 
