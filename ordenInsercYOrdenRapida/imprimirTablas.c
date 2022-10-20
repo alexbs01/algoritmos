@@ -24,7 +24,7 @@ void tablaInsercionAl(int inicialSize, int totalSize, int maxTime) {
             tardanza(arrayNumbers, actualSize, aleatorio, ord_ins);
         }
         TSu = dato.tiempoMedio / pow(actualSize, 1.8);  // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / pow(actualSize, 1.99);      // Tiempo/ CotaAjustada
+        TA= dato.tiempoMedio / pow(actualSize, 1.99);      // Tiempo / CotaAjustada
         TSo= dato.tiempoMedio / pow(actualSize, 2.2);   // Tiempo/ CotaSobreestimada
 
         printf("%8d\t%8d\t%15lf\t %14lf\t%14lf\t%14lf\n",
@@ -52,7 +52,7 @@ void tablaInsercionAs(int inicialSize, int totalSize, int maxTime){
 
         TSu = dato.tiempoMedio / pow(actualSize, 0.8);  // Tiempo / CotaSubestimada
         TA= dato.tiempoMedio / actualSize;                    // Tiempo / CotaAjustada
-        TSo= dato.tiempoMedio / pow(actualSize, 1.2);   // Tiempo / CotaSobreestimada
+        TSo= dato.tiempoMedio / pow(actualSize, 1.1);   // Tiempo / CotaSobreestimada
 
         printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
                actualSize, dato.count, dato.tiempoMedio, TSu, TA, TSo);
@@ -103,9 +103,20 @@ void tablaOrdRapidaAl(int inicialSize, int totalSize, int maxTime) {
         /*for(int i = 0; i <= 10; i++) {
             tardanza(arrayNumbers, actualSize, aleatorio, ordRapida);
         }*/
-        TSu = dato.tiempoMedio / actualSize;                    // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / (actualSize * log(actualSize));    // Tiempo / CotaAjustada
-        TSo= dato.tiempoMedio / pow(actualSize, 1.6); // Tiempo / CotaSobreestimada
+        if(UMBRAL == 1) {
+            TSu = dato.tiempoMedio / actualSize;                    // Tiempo / CotaSubestimada
+            TA= dato.tiempoMedio / (actualSize * 0.9 * log(actualSize));    // Tiempo / CotaAjustada
+            TSo= dato.tiempoMedio / pow(actualSize, 1.6); // Tiempo / CotaSobreestimada
+        } else if(UMBRAL == 10) {
+            TSu = dato.tiempoMedio / pow(actualSize, 1.05);
+            TA= dato.tiempoMedio / pow(actualSize, 1.112);
+            TSo= dato.tiempoMedio / pow(actualSize, 1.6);
+        } else if(UMBRAL == 100) {
+            TSu = dato.tiempoMedio / pow(actualSize, 1.05);
+            TA= dato.tiempoMedio / pow(actualSize, 1.111);
+            TSo= dato.tiempoMedio / pow(actualSize, 1.6);
+        }
+
 
         /*1.10920
         1.12212
@@ -133,9 +144,20 @@ void tablaOrdRapidaAs(int inicialSize, int totalSize, int maxTime) {
     do{
         dato = tardanza(arrayNumbers, actualSize, ascendente, ordRapida);
 
-        TSu = dato.tiempoMedio / actualSize;                   // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / (actualSize * log(actualSize));    // Tiempo / CotaAjustada
-        TSo= dato.tiempoMedio / pow(actualSize, 1.6);  // Tiempo / CotaSobreestimada
+        if(UMBRAL == 1) {
+            TSu = dato.tiempoMedio / pow(actualSize, 1.05);                   // Tiempo / CotaSubestimada
+            TA= dato.tiempoMedio / (actualSize * log(actualSize));    // Tiempo / CotaAjustada
+            TSo= dato.tiempoMedio / pow(actualSize, 1.6);  // Tiempo / CotaSobreestimada
+        } else if(UMBRAL == 10) {
+            TSu = dato.tiempoMedio / actualSize;
+            TA= dato.tiempoMedio / pow(actualSize, 1.12);
+            TSo= dato.tiempoMedio / pow(actualSize, 1.6);
+        } else if(UMBRAL == 100) {
+            TSu = dato.tiempoMedio / pow(actualSize, 0.9);
+            TA= dato.tiempoMedio / pow(actualSize, 1.114);
+            TSo= dato.tiempoMedio / pow(actualSize, 1.6);
+        }
+
 
         printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
                actualSize, dato.count, dato.tiempoMedio, TSu, TA, TSo);
@@ -159,9 +181,20 @@ void tablaOrdRapidaDes(int inicialSize, int totalSize, int maxTime) {
     do{
         dato = tardanza(arrayNumbers, actualSize, descendente, ordRapida);
 
-        TSu = dato.tiempoMedio / actualSize;               // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / (actualSize * 0.9 * log(actualSize));    // Tiempo / CotaAjustada
-        TSo= dato.tiempoMedio / pow(actualSize, 1.6);  // Tiempo / CotaSobreestimada
+        if(UMBRAL == 1) {
+            TSu = dato.tiempoMedio / actualSize;               // Tiempo / CotaSubestimada
+            TA= dato.tiempoMedio / (actualSize * 0.9 * log(actualSize));    // Tiempo / CotaAjustada
+            TSo= dato.tiempoMedio / pow(actualSize, 1.6);  // Tiempo / CotaSobreestimada
+        } else if(UMBRAL == 10) {
+            TSu = dato.tiempoMedio / actualSize;
+            TA= dato.tiempoMedio / pow(actualSize, 1.12);
+            TSo= dato.tiempoMedio / pow(actualSize, 1.6);
+        } else if(UMBRAL == 100) {
+            TSu = dato.tiempoMedio / pow(actualSize, 1);
+            TA= dato.tiempoMedio / pow(actualSize, 1.11);
+            TSo= dato.tiempoMedio / pow(actualSize, 1.3);
+        }
+
 
         printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
                actualSize, dato.count, dato.tiempoMedio, TSu, TA, TSo);

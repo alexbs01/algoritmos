@@ -7,7 +7,7 @@
 #include "algoritmosOrdenacion.h"
 #include "generacionNumeros.h"
 
-#define UMBRAL 1   //1 10 100
+   //1 10 100
 
 bool isOrd(int array[], int size) {
     int j = 1, i;
