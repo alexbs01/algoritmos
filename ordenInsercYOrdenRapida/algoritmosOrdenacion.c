@@ -7,7 +7,7 @@
 #include "algoritmosOrdenacion.h"
 #include "generacionNumeros.h"
 
-#define UMBRAL 100    //1 10 100
+#define UMBRAL 100   //1 10 100
 
 bool isOrd(int array[], int size) {
     int j = 1, i;
@@ -21,23 +21,19 @@ bool isOrd(int array[], int size) {
     return true;
 }
 
-void test(int array[], int size) {
-    int i;
+void test(void (*tipoOrd)(int a[], int v)) {
+    int i, size = 20, array[size];
+    aleatorio(array, 20);
 
-    printf("Array inicial\n");
+    printf("Array inicial:\n");
     for(i = 0; i < size; i++) {
         printf("%d, ", array[i]);
     }
 
-    printf("\n");
-
-    printf("ordenado? %d", isOrd(array, size));
-    printf("\n");
+    printf("\nOrdenado? %d\n", isOrd(array, size));
 
     if(!isOrd(array, size)) {
-        printf("ordenando...\n");
-
-        ord_ins(array, size);
+        tipoOrd(array, size);
 
         for (i = 0; i < size; i++) {
             printf("%d, ", array[i]);
@@ -45,7 +41,8 @@ void test(int array[], int size) {
 
         isOrd(array, size)? printf("\nEsta ordenado.\n") : printf("\nNo se ordenó.\n");
     }
-    printf("\n***************************************************");
+    printf("\n***************************************************\nArray inicial:\n");
+
 }
 
 void ord_ins(int v [], int n) {

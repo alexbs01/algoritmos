@@ -3,23 +3,22 @@
  * AUTOR 2: Miguel Cortón Debén
  * AUTOR 3: Alejandro Becerra Suárez
  * */
-
+#include "imprimirTablas.h"
 #include <stdio.h>
-#include <math.h>
 
 #include "algoritmosOrdenacion.h"
 #include "generacionNumeros.h"
-#include "medicionDeTiempos.h"
+
+#define inicialSize 500
 
 int main() {
     inicializar_semilla(); // Inicializamos la seed para obtener números aleatorios
-    int inicialSize = 500, totalSize = 128000;
-    int actualSize = inicialSize;
-
-    // Inicializamos el array con el número de elementos que tendrá al final de la última prueba
-    int arrayNumbers[totalSize];
-    chrono dato;
-    double TSu, TA, TSo;
+    int /*inicialSize = 500,*/ totalSize = 512000, maxTime = 10000000;
+    int array[20];
+    printf("Test de ordenación por inserción\n");
+    test(ord_ins);
+    printf("Test de ordenación con Quicksort\n");
+    test(ordRapida);
 
     // Medición de tiempos con el algoritmo de ORDENACIÓN POR INSERCIÓN
     printf("\n*************************************************************\n");
@@ -29,126 +28,27 @@ int main() {
     printf("T/CSub: Tiempo medio entre la Cota Subestimada.\n");
     printf("T/CAjus: Tiempo medio entre la Cota Ajustada.\n");
     printf("T/CSobre: Tiempo medio entre la Cota Sobreestimada.\n");
-    printf("\n*************************************************************\n");
+    //printf("\n*************************************************************\n");
 
-    printf("Tiempos con Ordenación por Inserción con array ALEATORIO:\n\n");
-    printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
+    tablaInsercionAl(inicialSize, totalSize, maxTime);
 
-    do{
-        dato = tardanza(arrayNumbers, actualSize, aleatorio, ord_ins);
+    printf("\n\n*********************************************************\n");
+    tablaInsercionAs(inicialSize, totalSize, maxTime);
 
-        TSu = dato.tiempoMedio / pow(actualSize, 1.8);  // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / pow(actualSize, 1.99);      // Tiempo/ CotaAjustada
-        TSo= dato.tiempoMedio / pow(actualSize, 2.2);   // Tiempo/ CotaSobreestimada
-
-        printf("%8d\t%8d\t%15lf\t %14lf\t%14lf\t%14lf\n",
-               actualSize, dato.count, dato.tiempoMedio, TSu, TA, TSo);
-
-        actualSize *= 2;
-    } while(actualSize <= totalSize);
-
-    actualSize = inicialSize; // Restablecemos el número de elementos
-
-    printf("\n\n\n*********************************************************\n");
-    printf("Tiempos con Ordenación por Inserción con array ASCENDENTE:\n\n");
-    printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
-
-    do{
-        dato = tardanza(arrayNumbers, actualSize, ascendente, ord_ins);
-
-        TSu = dato.tiempoMedio / pow(actualSize, 0.8);  // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / actualSize;              // Tiempo / CotaAjustada
-        TSo= dato.tiempoMedio / pow(actualSize, 1.2);   // Tiempo / CotaSobreestimada
-
-        printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
-               actualSize, dato.count, dato.tiempoMedio, TSu, TA, TSo);
-
-        actualSize *= 2;
-    } while(actualSize <= totalSize);
-
-    actualSize = inicialSize; // Restablecemos el número de elementos
-
-    printf("\n\n\n*********************************************************\n");
-    printf("Tiempos con Ordenación por Inserción con array DESCENDENTE\n\n");
-    printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
-
-    do{
-        dato = tardanza(arrayNumbers, actualSize, descendente, ord_ins);
-
-        TSu = dato.tiempoMedio / pow(actualSize, 1.8);  // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / pow(actualSize, 2);      // Tiempo / CotaAjustada
-        TSo= dato.tiempoMedio / pow(actualSize, 2.2);   // Tiempo / CotaSobreestimada
-
-        printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
-               actualSize, dato.count, dato.tiempoMedio, TSu, TA, TSo);
-
-        actualSize *= 2;
-    } while(actualSize <= totalSize);
-
-/**********************************************************************************************************************/
-/**********************************************************************************************************************/
+    printf("\n\n*********************************************************\n");
+    tablaInsercionDes(inicialSize, totalSize, maxTime);
 
     printf("\n***************************************************************");
-    printf("\n*-------------------------------------------------------------*");
     printf("\n***************************************************************");
 
-    actualSize = inicialSize; // Restablecemos el número de elementos
+    printf("\n\n*********************************************************\n");
+    tablaOrdRapidaAl(inicialSize, totalSize, maxTime);
 
-    printf("\n\n\n*********************************************************\n");
-    printf("Tiempos con Ordenación por Quicksort con array ALEATORIO:\n\n");
-    printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
+    printf("\n\n*********************************************************\n");
+    tablaOrdRapidaAs(inicialSize, totalSize, maxTime);
 
-    do{
-        dato = tardanza(arrayNumbers, actualSize, aleatorio, ordRapida);
-
-        TSu = dato.tiempoMedio / actualSize;                    // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / (actualSize * log(actualSize));    // Tiempo / CotaAjustada
-        TSo= dato.tiempoMedio / pow(actualSize, 1.6);  // Tiempo / CotaSobreestimada
-
-        printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
-               actualSize, dato.count, dato.tiempoMedio, TSu, TA, TSo);
-
-        actualSize *= 2;
-    } while(actualSize <= totalSize);
-
-    actualSize = inicialSize; // Restablecemos el número de elementos
-
-    printf("\n\n\n*********************************************************\n");
-    printf("Tiempos con OrdeOrdenaciónnacion por Quicksort con array ASCENDENTE:\n\n");
-    printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
-
-    do{
-        dato = tardanza(arrayNumbers, actualSize, ascendente, ordRapida);
-
-        TSu = dato.tiempoMedio / actualSize;                   // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / (actualSize * log(actualSize));    // Tiempo / CotaAjustada
-        TSo= dato.tiempoMedio / pow(actualSize, 1.6);  // Tiempo / CotaSobreestimada
-
-        printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
-               actualSize, dato.count, dato.tiempoMedio, TSu, TA, TSo);
-
-        actualSize *= 2;
-    } while(actualSize <= totalSize);
-
-
-            actualSize = inicialSize; // Restablecemos el número de elementos
-
-    printf("\n\n\n*********************************************************\n");
-    printf("Tiempos con Ordenación por Quicksort con array DESCENDENTE\n\n");
-    printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
-
-    do{
-        dato = tardanza(arrayNumbers, actualSize, descendente, ordRapida);
-
-        TSu = dato.tiempoMedio / actualSize;               // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / (actualSize * log2(actualSize));    // Tiempo / CotaAjustada
-        TSo= dato.tiempoMedio / pow(actualSize, 1.6);  // Tiempo / CotaSobreestimada
-
-        printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
-               actualSize, dato.count, dato.tiempoMedio, TSu, TA, TSo);
-
-        actualSize *= 2;
-    } while(actualSize <= totalSize);
+    printf("\n\n*********************************************************\n");
+    tablaOrdRapidaDes(inicialSize, totalSize, maxTime);
 
     return 0;
 }
