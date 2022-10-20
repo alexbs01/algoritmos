@@ -20,15 +20,18 @@ void tablaInsercionAl(int inicialSize, int totalSize, int maxTime) {
 
     do{
         dato = tardanza(arrayNumbers, actualSize, aleatorio, ord_ins);
-
+        for(int i = 0; i < 10; i++) {
+            tardanza(arrayNumbers, actualSize, aleatorio, ord_ins);
+        }
         TSu = dato.tiempoMedio / pow(actualSize, 1.8);  // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / pow(actualSize, 1.98);      // Tiempo/ CotaAjustada
+        TA= dato.tiempoMedio / pow(actualSize, 1.99);      // Tiempo/ CotaAjustada
         TSo= dato.tiempoMedio / pow(actualSize, 2.2);   // Tiempo/ CotaSobreestimada
 
         printf("%8d\t%8d\t%15lf\t %14lf\t%14lf\t%14lf\n",
                actualSize, dato.count, dato.tiempoMedio, TSu, TA, TSo);
 
         actualSize *= 2;
+
     } while(actualSize <= totalSize && dato.tiempoMedio <= maxTime);
 }
 
@@ -48,7 +51,7 @@ void tablaInsercionAs(int inicialSize, int totalSize, int maxTime){
         dato = tardanza(arrayNumbers, actualSize, ascendente, ord_ins);
 
         TSu = dato.tiempoMedio / pow(actualSize, 0.8);  // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / actualSize;              // Tiempo / CotaAjustada
+        TA= dato.tiempoMedio / actualSize;                    // Tiempo / CotaAjustada
         TSo= dato.tiempoMedio / pow(actualSize, 1.2);   // Tiempo / CotaSobreestimada
 
         printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
@@ -124,7 +127,7 @@ void tablaOrdRapidaAs(int inicialSize, int totalSize, int maxTime) {
     double TSu, TA, TSo;
 
     printf("\n\n*********************************************************\n");
-    printf("Tiempos con OrdeOrdenaciónnacion por Quicksort con array ASCENDENTE:\n\n");
+    printf("Tiempos con Ordenación por Quicksort con array ASCENDENTE:\n\n");
     printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
 
     do{
@@ -157,7 +160,7 @@ void tablaOrdRapidaDes(int inicialSize, int totalSize, int maxTime) {
         dato = tardanza(arrayNumbers, actualSize, descendente, ordRapida);
 
         TSu = dato.tiempoMedio / actualSize;               // Tiempo / CotaSubestimada
-        TA= dato.tiempoMedio / (actualSize * log(actualSize));    // Tiempo / CotaAjustada
+        TA= dato.tiempoMedio / (actualSize * 0.9 * log(actualSize));    // Tiempo / CotaAjustada
         TSo= dato.tiempoMedio / pow(actualSize, 1.6);  // Tiempo / CotaSobreestimada
 
         printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",

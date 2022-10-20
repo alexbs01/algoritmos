@@ -9,12 +9,13 @@
 #include "algoritmosOrdenacion.h"
 #include "generacionNumeros.h"
 
-#define inicialSize 500
+#define INICIAL_SIZE 500
+#define MAX_SIZE 512000
+#define MAX_TIME 500000
 
 int main() {
     inicializar_semilla(); // Inicializamos la seed para obtener números aleatorios
-    int /*inicialSize = 500,*/ totalSize = 512000, maxTime = 10000000;
-    int array[20];
+
     printf("Test de ordenación por inserción\n");
     test(ord_ins);
     printf("Test de ordenación con Quicksort\n");
@@ -30,25 +31,25 @@ int main() {
     printf("T/CSobre: Tiempo medio entre la Cota Sobreestimada.\n");
     //printf("\n*************************************************************\n");
 
-    tablaInsercionAl(inicialSize, totalSize, maxTime);
+    tablaInsercionAl(INICIAL_SIZE, MAX_SIZE, MAX_TIME);
 
     printf("\n\n*********************************************************\n");
-    tablaInsercionAs(inicialSize, totalSize, maxTime);
+    tablaInsercionAs(INICIAL_SIZE, MAX_SIZE, MAX_TIME);
 
     printf("\n\n*********************************************************\n");
-    tablaInsercionDes(inicialSize, totalSize, maxTime);
+    tablaInsercionDes(INICIAL_SIZE, MAX_SIZE, MAX_TIME);
 
     printf("\n***************************************************************");
     printf("\n***************************************************************");
 
     printf("\n\n*********************************************************\n");
-    tablaOrdRapidaAl(inicialSize, totalSize, maxTime);
+    tablaOrdRapidaAl(INICIAL_SIZE, MAX_SIZE, MAX_TIME);
 
     printf("\n\n*********************************************************\n");
-    tablaOrdRapidaAs(inicialSize, totalSize, maxTime);
+    tablaOrdRapidaAs(INICIAL_SIZE, MAX_SIZE, MAX_TIME);
 
     printf("\n\n*********************************************************\n");
-    tablaOrdRapidaDes(inicialSize, totalSize, maxTime);
+    tablaOrdRapidaDes(INICIAL_SIZE, MAX_SIZE, MAX_TIME);
 
     return 0;
 }

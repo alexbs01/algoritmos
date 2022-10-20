@@ -20,15 +20,13 @@ chrono tardanza(int array[], int size,
     int count = 1, i;
     chrono c = {count, (Tiempo / count)};
 
-    tipoArray(array, size);
+    /*tipoArray(array, size);
     tInicial = microsegundos();
     tipoOrd(array, size);
     tFinal = microsegundos();
     Tiempo = tFinal - tInicial;
-    //printf("(%d, %lf), ", size, Tiempo / count);
-    while(Tiempo <= 500) {
-        count *= 10;
-
+    printf("(%d, %lf), ", size, Tiempo / count);*/
+    do {
         tInicial = microsegundos();
         for(i = 0; i <= count; i++) {
             tipoArray(array, size);
@@ -46,8 +44,9 @@ chrono tardanza(int array[], int size,
 
         Tiempo = ta - tb;
 
-       // printf("(%d, %lf), ", size, Tiempo / count);
-    }
+       //printf("(%d, %lf), ", size, Tiempo / count);
+       if(Tiempo <= 500) count *= 10;
+    } while(Tiempo <= 500);
 
     c.count = count;
     c.tiempoMedio = Tiempo / count;
