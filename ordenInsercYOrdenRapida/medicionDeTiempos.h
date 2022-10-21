@@ -8,6 +8,7 @@
 #define ORDENINSERCYORDENRAPIDA_MEDICIONDETIEMPOS_H
 
 #include <stdlib.h>
+#include <time.h>
 #include <sys/time.h>
 #include "algoritmosOrdenacion.h"
 
