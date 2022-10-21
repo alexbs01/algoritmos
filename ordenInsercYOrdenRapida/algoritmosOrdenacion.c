@@ -5,7 +5,7 @@
  * */
 
 #include "algoritmosOrdenacion.h"
-#include "generacionNumeros.h"
+#include "medicionDeTiempos.h"
 
    //1 10 100
 

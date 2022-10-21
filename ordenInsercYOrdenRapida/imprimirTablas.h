@@ -8,7 +8,6 @@
 #define ORDENINSERCYORDENRAPIDA_IMPRIMIRTABLAS_H
 
 #include "medicionDeTiempos.h"
-#include "generacionNumeros.h"
 #include "math.h"
 #include "algoritmosOrdenacion.h"
 

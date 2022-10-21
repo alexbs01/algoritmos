@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 #include "algoritmosOrdenacion.h"
-#include "generacionNumeros.h"
+
 
 #define INICIAL_SIZE 500
 #define MAX_SIZE 512000

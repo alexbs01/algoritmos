@@ -15,7 +15,10 @@ typedef struct chrono {
     int count;
     double tiempoMedio;
 }chrono;
-
+void inicializar_semilla();
+void aleatorio(int v[], int n); // Se generan número pseudo aleatorios entre -n y +n.
+void ascendente(int v[], int n);
+void descendente(int v[], int n);
 double microsegundos();
 chrono tardanza(int array[], int size, void (*tipoArray)(int v [], int n), void (*tipoOrd)(int v [], int n));
 
