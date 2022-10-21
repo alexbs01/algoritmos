@@ -12,7 +12,7 @@
 #include <stdlib.h>
 
 void inicializar_semilla();
-void aleatorio(int v[], int n); // Se generan número pseudo aleatorios entre -n y +n
+void aleatorio(int v[], int n); // Se generan número pseudo aleatorios entre -n y +n.
 void ascendente(int v[], int n);
 void descendente(int v[], int n);
 

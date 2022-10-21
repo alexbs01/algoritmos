@@ -8,7 +8,9 @@
 #define ORDENINSERCYORDENRAPIDA_ALGORITMOSORDENACION_H
 #include <stdio.h>
 #include <stdbool.h>
-#define UMBRAL 100
+
+#define UMBRAL 100  // 1 10 100
+
 bool isOrd(int array[], int size);  // Comprueba si el array está ordenado o no
 void test(void (*tipoOrd)(int a[], int v));   // Checkea que funcione correctamente
 void ord_ins(int v[], int n);       // Algoritmo de ordenación por inserción

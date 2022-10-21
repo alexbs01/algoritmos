@@ -39,9 +39,13 @@ void test(void (*tipoOrd)(int a[], int v)) {
             printf("%d, ", array[i]);
         }
 
-        isOrd(array, size)? printf("\nEsta ordenado.\n") : printf("\nNo se ordenó.\n");
+        if(isOrd(array, size)) {
+            printf("\nEsta ordenado.\n");
+        } else {
+            printf("\nNo se ordenó.\n");
+        }
     }
-    printf("\n***************************************************\nArray inicial:\n");
+    printf("\n*********************************************\n");
 
 }
 

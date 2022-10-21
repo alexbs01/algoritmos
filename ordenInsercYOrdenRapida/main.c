@@ -21,34 +21,28 @@ int main() {
     printf("Test de ordenación con Quicksort\n");
     test(ordRapida);
 
-    // Medición de tiempos con el algoritmo de ORDENACIÓN POR INSERCIÓN
     printf("\n*************************************************************\n");
     printf("N: Cantidad de números a ordenar.\n");
     printf("I: Numero de veces que se repite el algoritmo.\n");
-    printf("T: Tiempo medio de ejecución del algoritmo en microsegundos (us).\n");
+    printf("T: Tiempo medio de ejecución en microsegundos (us).\n");
     printf("T/CSub: Tiempo medio entre la Cota Subestimada.\n");
     printf("T/CAjus: Tiempo medio entre la Cota Ajustada.\n");
     printf("T/CSobre: Tiempo medio entre la Cota Sobreestimada.\n");
-    //printf("\n*************************************************************\n");
+    printf("\n*************************************************************\n");
+
+    // Medición de tiempos con el algoritmo de ORDENACIÓN POR INSERCIÓN
 
     tablaInsercionAl(INICIAL_SIZE, MAX_SIZE, MAX_TIME);
-
-    printf("\n\n*********************************************************\n");
     tablaInsercionAs(INICIAL_SIZE, MAX_SIZE, MAX_TIME);
-
-    printf("\n\n*********************************************************\n");
     tablaInsercionDes(INICIAL_SIZE, MAX_SIZE, MAX_TIME);
 
     printf("\n***************************************************************");
     printf("\n***************************************************************");
 
-    printf("\n\n*********************************************************\n");
+    // Medición de tiempos con el algoritmo de ORDENACIÓN POR QUICKSORT
+
     tablaOrdRapidaAl(INICIAL_SIZE, MAX_SIZE, MAX_TIME);
-
-    printf("\n\n*********************************************************\n");
     tablaOrdRapidaAs(INICIAL_SIZE, MAX_SIZE, MAX_TIME);
-
-    printf("\n\n*********************************************************\n");
     tablaOrdRapidaDes(INICIAL_SIZE, MAX_SIZE, MAX_TIME);
 
     return 0;
