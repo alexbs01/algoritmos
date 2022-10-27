@@ -31,7 +31,8 @@ void test() {
     for(i = 1; i <= 6; i++) {
         printf("Busco %d y ", i);
         if(buscar(i, T) != NULL) {
-            printf("encuentro %d repetido: %d veces\n", i, numeroRepeticiones(buscar(i, T)));
+            printf("encuentro %d repetido: %d veces\n", i,
+                   numeroRepeticiones(buscar(i, T)));
         } else {
             printf("no encuentro nada\n");
         }
@@ -178,5 +179,55 @@ void tablaIB(int inicialSize, int maxSize) {
                actualSize, TI.count, TI.tiempoMedio, TB.count, TB.tiempoMedio);
 
         actualSize *= 2;
-    } while(actualSize <= maxSize); //dato.tiempoMedio <= maxTime
+    } while(actualSize <= maxSize); //&& dato.tiempoMedio <= maxTime
+}
+
+void tablaI(int inicialSize, int maxSize) {
+
+    int actualSize = inicialSize;
+    int arrayNumbers[maxSize];
+    chrono TI;
+    double TSu, TA, TSo;
+
+    printf("\n\n*********************************************************\n");
+    printf("Inserción de n elementos.\n\n");
+    printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
+
+    do {
+        TI = tardanzaI(arrayNumbers, actualSize);
+
+        TSu = TI.tiempoMedio / pow(actualSize, 1.2);  // Tiempo / CotaSubestimada
+        TA = TI.tiempoMedio / actualSize;      // Tiempo / CotaAjustada
+        TSo = TI.tiempoMedio / pow(actualSize, 0.8);   // Tiempo / CotaSobreestimada
+
+        printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
+               actualSize, TI.count, TI.tiempoMedio, TSu, TA, TSo);
+
+        actualSize *= 2;
+    } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
+}
+
+void tablaB(int inicialSize, int maxSize) {
+
+    int actualSize = inicialSize;
+    int arrayNumbers[maxSize];
+    chrono TB;
+    double TSu, TA, TSo;
+
+    printf("\n\n*********************************************************\n");
+    printf("Búsqueda de n elementos.\n\n");
+    printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
+
+    do {
+        TB = tardanzaI(arrayNumbers, actualSize);
+
+        TSu = TB.tiempoMedio / actualSize;  // Tiempo / CotaSubestimada
+        TA = TB.tiempoMedio / pow(actualSize, 1.25);      // Tiempo / CotaAjustada
+        TSo = TB.tiempoMedio / pow(actualSize, 1.5);   // Tiempo / CotaSobreestimada
+
+        printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
+               actualSize, TB.count, TB.tiempoMedio, TSu, TA, TSo);
+
+        actualSize *= 2;
+    } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
 }
