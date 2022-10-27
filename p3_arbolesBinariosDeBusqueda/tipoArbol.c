@@ -105,20 +105,20 @@ void visualizar(arbol T) {
 
         if(!esArbolVacio(T->izq)) {
             printf("(");
-        } else {
             visualizar(T->izq);
+            printf(")");
         }
 
         printf(" %d ", T->elem);
 
         if(!esArbolVacio(T->der)) {
-            printf(")");
-        } else {
+            printf("(");
             visualizar(T->der);
+            printf(")");
         }
 
-
     } else {
-        printf("()");
+        printf("() .");
     }
+
 }
