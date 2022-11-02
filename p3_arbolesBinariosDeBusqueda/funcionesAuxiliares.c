@@ -163,9 +163,10 @@ chrono tardanzaB(int array[], int size) {
 }
 
 void tablaIB(int inicialSize, int maxSize) {
-    int actualSize = inicialSize;
+    int actualSize = inicialSize, cnt = 0;
     chrono TI, TB;
     int arrayNumbers[maxSize];
+    double arrayI[5], arrayB[5];
 
     printf("\n*********************************************************\n");
     printf("Tiempos en insertar y buscar n números enteros aleatorios:\n\n");
@@ -175,18 +176,24 @@ void tablaIB(int inicialSize, int maxSize) {
         TI = tardanzaI(arrayNumbers, actualSize);
         TB = tardanzaB(arrayNumbers, actualSize);
 
+        arrayI[cnt] = TI.tiempoMedio;
+        arrayB[cnt] = TB.tiempoMedio;
+
         printf("%8d\t%8d\t%15lf\t%8d\t%15lf\n",
                actualSize, TI.count, TI.tiempoMedio, TB.count, TB.tiempoMedio);
 
+        cnt++;
         actualSize *= 2;
     } while(actualSize <= maxSize); //&& dato.tiempoMedio <= maxTime
+
+    tablaI(INICIAL_SIZE, MAX_SIZE, arrayI);
+    tablaB(INICIAL_SIZE, MAX_SIZE, arrayB);
 }
 
-void tablaI(int inicialSize, int maxSize) {
+void tablaI(int inicialSize, int maxSize, double array[]) {
 
     int actualSize = inicialSize;
-    int arrayNumbers[maxSize];
-    chrono TI;
+    int cnt = 0;
     double TSu, TA, TSo;
 
     printf("\n\n*********************************************************\n");
@@ -194,24 +201,22 @@ void tablaI(int inicialSize, int maxSize) {
     printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
 
     do {
-        TI = tardanzaI(arrayNumbers, actualSize);
-
-        TSu = TI.tiempoMedio / pow(actualSize, 1.2);  // Tiempo / CotaSubestimada
-        TA = TI.tiempoMedio / actualSize;      // Tiempo / CotaAjustada
-        TSo = TI.tiempoMedio / pow(actualSize, 0.8);   // Tiempo / CotaSobreestimada
+        TSu = array[cnt] / pow(actualSize, 1.2);  // Tiempo / CotaSubestimada
+        TA = array[cnt] / actualSize;      // Tiempo / CotaAjustada
+        TSo = array[cnt] / pow(actualSize, 0.8);   // Tiempo / CotaSobreestimada
 
         printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
-               actualSize, TI.count, TI.tiempoMedio, TSu, TA, TSo);
+               actualSize, 0, array[cnt] , TSu, TA, TSo);
 
+        cnt++;
         actualSize *= 2;
     } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
 }
 
-void tablaB(int inicialSize, int maxSize) {
+void tablaB(int inicialSize, int maxSize, double array[]) {
 
     int actualSize = inicialSize;
-    int arrayNumbers[maxSize];
-    chrono TB;
+    int cnt = 0;
     double TSu, TA, TSo;
 
     printf("\n\n*********************************************************\n");
@@ -219,15 +224,14 @@ void tablaB(int inicialSize, int maxSize) {
     printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
 
     do {
-        TB = tardanzaI(arrayNumbers, actualSize);
-
-        TSu = TB.tiempoMedio / actualSize;  // Tiempo / CotaSubestimada
-        TA = TB.tiempoMedio / pow(actualSize, 1.25);      // Tiempo / CotaAjustada
-        TSo = TB.tiempoMedio / pow(actualSize, 1.5);   // Tiempo / CotaSobreestimada
+        TSu = array[cnt] / actualSize;  // Tiempo / CotaSubestimada
+        TA = array[cnt] / pow(actualSize, 1.25);      // Tiempo / CotaAjustada
+        TSo = array[cnt] / pow(actualSize, 1.5);   // Tiempo / CotaSobreestimada
 
         printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
-               actualSize, TB.count, TB.tiempoMedio, TSu, TA, TSo);
+               actualSize, 0, array[cnt] , TSu, TA, TSo);
 
+        cnt++;
         actualSize *= 2;
     } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
 }

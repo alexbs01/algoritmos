@@ -11,6 +11,7 @@
 
 int main() {
     test();
+    
     inicializar_semilla(); // Inicializamos la seed para obtener números aleatorios.
 
     printf("\n*************************************************************\n");
@@ -24,8 +25,6 @@ int main() {
     printf("\n*************************************************************\n");
 
     tablaIB(INICIAL_SIZE, MAX_SIZE);
-    tablaI(INICIAL_SIZE, MAX_SIZE);
-    tablaB(INICIAL_SIZE, MAX_SIZE);
 
     return 0;
 }
