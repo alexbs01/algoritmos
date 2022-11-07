@@ -13,13 +13,8 @@
 #include <math.h>
 #include "tipoArbol.h"
 
-#define INICIAL_SIZE 8000
+#define INICIAL_SIZE 500
 #define MAX_SIZE 256000
-
-typedef struct chrono {
-    int count;
-    double tiempoMedio;
-}chrono;
 
 void test();
 
@@ -27,11 +22,14 @@ void inicializar_semilla();
 void aleatorio(int v [], int n);
 
 double microsegundos();
-chrono tardanzaI(int array[], int size);
-chrono tardanzaB(int array[], int size);
+double tardanzaI(int array[], int size, arbol *T);
+double tardanzaB(int array[], int size, arbol *T);
 
 void tablaIB(int inicialSize, int maxSize);
-void tablaI(int inicialSize, int maxSize, double arrayI[]);
-void tablaB(int inicialSize, int maxSize, double arrayB[]);
+
+void tablaI(int inicialSize, int maxSize, const double arrayI[],
+            const double arrayB[]);
+void tablaB(int inicialSize, int maxSize, const double arrayI[],
+            const double arrayB[]);
 
 #endif //P3_ARBOLESBINARIOSDEBUSQUEDA_FUNCIONESAUXILIARES_H

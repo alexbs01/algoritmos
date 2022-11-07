@@ -6,19 +6,19 @@
 #include <stdio.h>
 #include "funcionesAuxiliares.h"
 
-#define INICIAL_SIZE 8000
+#define INICIAL_SIZE 500
 #define MAX_SIZE 256000
 
 int main() {
     test();
-    
+
     inicializar_semilla(); // Inicializamos la seed para obtener números aleatorios.
 
     printf("\n*************************************************************\n");
-    printf("N: Cantidad de números que se insertan al arbol.\n");
-    printf("II: Numero de veces que se repite una inserción.\n");
-    printf("IB: Numero de veces que se repite una búsqueda.\n");
-    printf("T: Tiempo medio de inserción en microsegundos (us).\n");
+    printf("N: Cantidad de números que se insertan y buscan en un árbol.\n");
+    printf("T_ins: Tiempo medio de inserción en microsegundos (us).\n");
+    printf("T_bus: Tiempo medio de búsqueda en microsegundos (us).\n");
+    printf("T: Tiempo medio de inserción o búsqueda en microsegundos (us).\n");
     printf("T/CSub: Tiempo medio entre la Cota Subestimada.\n");
     printf("T/CAjus: Tiempo medio entre la Cota Ajustada.\n");
     printf("T/CSobre: Tiempo medio entre la Cota Sobreestimada.\n");

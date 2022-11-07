@@ -9,13 +9,13 @@
 void test() {
     int i;
     arbol T = crearArbol();
-    printf("Arbol vacio: ");
+    printf("Árbol vacÍo: ");
     visualizar(T);
 
     printf("\n");
-    printf("Altura del arbol: %d\n", altura(T));
+    printf("Altura del árbol: %d\n", altura(T));
 
-    printf("Insertamos por este orden 3-1-2-5-4-5 al arbol vacio\n");
+    printf("Insertamos por este orden 3 1 2 5 4 5 al árbol vacío\n");
     T = insertar(3, T);
     T = insertar(1, T);
     T = insertar(2, T);
@@ -23,10 +23,10 @@ void test() {
     T = insertar(4, T);
     T = insertar(5, T);
 
-    printf("Arbol: ");
+    printf("Árbol: ");
     visualizar(T);
-
-    printf("\nAltura del arbol: %d\n", altura(T));
+    printf(".");
+    printf("\nAltura del árbol: %d\n", altura(T));
 
     for(i = 1; i <= 6; i++) {
         printf("Busco %d y ", i);
@@ -38,14 +38,12 @@ void test() {
         }
     }
 
-    printf("Elimino el arbol\n");
+    printf("Borro todos nodos liberando la memoria:\n");
     T = eliminarArbol(T);
 
-    printf("Arbol vacío: ");
-
+    printf("Árbol vacío: ");
     visualizar(T);
-
-    printf("\nAltura del arbol: %d\n", altura(T));
+    printf("\nAltura del árbol: %d\n", altura(T));
 }
 
 
@@ -68,129 +66,66 @@ double microsegundos() {
     return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 
-chrono tardanzaI(int array[], int size) {
-    double tInicial, tFinal, ta, tb, Tiempo;
-    int count = 1, i, cnt;
-    arbol T = crearArbol();
-    chrono c = {count, (Tiempo / count)};
+double tardanzaI(int array[], int size, arbol *T) {
+    double tInicial, tFinal, Tiempo;
+    int cnt;
 
     aleatorio(array, size);
     tInicial = microsegundos();
     for(cnt = 0; cnt < size; cnt++) {
-        insertar(array[cnt], T);
+        *T = insertar(array[cnt], *T);
     }
     tFinal = microsegundos();
     Tiempo = tFinal - tInicial;
 
-    while(Tiempo <= 500) {
-        tInicial = microsegundos();
-        for(i = 0; i <= count; i++) {
-            aleatorio(array, size);
-            for(cnt = 0; cnt < size; cnt++) {
-                insertar(array[cnt], T);
-            }
-        }
-        tFinal = microsegundos();
-        ta = tFinal - tInicial;
-
-        tInicial = microsegundos();
-        for(i = 0; i <= count; i++) {
-            aleatorio(array, size);
-        }
-        tFinal = microsegundos();
-        tb = tFinal - tInicial;
-
-        Tiempo = ta - tb;
-
-        if(Tiempo <= 500) count *= 10;
-    }
-
-    c.count = count;
-    c.tiempoMedio = Tiempo / count;
-    return c;
+    return Tiempo;
 }
 
-chrono tardanzaB(int array[], int size) {
-    double tInicial, tFinal, ta, tb, Tiempo;
-    int count = 1, i, cnt;
-    arbol T = crearArbol();
-    chrono c = {count, (Tiempo / count)};
-
-    aleatorio(array, size);
-    for(cnt = 0; cnt < size; cnt++) {
-        insertar(array[cnt], T);
-    }
+double tardanzaB(int array[], int size, arbol *T) {
+    double tInicial, tFinal, Tiempo;
+    int cnt;
 
     aleatorio(array, size);
     tInicial = microsegundos();
     for(cnt = 0; cnt < size; cnt++) {
-        buscar(array[cnt], T);
+        buscar(array[cnt], *T);
     }
     tFinal = microsegundos();
     Tiempo = tFinal - tInicial;
 
-    while(Tiempo <= 500) {
-        aleatorio(array, size);
-        for(cnt = 0; cnt < size; cnt++) {
-            insertar(array[cnt], T);
-        }
+    *T = eliminarArbol(*T);
 
-        tInicial = microsegundos();
-        for(i = 0; i <= count; i++) {
-            aleatorio(array, size);
-            for(cnt = 0; cnt < size; cnt++) {
-                buscar(array[cnt], T);
-            }
-        }
-        tFinal = microsegundos();
-        ta = tFinal - tInicial;
-
-        tInicial = microsegundos();
-        for(i = 0; i <= count; i++) {
-            aleatorio(array, size);
-        }
-        tFinal = microsegundos();
-        tb = tFinal - tInicial;
-
-        Tiempo = ta - tb;
-
-        if(Tiempo <= 500) count *= 10;
-    }
-
-    c.count = count;
-    c.tiempoMedio = Tiempo / count;
-    return c;
+    return Tiempo;
 }
 
 void tablaIB(int inicialSize, int maxSize) {
     int actualSize = inicialSize, cnt = 0;
-    chrono TI, TB;
     int arrayNumbers[maxSize];
-    double arrayI[5], arrayB[5];
+    double arrayI[MAX_SIZE], arrayB[MAX_SIZE];
+    arbol T = crearArbol();
 
     printf("\n*********************************************************\n");
     printf("Tiempos en insertar y buscar n números enteros aleatorios:\n\n");
-    printf("   [N]\t\t     [II]\t\t[T_ins]\t    [IB]\t\t[T_bus]\n");
+    printf("    [N]\t\t      [T_ins]\t      [T_bus]\n");
 
     do{
-        TI = tardanzaI(arrayNumbers, actualSize);
-        TB = tardanzaB(arrayNumbers, actualSize);
+        arrayI[cnt] = tardanzaI(arrayNumbers, actualSize, &T);
+        arrayB[cnt] = tardanzaB(arrayNumbers, actualSize, &T);
 
-        arrayI[cnt] = TI.tiempoMedio;
-        arrayB[cnt] = TB.tiempoMedio;
-
-        printf("%8d\t%8d\t%15lf\t%8d\t%15lf\n",
-               actualSize, TI.count, TI.tiempoMedio, TB.count, TB.tiempoMedio);
-
+        if(arrayI[cnt] > 500 && arrayB[cnt] > 500) {
+            printf("%8d\t%15lf\t%15lf\n",
+                   actualSize, arrayI[cnt], arrayB[cnt]);
+        }
         cnt++;
         actualSize *= 2;
     } while(actualSize <= maxSize); //&& dato.tiempoMedio <= maxTime
 
-    tablaI(INICIAL_SIZE, MAX_SIZE, arrayI);
-    tablaB(INICIAL_SIZE, MAX_SIZE, arrayB);
+    tablaI(INICIAL_SIZE, MAX_SIZE, arrayI, arrayB);
+    tablaB(INICIAL_SIZE, MAX_SIZE, arrayI, arrayB);
 }
 
-void tablaI(int inicialSize, int maxSize, double array[]) {
+void tablaI(int inicialSize, int maxSize, const double arrayI[],
+            const double arrayB[]) {
 
     int actualSize = inicialSize;
     int cnt = 0;
@@ -198,22 +133,25 @@ void tablaI(int inicialSize, int maxSize, double array[]) {
 
     printf("\n\n*********************************************************\n");
     printf("Inserción de n elementos.\n\n");
-    printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
+    printf("   [N]\t\t\t [T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
 
     do {
-        TSu = array[cnt] / pow(actualSize, 1.2);  // Tiempo / CotaSubestimada
-        TA = array[cnt] / actualSize;      // Tiempo / CotaAjustada
-        TSo = array[cnt] / pow(actualSize, 0.8);   // Tiempo / CotaSobreestimada
+        if(arrayI[cnt] > 500 && arrayB[cnt] > 500) {
 
-        printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
-               actualSize, 0, array[cnt] , TSu, TA, TSo);
+            TSu = arrayI[cnt] / actualSize;  // Tiempo / CotaSubestimada
+            TA = arrayI[cnt] / pow(actualSize, 1.28);      // Tiempo / CotaAjustada
+            TSo = arrayI[cnt] /  pow(actualSize, 1.5);   // Tiempo / CotaSobreestimada
 
+            printf("%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
+                   actualSize, arrayI[cnt], TSu, TA, TSo);
+        }
         cnt++;
         actualSize *= 2;
     } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
 }
 
-void tablaB(int inicialSize, int maxSize, double array[]) {
+void tablaB(int inicialSize, int maxSize, const double arrayI[],
+            const double arrayB[]) {
 
     int actualSize = inicialSize;
     int cnt = 0;
@@ -221,16 +159,18 @@ void tablaB(int inicialSize, int maxSize, double array[]) {
 
     printf("\n\n*********************************************************\n");
     printf("Búsqueda de n elementos.\n\n");
-    printf("   [N]\t\t      [I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
+    printf("   [N]\t\t\t [T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
 
     do {
-        TSu = array[cnt] / actualSize;  // Tiempo / CotaSubestimada
-        TA = array[cnt] / pow(actualSize, 1.25);      // Tiempo / CotaAjustada
-        TSo = array[cnt] / pow(actualSize, 1.5);   // Tiempo / CotaSobreestimada
+        if(arrayI[cnt] > 500 && arrayB[cnt] > 500) {
 
-        printf("%8d\t%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
-               actualSize, 0, array[cnt] , TSu, TA, TSo);
+            TSu = arrayB[cnt] / actualSize;  // Tiempo / CotaSubestimada
+            TA = arrayB[cnt] / pow(actualSize, 1.28);      // Tiempo / CotaAjustada
+            TSo = arrayB[cnt] / pow(actualSize, 1.5);   // Tiempo / CotaSobreestimada
 
+            printf("%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
+                   actualSize, arrayB[cnt], TSu, TA, TSo);
+        }
         cnt++;
         actualSize *= 2;
     } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime

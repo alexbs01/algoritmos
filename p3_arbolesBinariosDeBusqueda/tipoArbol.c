@@ -101,7 +101,7 @@ int altura(arbol T) {
 
 void visualizar(arbol T) {
 
-    if(T != NULL) {
+    if(!esArbolVacio(T)) {
 
         if(!esArbolVacio(T->izq)) {
             printf("(");
@@ -118,7 +118,6 @@ void visualizar(arbol T) {
         }
 
     } else {
-        printf("() .");
+        printf("().");
     }
-
 }
