@@ -12,7 +12,7 @@ main.o: main.c funcionesAuxiliares.h tipoArbol.h
 	gcc -c main.c -g
 
 main: tipoArbol.o funcionesAuxiliares.o main.o
-	gcc -o $(EXECUTABLE) tipoArbol.o funcionesAuxiliares.o main.o -lm -g
+	gcc -o $(EXECUTABLE) -Wall tipoArbol.o funcionesAuxiliares.o main.o -lm -g
 
 clean:
 	rm -f tipoArbol.o funcionesAuxiliares.o main.o $(EXECUTABLE)

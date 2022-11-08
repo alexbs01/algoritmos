@@ -5,27 +5,24 @@
  * */
 
 #include "funcionesAuxiliares.h"
-
+/**
+ * Comprueba que el algoritmo del que vamos a realizar la medición de tiempos
+ * y hacer el estudio, funcione perfectamente.
+ */
 void test() {
-    int i;
+    int i, nodosAInsertar[] = {3, 1 ,2, 5, 4, 5};
     arbol T = crearArbol();
-    printf("Árbol vacÍo: ");
-    visualizar(T);
+    printf("Árbol vacío: "); visualizar(T);
 
     printf("\n");
     printf("Altura del árbol: %d\n", altura(T));
 
     printf("Insertamos por este orden 3 1 2 5 4 5 al árbol vacío\n");
-    T = insertar(3, T);
-    T = insertar(1, T);
-    T = insertar(2, T);
-    T = insertar(5, T);
-    T = insertar(4, T);
-    T = insertar(5, T);
+    for(i = 0; i < sizeof(nodosAInsertar)/ sizeof(nodosAInsertar[0]); i++) {
+        T = insertar(nodosAInsertar[i], T);
+    }
 
-    printf("Árbol: ");
-    visualizar(T);
-    printf(".");
+    printf("Árbol: "); visualizar(T);
     printf("\nAltura del árbol: %d\n", altura(T));
 
     for(i = 1; i <= 6; i++) {
@@ -41,16 +38,22 @@ void test() {
     printf("Borro todos nodos liberando la memoria:\n");
     T = eliminarArbol(T);
 
-    printf("Árbol vacío: ");
-    visualizar(T);
+    printf("Árbol vacío: "); visualizar(T);
     printf("\nAltura del árbol: %d\n", altura(T));
 }
 
-
+/**
+ * Inicializa una seed para poder utilizar la función rand() correctamente
+ */
 void inicializar_semilla() {
     srand(time(NULL));
 }
 
+/**
+ * Pasándole un array v, se rellenará con una cantidad n de elementos aleatorios
+ * @param v - Un array de enteros
+ * @param n - Tamaño del array
+ */
 void aleatorio(int v [], int n) {
     int i, m = 2 * n + 1;
 
@@ -59,6 +62,10 @@ void aleatorio(int v [], int n) {
     }
 }
 
+/**
+ * Obtiene el tiempo en microsegundos del sistema, permitiendo calcular tiempos
+ * @return Tiempo en microsegundos
+ */
 double microsegundos() {
     struct timeval t;
     if (gettimeofday(&t, NULL) < 0 )
@@ -66,6 +73,14 @@ double microsegundos() {
     return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 
+/**
+ * Cuenta cuanto tiempo tarda en insertar los elementos del array
+ * @param array - Array de elementos aleatorios
+ * @param size - Tamaño del array
+ * @param T - Árbol en el que se insertarán los elementos del array
+ * @return Retorna el tiempo en microsegundo que se tardó en insertar todos los
+ * elementos del array
+ */
 double tardanzaI(int array[], int size, arbol *T) {
     double tInicial, tFinal, Tiempo;
     int cnt;
@@ -81,6 +96,14 @@ double tardanzaI(int array[], int size, arbol *T) {
     return Tiempo;
 }
 
+/**
+ * Cuenta cuanto tiempo tarda en buscar los elementos del array
+ * @param array - Array de elementos aleatorios
+ * @param size - Tamaño del array
+ * @param T - Árbol en el que se buscarán los elementos del array
+ * @return Retorna el tiempo en microsegundo que se tardó en buscar todos los
+ * elementos del array
+ */
 double tardanzaB(int array[], int size, arbol *T) {
     double tInicial, tFinal, Tiempo;
     int cnt;
@@ -98,6 +121,11 @@ double tardanzaB(int array[], int size, arbol *T) {
     return Tiempo;
 }
 
+/**
+ * Genera una tabla con la medición de los tiempos para insertar y buscar
+ * @param inicialSize - Tamaño inicial del árbol
+ * @param maxSize - Tamaño final del árbol
+ */
 void tablaIB(int inicialSize, int maxSize) {
     int actualSize = inicialSize, cnt = 0;
     int arrayNumbers[maxSize];
@@ -124,6 +152,14 @@ void tablaIB(int inicialSize, int maxSize) {
     tablaB(INICIAL_SIZE, MAX_SIZE, arrayI, arrayB);
 }
 
+/**
+ * Genera una tabla con los tiempos de tablaIB, pero haciendo un estudio un
+ * poco más exhaustivo en los tiempo para la inserción.
+ * @param inicialSize - Tamaño inicial del árbol
+ * @param maxSize - Tamaño máximo del árbol
+ * @param arrayI - Array con los elementos de inserción de la función tablaIB()
+ * @param arrayB - Array con los elementos de búsqueda de la función tablaIB()
+ */
 void tablaI(int inicialSize, int maxSize, const double arrayI[],
             const double arrayB[]) {
 
@@ -150,6 +186,14 @@ void tablaI(int inicialSize, int maxSize, const double arrayI[],
     } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
 }
 
+/**
+ * Genera una tabla con los tiempos de tablaIB, pero haciendo un estudio un
+ * poco más exhaustivo en los tiempo para la búsqueda.
+ * @param inicialSize - Tamaño inicial del árbol
+ * @param maxSize - Tamaño máximo del árbol
+ * @param arrayI - Array con los elementos de inserción de la función tablaIB()
+ * @param arrayB - Array con los elementos de búsqueda de la función tablaIB()
+ */
 void tablaB(int inicialSize, int maxSize, const double arrayI[],
             const double arrayB[]) {
 
