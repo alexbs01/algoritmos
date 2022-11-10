@@ -31,5 +31,5 @@ void tablaI(int inicialSize, int maxSize, const double arrayI[],
             const double arrayB[]);
 void tablaB(int inicialSize, int maxSize, const double arrayI[],
             const double arrayB[]);
-
+void calentarProcesador(int inicialSize, int maxSize);
 #endif //P3_ARBOLESBINARIOSDEBUSQUEDA_FUNCIONESAUXILIARES_H

@@ -24,6 +24,7 @@ int main() {
     printf("T/CSobre: Tiempo medio entre la Cota Sobreestimada.\n");
     printf("\n*************************************************************\n");
 
+    calentarProcesador(INICIAL_SIZE, MAX_SIZE);
     tablaIB(INICIAL_SIZE, MAX_SIZE);
 
     return 0;

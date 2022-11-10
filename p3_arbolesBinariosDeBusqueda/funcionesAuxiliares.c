@@ -219,3 +219,18 @@ void tablaB(int inicialSize, int maxSize, const double arrayI[],
         actualSize *= 2;
     } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
 }
+
+void calentarProcesador(int inicialSize, int maxSize) {
+    int actualSize = inicialSize, cnt = 0;
+    int arrayNumbers[maxSize];
+    double arrayI[MAX_SIZE], arrayB[MAX_SIZE];
+    arbol T = crearArbol();
+
+    do{
+        arrayI[cnt] = tardanzaI(arrayNumbers, actualSize, &T);
+        arrayB[cnt] = tardanzaB(arrayNumbers, actualSize, &T);
+
+        cnt++;
+        actualSize *= 2;
+    } while(actualSize <= maxSize); //&& dato.tiempoMedio <= maxTime
+}
