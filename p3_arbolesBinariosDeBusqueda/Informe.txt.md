@@ -14,7 +14,7 @@
 ## Introducción
 El objetivo de esta práctica es calcular la complejidad computacional, de forma 
 empírica, de la inserción y búsqueda de números enteros (aleatorios) en un 
-árbol vacío. Esto se realiza partir de la medición de tiempos
+árbol vacío. Esto se realiza partir de la medición de tiempos.
 
 Los **tiempos** de inserción y búsqueda según el tamaño del árbol generado
 aleatoriamente de las siguientes tablas estarán en **microsegundo (us)**,
@@ -24,9 +24,11 @@ cada tiempo calculado.
 Cuando **un tiempo es inferior a 500 microsegundos**, no se mostrará en
 la tabla. En el enunciado se empieza a partir de N = 8000, ya que es a partir
 de ese N cuando el tiempo da mayor que 500 us, pero en la máquina empleada por
-este grupo a veces para n = 4000 hay tiempos mayores que 500 us. Esto significa
-que las tablas que hay en el informe tendrán la fila para n = 4000 aunque haya a
-veces que al ejecutar el programa no aparezcan por dar tiempos menores a 500 us.
+este grupo a veces para n = 2000 o para n = 4000 hay tiempos mayores que 500 us. 
+Esto significa que las tablas que hay en el informe empiezan en n = 8000, pero 
+algunas veces se imprimen las filas de n = 2000 y n = 4000 al ejecutar el 
+código.
+
 
 El **tamaño** de las entradas (los arrays) será de **razón 2** comenzando
 en 500 (500, 1000, 2000, ...) y terminando 256000.
@@ -42,15 +44,14 @@ en 500 (500, 1000, 2000, ...) y terminando 256000.
 
 ## Tiempos en insertar y buscar n números enteros aleatorios:
 
-|   [N]  |    [T_ins]   |    [T_bus]   |
-|-------:|-------------:|-------------:|
-|   4000 |   596.000000 |   604.000000 |
-|   8000 |  1292.000000 |  1001.000000 |
-|  16000 |  2436.000000 |  2365.000000 |
-|  32000 |  5658.000000 |  5495.000000 |
-|  64000 | 13949.000000 | 13123.000000 |
-| 128000 | 33799.000000 | 36803.000000 |
-| 256000 | 85920.000000 | 94921.000000 |
+|     [N] |       [T_ins] |       [T_bus] |
+|--------:|--------------:|--------------:|
+|    8000 |   1094.000000 |   1216.000000 |
+|   16000 |   2514.000000 |   2852.000000 |
+|   32000 |   6242.000000 |   6788.000000 |
+|   64000 |  18595.000000 |  15255.000000 |
+|  128000 |  36353.000000 |  37311.000000 |
+|  256000 |  83593.000000 |  85713.000000 |
 
 Con esta primera tabla podemos ver los tiempos que se tardan N números
 aleatorios en insertarse en un árbol vacío y los tiempos respectivamente
@@ -60,45 +61,60 @@ de búsqueda de N números aleatorios sobre esos árboles previamente creados.
 
 ## Inserción de n elementos:
 
-|   [N]  |      [T]     | [T/CSub] | [T/CAjus] | [T/CSobre] |
-|-------:|-------------:|---------:|----------:|-----------:|
-|   4000 |   596.000000 | 0.149000 |  0.014609 |   0.002356 |
-|   8000 |  1292.000000 | 0.161500 |  0.013041 |   0.001806 |
-|  16000 |  2436.000000 | 0.152250 |  0.010125 |   0.001204 |
-|  32000 |  5658.000000 | 0.176813 |  0.009684 |   0.000988 |
-|  64000 | 13949.000000 | 0.217953 |  0.009832 |   0.000862 |
-| 128000 | 33799.000000 | 0.264055 |  0.009810 |   0.000738 |
-| 256000 | 85920.000000 | 0.335625 |  0.010269 |   0.000663 |
+|     [N] |           [T] |  [T/CSub] | [T/CAjus] | [T/CSobre] |
+|--------:|--------------:|----------:|:---------:|-----------:|
+|    8000 |   1094.000000 |  0.136750 |  0.011042 |   0.001529 |
+|   16000 |   2514.000000 |  0.157125 |  0.010449 |   0.001242 |
+|   32000 |   6242.000000 |  0.195062 |  0.010684 |   0.001090 |
+|   64000 |  18595.000000 |  0.290547 |  0.013106 |   0.001148 |
+|  128000 |  36353.000000 |  0.284008 |  0.010551 |   0.000794 |
+|  256000 |  83593.000000 |  0.326535 |  0.009991 |   0.000645 |
 
 - **CSub**: N
 - **CAjus**: pow(N, 1.28)
 - **CSobre**: pow(N, 1.5)
 
-Con esta tabla vemos que la cota ajustada está tendiendo a 0.010.
-Hay dos anomalías, cuando N es 4000 y cuando N es 8000.
+Con esta tabla vemos que la cota ajustada está tendiendo entre 0.01 y 0.03.
+
+#No hay anomolías.
 
 -----
 
 ## Búsqueda de n elementos:
 
-|   [N]  |      [T]     | [T/CSub] | [T/CAjus] | [T/CSobre] |
+|    [N] |          [T] | [T/CSub] | [T/CAjus] | [T/CSobre] |
 |-------:|-------------:|---------:|----------:|-----------:|
-|   4000 |   604.000000 | 0.151000 |  0.014805 |   0.002388 |
-|   8000 |  1001.000000 | 0.125125 |  0.010104 |   0.001399 |
-|  16000 |  2365.000000 | 0.147813 |  0.009830 |   0.001169 |
-|  32000 |  5495.000000 | 0.171719 |  0.009405 |   0.000960 |
-|  64000 | 13123.000000 | 0.205047 |  0.009250 |   0.000811 |
-| 128000 | 36803.000000 | 0.287523 |  0.010682 |   0.000804 |
-| 256000 | 94921.000000 | 0.370785 |  0.011345 |   0.000733 |
+|   8000 |  1216.000000 | 0.152000 |  0.016072 |   0.001699 |
+|  16000 |  2852.000000 | 0.178250 |  0.015849 |   0.001409 |
+|  32000 |  6788.000000 | 0.212125 |  0.015860 |   0.001186 |
+|  64000 | 15255.000000 | 0.238359 |  0.014986 |   0.000942 |
+| 128000 | 37311.000000 | 0.291492 |  0.015411 |   0.000815 |
+| 256000 | 85713.000000 | 0.334816 |  0.014885 |   0.000662 |
 
 - **CSub**: N
-- **CAjus**: pow(N, 1.28)
+- **CAjus**: pow(N, 1.25)
 - **CSobre**: pow(N, 1.5)
 
-Con esta tabla vemos que la cota ajustada está tendiendo a 0.010.
-Hay una anomalía, cuando N es 4000.
+Con esta tabla vemos que la cota ajustada está tendiendo entre 0.015 y 0.016.
 
+(* ERRORES P2 *)
 
+- Mala idea hacer el test solo con aleatorio
+- El objetivo de la práctica es determinar la O grande de forma empírica, para lo cual, se miden tiempos. (el objetivo no es la medición de tiempos)
+- Prueba con elmentos aleatorios
+    - en los 2 primeros valores el tiempo es anormalmente alto, hay 			
+      una anomalia, para q eso no pase siempre eso en las 2 primeras tablas hay q hacer un 					
+      precalentamiento
+    - no hace falta poner tantos decimales en el tiempo de la cota
+      ajustada después de la tabla
+
+- Prueba con elementos ordenados de forma ascendente
+    - los valores de la cota ajustada estan mal, valores muy malos 		
+      hasta que tiende a 0.024 (q sigue siendo regular)
+    - poner visualmente cuando hay anomalias (#, flecha, punto...)
+      tanto en la tabla como después
+- En la conclusión en la cota ajustada esta puesto que es n^2 pero en la tabla se estudia n^1.99, por lo que no es coherente, y en el caso medio lo mismo porque no se usa n·log(n)
+- (CREO DIJO ESO) En el quicksort con umbral 100: había que responder que para vectores ascendentes los mejores tiempos son con umbral 100 y en ascendentes 100 y en aleatorio 10
 
 
 
@@ -145,15 +161,13 @@ A PARTIR DE AQUÍ HAY QUE HACER (Arriba también falta el objetivo)
 
 ### Complejidades
 
-**Ordenación por inserción:**
-- Mejor Caso (Ascendente): O(n)
-- Caso promedio (Aleatorio): O(n²)
-- Peor Caso (Descendente): O(n²)
+**Búsqueda:**
+- Caso medio: O(log n)
+- Caso peor: O(n)
 
-**Ordenación por QuickSort:**
-- Mejor Caso (Ascendente): O(n·log(n))
-- Caso promedio (Descendente):  O(n·log(n))
-- Peor Caso (Aleatorio):  O(n²)
+**Inserción:**
+- Caso medio: O(log n)
+- Caso peor: O(n)
 
 ### Algoritmo de Ordenación por Inserción
 

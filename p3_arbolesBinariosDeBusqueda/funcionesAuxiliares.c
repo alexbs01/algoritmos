@@ -175,8 +175,8 @@ void tablaI(int inicialSize, int maxSize, const double arrayI[],
         if(arrayI[cnt] > 500 && arrayB[cnt] > 500) {
 
             TSu = arrayI[cnt] / actualSize;  // Tiempo / CotaSubestimada
-            TA = arrayI[cnt] / pow(actualSize, 1.28);      // Tiempo / CotaAjustada
-            TSo = arrayI[cnt] /  pow(actualSize, 1.5);   // Tiempo / CotaSobreestimada
+            TA = arrayI[cnt] / pow(actualSize, 1.28); // Tiempo/CotaAjustada
+            TSo = arrayI[cnt] /  pow(actualSize, 1.5); // Tiempo/CotaSobreestimada
 
             printf("%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
                    actualSize, arrayI[cnt], TSu, TA, TSo);
@@ -209,8 +209,8 @@ void tablaB(int inicialSize, int maxSize, const double arrayI[],
         if(arrayI[cnt] > 500 && arrayB[cnt] > 500) {
 
             TSu = arrayB[cnt] / actualSize;  // Tiempo / CotaSubestimada
-            TA = arrayB[cnt] / pow(actualSize, 1.25);      // Tiempo / CotaAjustada
-            TSo = arrayB[cnt] / pow(actualSize, 1.5);   // Tiempo / CotaSobreestimada
+            TA = arrayB[cnt] / pow(actualSize, 1.25); // Tiempo / CotaAjustada
+            TSo = arrayB[cnt] / pow(actualSize, 1.5); // Tiempo / CotaSobreestimada
 
             printf("%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
                    actualSize, arrayB[cnt], TSu, TA, TSo);
@@ -220,6 +220,12 @@ void tablaB(int inicialSize, int maxSize, const double arrayI[],
     } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
 }
 
+/**
+ * Hace que el procesador no esté en modo de ahorro de energía para que no haya
+ * variaciones con los tiempos debido a esto.
+ * @param inicialSize - Tamaño inicial del árbol
+ * @param maxSize - Tamaño máximo del árbol
+ */
 void calentarProcesador(int inicialSize, int maxSize) {
     int actualSize = inicialSize, cnt = 0;
     int arrayNumbers[maxSize];
