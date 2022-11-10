@@ -13,7 +13,8 @@
 
 ## Introducción
 El objetivo de esta práctica es calcular la complejidad computacional, de forma 
-empírica, de la inserción de números enteros en un árbol vacío a partir de la medición de tiempos
+empírica, de la inserción y búsqueda de números enteros (aleatorios) en un 
+árbol vacío. Esto se realiza partir de la medición de tiempos
 
 Los **tiempos** de inserción y búsqueda según el tamaño del árbol generado
 aleatoriamente de las siguientes tablas estarán en **microsegundo (us)**,

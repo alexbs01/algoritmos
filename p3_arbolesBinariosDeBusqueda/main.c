@@ -25,6 +25,10 @@ int main() {
     printf("\n*************************************************************\n");
 
     calentarProcesador(INICIAL_SIZE, MAX_SIZE);
+
+
+
+    
     tablaIB(INICIAL_SIZE, MAX_SIZE);
 
     return 0;
