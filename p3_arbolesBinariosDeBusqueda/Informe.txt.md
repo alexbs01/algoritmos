@@ -12,22 +12,24 @@
 - **Kernel**: 5.15.0-47-generic
 
 ## Introducción
-El objetivo de esta práctica es calcular la complejidad computacional, de forma 
-empírica, de la inserción y búsqueda de números enteros (aleatorios) en un 
-árbol vacío. Esto se realiza partir de la medición de tiempos.  
+El objetivo de esta práctica es **calcular la complejidad computacional**, de 
+forma empírica, de la inserción y búsqueda de números enteros (aleatorios) en 
+un árbol vacío. Esto se realizará a partir de la medición de tiempos.  
 
 Los **tiempos** de inserción y búsqueda según el tamaño del árbol generado 
 aleatoriamente de las siguientes tablas estarán en **microsegundos (us)**, 
 además también se dará una cota subestimada, ajustada y sobreestimada para 
 cada tiempo calculado. 
 
-Cuando **un tiempo es inferior a 500 microsegundos**, no se mostrará en 
-la tabla. En el enunciado se empieza a partir de N = 8000, ya que es a partir
+Cuando **un tiempo es inferior a 500 microsegundos, no se mostrará en 
+la tabla**. En el enunciado se empieza a partir de N = 8000, ya que es a partir
 de ese N cuando el tiempo da mayor que 500 us, pero en la máquina empleada por 
 este grupo a veces para n = 2000 o para n = 4000 hay tiempos mayores que 500 us. 
 Esto significa que las tablas que hay en el informe empiezan en n = 8000, pero 
 algunas veces se imprimen las filas de n = 2000 y n = 4000 al ejecutar el 
-código.  
+código. Como en las tablas solo hay tiempos superiores a 500 us, ningún dato 
+mostrado fue obtenido a partir de la repetición de un bucle, si no que fue 
+medido de forma directa.  
 
 El **tamaño** de las entradas (los arrays) será de **razón 2** comenzando
 en 500 (500, 1000, 2000, ...) y terminando 256000.  
@@ -102,24 +104,26 @@ Con esta tabla vemos que la cota ajustada está tendiendo entre 0.015 y 0.016.
 
 ### Complejidades
 
-Se calcularon a través de hacer una nube de puntos entre con las coordenadas 
-con (N, Tiempo), y calcular una función exponencial que pase lo más cerca 
-posible por todos los puntos.
+Se calcularon a través de hacer una **nube de puntos** con las coordenadas 
+de *(N, Tiempo)* múltiples veces, y calcular una **función exponencial** que 
+pase lo más cerca posible por todos los puntos.  
+
 #### Inserción
-- Caso medio: O(pow(n, 1.28))
+- **Caso medio**: O(pow(n, 1.28))
 
 #### Búsqueda
-- Caso medio: O(pow(n, 1.25))
+- **Caso medio**: O(pow(n, 1.25))
 
 Tras el análisis de los tiempos de inserción y búsqueda, podemos concluir que 
-por lo general, la inserción es más rápida.  
+por lo general, **la inserción es más rápida**.  
 
 La inserción de n elementos en un árbol vacío, lleva consigo hacer una reserva 
 de memoria para la creación de los nodos, esta reserva es relativamente 
-costosa.  
+costosa. Pero no es lo suficientemente lenta como para ser más lento que la 
+búsqueda.
 
 La búsqueda de n elementos sobre un árbol de n elementos, se realiza con un 
 array de n números aleatorios, que pueden coincidir con los que hay en el árbol 
 o no. El caso en el que un elemento del array no esté en el árbol, hará que se 
-tenga que bajar hasta una hoja, lo cual tiene un coste de tiempo bastante 
-inferior al de realizar las reservas de memoria.  
+tenga que bajar hasta una hoja, lo cual tiene un coste de tiempo superior al de
+reservar memoria y crear nodos para después insertarlos.  

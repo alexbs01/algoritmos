@@ -222,7 +222,7 @@ void tablaB(int inicialSize, int maxSize, const double arrayI[],
 
 /**
  * Hace que el procesador no esté en modo de ahorro de energía para que no haya
- * variaciones con los tiempos debido a esto.
+ * variaciones con los tiempos debido a esto (es un seguro para los portátiles).
  * @param inicialSize - Tamaño inicial del árbol
  * @param maxSize - Tamaño máximo del árbol
  */
