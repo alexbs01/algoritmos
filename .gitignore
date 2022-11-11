@@ -55,3 +55,7 @@ cmake-build-debug/
 .idea/
 *.txt
 *.lnk
+
+# Exceptions
+!Informe.txt
+!makefile.txt
