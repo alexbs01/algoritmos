@@ -22,6 +22,6 @@ void inicializar_semilla();
 void aleatorio(int v [], int n);
 void hundir(monticulo *m, int n);
 void ord_monticulos(int array[], int n);
-
+void intercambiar(int *a, int *b);
 
 #endif //P4_MONTICULOS_MONTICULO_H

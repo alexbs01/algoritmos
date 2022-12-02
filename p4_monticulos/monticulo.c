@@ -6,6 +6,13 @@
 
 #include "monticulo.h"
 
+void intercambiar(int *a, int *b) {
+    int aux;
+    aux = *a;
+    *a = *b;
+    *b = aux;
+}
+
 void hundir(monticulo *m, int n) {
     int j;
 
@@ -21,10 +28,7 @@ void hundir(monticulo *m, int n) {
             n = hijoizq;
         }
 
-        for(n = 0; n < TAM; n++) {
-            m->vector[j] = m->vector[n];
-        }
-
+        intercambiar(&m->vector[j], &m->vector[n]);
     } while(j != n);
 }
 

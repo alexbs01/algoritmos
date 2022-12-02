@@ -15,6 +15,8 @@
 
 void inicializar_semilla();
 void aleatorio(int v [], int n);
-
+void ascendente(int v [], int n);
+void descendente(int v[], int n);
+double microsegundos();
 
 #endif //P4_MONTICULOS_FUNCIONESAUXILIARES_H
