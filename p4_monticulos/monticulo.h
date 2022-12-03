@@ -9,6 +9,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
 #define TAM 512000
 
 typedef struct monticulo {
@@ -17,11 +19,11 @@ typedef struct monticulo {
 } monticulo;
 
 void crear_monticulo(int array[], int size, monticulo *m);
-int eliminar_mayor(monticulo *m);
-void inicializar_semilla();
-void aleatorio(int v [], int n);
 void hundir(monticulo *m, int n);
-void ord_monticulos(int array[], int n);
 void intercambiar(int *a, int *b);
+
+int eliminar_mayor(monticulo *m);
+
+bool monticulo_vacio(monticulo m);
 
 #endif //P4_MONTICULOS_MONTICULO_H

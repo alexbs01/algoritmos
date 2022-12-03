@@ -7,6 +7,10 @@
 
 #include "funcionesAuxiliares.h"
 #include "monticulo.h"
+
+#define INICIAL_SIZE 500
+#define MAX_SIZE 256000
+
 /**
  * Inicializa una seed para poder utilizar la función rand() correctamente
  */
@@ -14,19 +18,12 @@ void inicializar_semilla() {
     srand(time(NULL));
 }
 
-/**
- * Pasándole un array v, se rellenará con una cantidad n de elementos aleatorios
- * @param v - Un array de enteros
- * @param n - Tamaño del array
- */
-void aleatorio(int v [], int n) {
-    int i, m = 2 * n + 1;
-
-    for(i = 0; i < n; i++) {
-        v[i] = (rand() % m) - n;
-    }
+double microsegundos() {
+    struct timeval t;
+    if (gettimeofday(&t, NULL) < 0 )
+        return 0.0;
+    return (t.tv_usec + t.tv_sec * 1000000.0);
 }
-
 /**
  * Pasándole un array v, se rellenará con una cantidad n de elementos ordenados
  * de forma ascendente
@@ -41,12 +38,150 @@ void ascendente(int v [], int n) {
     }
 }
 
+void visualizar(monticulo m) {
+    int i;
+
+    if(!monticulo_vacio(m)) {
+        for(i = 0; i <= m.ultimo; i++){
+            printf("%d ", m.vector[i]);
+        }
+    } else {
+        printf("().");
+    }
+}
+
+void hijosYpadre(monticulo m) {
+    int i;
+
+    for(i = 0; i <= m.ultimo; i++) {
+        printf("\nNodo %d: %d", i, m.vector[i]);
+
+        if(0 != m.vector[2 * i + 1] && (2 * i + 1) <= m.ultimo) {
+            printf("\n\tHijo Izquierdo: %d", m.vector[2 * i + 1]);
+        } else {
+            printf("\n\tNo tiene hijo izquierdo.");
+        }
+
+        if(0 != m.vector[2 * i + 2] && (2 * i + 2) <= m.ultimo) {
+            printf("\n\tHijo Derecho: %d", m.vector[2 * i + 2]);
+        } else {
+            printf("\n\tNo tiene hijo derecho.");
+        }
+    }
+}
+
+void test() {
+    int i, j, size = 5;
+    int nodosAInsertar[] = {1, 5, 3, 7, 9, 2};   //nodosAInsertar[] = {3, 1 ,2, 5, 4, 5}; Preguntar a Kike, dos 5 bb
+    monticulo m;
+
+    printf("Array a insertar en el monticulo: ");
+    for(i = 0; i <= size; i++){
+        printf("%d ", nodosAInsertar[i]);
+    }
+
+    crear_monticulo(nodosAInsertar, size, &m);
+    printf("\nNodos del monticulo ordenado: "); visualizar(m);
+    printf("\nNúmero de nodos (Empezamos a contar en cero): %d", m.ultimo);
+
+    hijosYpadre(m);
+
+    printf("\nEliminamos el mayor del monticulo: %d", eliminar_mayor(&m));
+    printf("\nNodos del monticulo ordenado: "); visualizar(m);
+    printf("\nNúmero de nodos (Empezamos a contar en cero): %d", m.ultimo);
+
+    hijosYpadre(m);
+
+    printf("\nBorro todos nodos liberando la memoria: ");
+
+    j = m.ultimo;
+    for(i = 0; i <= j; i++) {
+        printf("%d ",eliminar_mayor(&m));
+    }
+
+    printf("\nNodo vacío: "); visualizar(m);
+    printf("\nNúmero de nodos (Empezamos a contar en cero): %d", m.ultimo);
+}
+
+double tardanza(int array[], int size, monticulo *m) {
+    double tInicial, tFinal, Tiempo;
+    int cnt;
+
+    ascendente(array, size);
+    tInicial = microsegundos();
+    for(cnt = 0; cnt < size; cnt++) {
+        crear_monticulo(array, size, m);
+    }
+    tFinal = microsegundos();
+    Tiempo = tFinal - tInicial;
+
+    return Tiempo;
+}
+
+void calentarProcesador(int inicialSize, int maxSize) {
+    int actualSize = inicialSize, cnt = 0;
+    int arrayNumbers[maxSize];
+    double array[MAX_SIZE];
+    monticulo m;
+
+    do{
+        array[cnt] = tardanza(arrayNumbers, actualSize, &m);
+
+        cnt++;
+        actualSize *= 2;
+    } while(actualSize <= maxSize); //&& dato.tiempoMedio <= maxTime
+}
+
+void tabla(int inicialSize, int maxSize) {
+    int actualSize = inicialSize, cnt = 0;
+    int arrayNumbers[maxSize];
+    double array[MAX_SIZE];
+    monticulo m;
+    double TSu, TA, TSo;
+
+    printf("\n\n*********************************************************\n");
+    printf("Inserción de n elementos.\n\n");
+    printf("   [N]\t\t\t [T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
+
+    do {
+        array[cnt] = tardanza(arrayNumbers, actualSize, &m);
+
+        TSu = array[cnt] / pow(actualSize, 0.5);  // Tiempo / CotaSubestimada
+        TA = array[cnt] / actualSize; // Tiempo/CotaAjustada
+        TSo = array[cnt] /  pow(actualSize, 1.5); // Tiempo/CotaSobreestimada
+
+        printf("%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
+               actualSize, array[cnt], TSu, TA, TSo);
+
+        cnt++;
+        actualSize *= 2;
+    } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
+}
+
+
+
+
+/**
+ * Pasándole un array v, se rellenará con una cantidad n de elementos aleatorios
+ * @param v - Un array de enteros
+ * @param n - Tamaño del array
+ */
+/*
+void aleatorio(int v [], int n) {
+    int i, m = 2 * n + 1;
+
+    for(i = 0; i < n; i++) {
+        v[i] = (rand() % m) - n;
+    }
+}
+*/
 /**
  * Pasándole un array v, se rellenará con una cantidad n de elementos ordenados
  * de forma descendente
  * @param v - Un array de enteros
  * @param n - Tamaño del array
  */
+/*
 void descendente(int v[], int n) {
     int i;
 
@@ -54,65 +189,4 @@ void descendente(int v[], int n) {
         v[i] = n - i;
     }
 }
-
-double microsegundos() {
-    struct timeval t;
-    if (gettimeofday(&t, NULL) < 0 )
-        return 0.0;
-    return (t.tv_usec + t.tv_sec * 1000000.0);
-}
-
-void visualizar(monticulo T) {
-    if(!esArbolVacio(T)) {
-
-        if(!esArbolVacio(T->izq)) {
-            printf("(");
-            visualizar(T->izq);
-            printf(")");
-        }
-
-        printf(" %d ", T->elem);
-
-        if(!esArbolVacio(T->der)) {
-            printf("(");
-            visualizar(T->der);
-            printf(")");
-        }
-
-    } else {
-        printf("().");
-    }
-}
-
-void test() {
-    int i, nodosAInsertar[] = {3, 1 ,2, 5, 4}; //Preguntar a Kike, dos 5 bb
-    monticulo M = crearArbol();
-    printf("Árbol vacío: "); visualizar(T);
-
-    printf("\n");
-    printf("Altura del árbol: %d\n", altura(T));
-
-    printf("Insertamos por este orden 3 1 2 5 4 5 al árbol vacío\n");
-    for(i = 0; i < sizeof(nodosAInsertar)/ sizeof(nodosAInsertar[0]); i++) {
-        M = insertar(nodosAInsertar[i], M);
-    }
-
-    printf("Árbol: "); visualizar(T);
-    printf("\nAltura del árbol: %d\n", altura(T));
-
-    for(i = 1; i <= 6; i++) {
-        printf("Busco %d y ", i);
-        if(buscar(i, T) != NULL) {
-            printf("encuentro %d repetido: %d veces\n", i,
-                   numeroRepeticiones(buscar(i, T)));
-        } else {
-            printf("no encuentro nada\n");
-        }
-    }
-
-    printf("Borro todos nodos liberando la memoria:\n");
-    T = eliminarArbol(T);
-
-    printf("Árbol vacío: "); visualizar(T);
-    printf("\nAltura del árbol: %d\n", altura(T));
-}
+*/

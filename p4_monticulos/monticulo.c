@@ -6,11 +6,18 @@
 
 #include "monticulo.h"
 
-void intercambiar(int *a, int *b) {
-    int aux;
-    aux = *a;
-    *a = *b;
-    *b = aux;
+
+void crear_monticulo(int array[], int size, monticulo *m) {
+    int i;
+
+    for(i = 0; i <= size; i++) {
+        m->vector[i] = array[i];
+    }
+    m->ultimo = size;
+
+    for(i = size/2; i >= 0; i--) {
+        hundir(m, i);
+    }
 }
 
 void hundir(monticulo *m, int n) {
@@ -32,35 +39,33 @@ void hundir(monticulo *m, int n) {
     } while(j != n);
 }
 
-void crear_monticulo(int array[], int size, monticulo *m) {
-    int i;
-
-    for(i = 0; i < TAM; i++) {
-        m->vector[i] = array[i];
-    }
-
-    m->ultimo = size;
-
-    for(i = m->ultimo / 2; i <= 1; i--) {
-        hundir(m, i);
-    }
+void intercambiar(int *a, int *b) {
+    int aux;
+    aux = *a;
+    *a = *b;
+    *b = aux;
 }
 
+
 int eliminar_mayor(monticulo *m) {
-    if(m->ultimo==0) {
+    if(monticulo_vacio(*m)) {
         printf("Error: monticulo vacio");
 
     } else {
         int x;
-        x = m->vector[1];
-        m->vector[1] = m->vector[m->ultimo];
-        m->ultimo = m->ultimo - 1;
+        x = m->vector[0];
+        m->vector[0] = m->vector[m->ultimo];
+        m->ultimo = m->ultimo - 1; // [2 7 3 1 5] 2
 
         if(m->ultimo > 0) {
-            hundir(m, 1);
+            hundir(m, 0);
         }
 
         return x;
     }
+}
+
+bool monticulo_vacio(monticulo m){
+    return (m.ultimo == -1);
 }
 
