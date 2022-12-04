@@ -48,21 +48,22 @@ void intercambiar(int *a, int *b) {
 
 
 int eliminar_mayor(monticulo *m) {
+    int x;
+
     if(monticulo_vacio(*m)) {
         printf("Error: monticulo vacio");
 
-    } else {
-        int x;
-        x = m->vector[0];
-        m->vector[0] = m->vector[m->ultimo];
-        m->ultimo = m->ultimo - 1; // [2 7 3 1 5] 2
-
-        if(m->ultimo > 0) {
-            hundir(m, 0);
-        }
-
-        return x;
     }
+
+    x = m->vector[0];
+    m->vector[0] = m->vector[m->ultimo];
+    m->ultimo = m->ultimo - 1; // [2 7 3 1 5] 2
+
+    if(m->ultimo > 0) {
+        hundir(m, 0);
+    }
+
+    return x;
 }
 
 bool monticulo_vacio(monticulo m){

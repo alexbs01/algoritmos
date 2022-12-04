@@ -71,8 +71,9 @@ void hijosYpadre(monticulo m) {
 }
 
 void test() {
-    int i, j, size = 5;
-    int nodosAInsertar[] = {1, 5, 3, 7, 9, 2};   //nodosAInsertar[] = {3, 1 ,2, 5, 4, 5}; Preguntar a Kike, dos 5 bb
+    //int nodosAInsertar[] = {1, 5, 3, 7, 9, 2};   //nodosAInsertar[] = {3, 1 ,2, 5, 4, 5}; Preguntar a Kike, dos 5 bb
+    int nodosAInsertar[] = {1, 1, 1, 1, 1, 1, 10};   //nodosAInsertar[] = {3, 1 ,2, 5, 4, 5}; Preguntar a Kike, dos 5 bb
+    int i, j, size = sizeof(nodosAInsertar) / sizeof(nodosAInsertar[0]) - 1;
     monticulo m;
 
     printf("Array a insertar en el monticulo: ");
@@ -109,6 +110,10 @@ double tardanza(int array[], int size, monticulo *m) {
 
     ascendente(array, size);
     tInicial = microsegundos();
+    //// El problema de que tarde mucho creo que está aquí
+    /* Para insertar 512000 elementos en el montículo, los inserta 512000 veces,
+     * y el tiempo calculado es el tiempo resultante de insertar 512000 elementos
+     * 512000 veces*/
     for(cnt = 0; cnt < size; cnt++) {
         crear_monticulo(array, size, m);
     }
@@ -121,11 +126,10 @@ double tardanza(int array[], int size, monticulo *m) {
 void calentarProcesador(int inicialSize, int maxSize) {
     int actualSize = inicialSize, cnt = 0;
     int arrayNumbers[maxSize];
-    double array[MAX_SIZE];
     monticulo m;
 
     do{
-        array[cnt] = tardanza(arrayNumbers, actualSize, &m);
+        tardanza(arrayNumbers, actualSize, &m);
 
         cnt++;
         actualSize *= 2;
