@@ -105,22 +105,30 @@ void test() {
 }
 
 double tardanza(int array[], int size, monticulo *m) {
-    double tInicial, tFinal, Tiempo;
-    int cnt;
+    double tInicial, tFinal;
+    int cnt = 1, i;
 
     ascendente(array, size);
     tInicial = microsegundos();
-    //// El problema de que tarde mucho creo que está aquí
-    /* Para insertar 512000 elementos en el montículo, los inserta 512000 veces,
-     * y el tiempo calculado es el tiempo resultante de insertar 512000 elementos
-     * 512000 veces*/
-    for(cnt = 0; cnt < size; cnt++) {
-        crear_monticulo(array, size, m);
-    }
+    crear_monticulo(array, size, m);
     tFinal = microsegundos();
-    Tiempo = tFinal - tInicial;
 
-    return Tiempo;
+    if(tFinal - tInicial < 500) {
+        do {
+            cnt *= 10;
+            tInicial = microsegundos();
+            for(i = 1; i <= cnt; i++) {
+                crear_monticulo(array, size, m);
+            }
+            tFinal = microsegundos();
+        } while(tFinal - tInicial < 500);
+        return (tFinal - tInicial) / cnt;
+    }
+
+    tFinal = microsegundos();
+
+
+    return tFinal - tInicial;
 }
 
 void calentarProcesador(int inicialSize, int maxSize) {

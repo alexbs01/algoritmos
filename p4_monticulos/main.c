@@ -8,7 +8,7 @@
 #include "funcionesAuxiliares.h"
 
 #define INICIAL_SIZE 500
-#define MAX_SIZE 256000
+#define MAX_SIZE 512000
 
 int main() {
 
