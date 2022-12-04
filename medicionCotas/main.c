@@ -17,7 +17,7 @@ int main() {
     printf("Escribe inicio del intervalo, final y salto separados por espacio: ");
     scanf("%f %f %f", &inicioIntervalo, &finalIntervalo, &salto);
 
-    printf("\nSe generarán %f tablas\n", (finalIntervalo - inicioIntervalo) / salto);
+    printf("\nSe generarán %f tablas\n", roundf((finalIntervalo - inicioIntervalo) / salto));
 
     do {
         printf("\nVer cota ajustada para log N (1), N log N (2), N^a (3), fin programa(4):");
