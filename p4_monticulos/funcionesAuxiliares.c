@@ -1,4 +1,3 @@
-
 /*
  * AUTOR 1: Adrián Rego Criado
  * AUTOR 2: Miguel Cortón Debén
@@ -104,7 +103,8 @@ void test() {
     printf("\nNúmero de nodos (Empezamos a contar en cero): %d", m.ultimo);
 }
 
-double tardanza(int array[], int size, monticulo *m) {
+chrono tardanza(int array[], int size, monticulo *m) {
+    chrono c;
     double tInicial, tFinal;
     int cnt = 1, i;
 
@@ -122,13 +122,19 @@ double tardanza(int array[], int size, monticulo *m) {
             }
             tFinal = microsegundos();
         } while(tFinal - tInicial < 500);
-        return (tFinal - tInicial) / cnt;
+
+        c.count = cnt;
+        c.tiempoMedio = (tFinal - tInicial) / cnt;
+
+        return c;
     }
 
     tFinal = microsegundos();
 
+    c.count = cnt;
+    c.tiempoMedio = (tFinal - tInicial) / cnt;
 
-    return tFinal - tInicial;
+    return c;
 }
 
 void calentarProcesador(int inicialSize, int maxSize) {
@@ -147,23 +153,23 @@ void calentarProcesador(int inicialSize, int maxSize) {
 void tabla(int inicialSize, int maxSize) {
     int actualSize = inicialSize, cnt = 0;
     int arrayNumbers[maxSize];
-    double array[MAX_SIZE];
+    chrono array[MAX_SIZE];
     monticulo m;
     double TSu, TA, TSo;
 
-    printf("\n\n*********************************************************\n");
+    printf("\n\n****************************************************\n");
     printf("Inserción de n elementos.\n\n");
-    printf("   [N]\t\t\t [T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
+    printf("  [N]\t\t[I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
 
     do {
         array[cnt] = tardanza(arrayNumbers, actualSize, &m);
 
-        TSu = array[cnt] / pow(actualSize, 0.5);  // Tiempo / CotaSubestimada
-        TA = array[cnt] / actualSize; // Tiempo/CotaAjustada
-        TSo = array[cnt] /  pow(actualSize, 1.5); // Tiempo/CotaSobreestimada
+        TSu = array[cnt].tiempoMedio / pow(actualSize, 0.5);
+        TA = array[cnt].tiempoMedio / actualSize;
+        TSo = array[cnt].tiempoMedio /  pow(actualSize, 1.5);
 
-        printf("%8d\t%14lf\t%15lf\t%15lf\t%15lf\n",
-               actualSize, array[cnt], TSu, TA, TSo);
+        printf("%8d\t%3d\t%15lf\t %14lf\t%14lf\t%14lf\n",
+               actualSize, array[cnt].count ,array[cnt].tiempoMedio, TSu, TA, TSo);
 
         cnt++;
         actualSize *= 2;

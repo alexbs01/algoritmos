@@ -15,6 +15,10 @@
 #include <sys/time.h>
 #include <math.h>
 
+typedef struct chrono {
+    int count;
+    double tiempoMedio;
+}chrono;
 
 void inicializar_semilla();
 void ascendente(int v [], int n);
@@ -24,7 +28,7 @@ void visualizar(monticulo m);
 void hijosYpadre(monticulo m);
 void test();
 
-double tardanza(int array[], int size, monticulo *m);
+chrono tardanza(int array[], int size, monticulo *m);
 void calentarProcesador(int inicialSize, int maxSize);
 void tabla(int inicialSize, int maxSize);
 
