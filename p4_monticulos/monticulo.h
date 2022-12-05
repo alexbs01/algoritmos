@@ -18,12 +18,14 @@ typedef struct monticulo {
     int ultimo;
 } monticulo;
 
-void crear_monticulo(int array[], int size, monticulo *m);
+void crear_monticulo(int const array[], int size, monticulo *m);
 void hundir(monticulo *m, int n);
 void intercambiar(int *a, int *b);
 
 int eliminar_mayor(monticulo *m);
 
 bool monticulo_vacio(monticulo m);
+
+void ord_monticulo(int array[], int n);
 
 #endif //P4_MONTICULOS_MONTICULO_H

@@ -7,7 +7,7 @@
 #include "monticulo.h"
 
 
-void crear_monticulo(int array[], int size, monticulo *m) {
+void crear_monticulo(int const array[], int size, monticulo *m) {
     int i;
 
     for(i = 0; i <= size; i++) {
@@ -70,3 +70,13 @@ bool monticulo_vacio(monticulo m){
     return (m.ultimo == -1);
 }
 
+void ord_monticulo(int array[], int n) {
+    monticulo m;
+    int i;
+
+    crear_monticulo(array, n, &m);
+
+    for(i = n; i >= 0; i--) {
+        array[i] = eliminar_mayor(&m);
+    }
+}

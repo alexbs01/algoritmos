@@ -23,6 +23,8 @@ double microsegundos() {
         return 0.0;
     return (t.tv_usec + t.tv_sec * 1000000.0);
 }
+
+
 /**
  * Pasándole un array v, se rellenará con una cantidad n de elementos ordenados
  * de forma ascendente
@@ -36,6 +38,34 @@ void ascendente(int v [], int n) {
         v[i] = i;
     }
 }
+
+/**
+ * Pasándole un array v, se rellenará con una cantidad n de elementos ordenados
+ * de forma descendente
+ * @param v - Un array de enteros
+ * @param n - Tamaño del array
+ */
+void descendente(int v[], int n) {
+    int i;
+
+    for(i = 0; i < n; i++) {
+        v[i] = n - i;
+    }
+}
+
+/**
+ * Pasándole un array v, se rellenará con una cantidad n de elementos aleatorios
+ * @param v - Un array de enteros
+ * @param n - Tamaño del array
+ */
+void aleatorio(int v [], int n) {
+    int i, m = 2 * n + 1;
+
+    for(i = 0; i < n; i++) {
+        v[i] = (rand() % m) - n;
+    }
+}
+
 
 void visualizar(monticulo m) {
     int i;
@@ -103,57 +133,102 @@ void test() {
     printf("\nNúmero de nodos (Empezamos a contar en cero): %d", m.ultimo);
 }
 
-chrono tardanza(int array[], int size, monticulo *m) {
+
+chrono tardanzaCrear(int array[], int size, monticulo *m,
+                     void (*tipoArray)(int array[], int size)) {
     chrono c;
-    double tInicial, tFinal;
+    double tInicial, tFinal, tiempo, ta, tb;
     int cnt = 1, i;
 
-    ascendente(array, size);
+    tipoArray(array, size);
     tInicial = microsegundos();
     crear_monticulo(array, size, m);
     tFinal = microsegundos();
+    tiempo = tFinal - tInicial;
 
-    if(tFinal - tInicial < 500) {
-        do {
-            cnt *= 10;
-            tInicial = microsegundos();
-            for(i = 1; i <= cnt; i++) {
-                crear_monticulo(array, size, m);
-            }
-            tFinal = microsegundos();
-        } while(tFinal - tInicial < 500);
+    while(tiempo < 500) {
+        cnt *= 10;
 
-        c.count = cnt;
-        c.tiempoMedio = (tFinal - tInicial) / cnt;
+        tInicial = microsegundos();
+        for(i = 0; i <= cnt; i++) {
+            tipoArray(array, size);
+            crear_monticulo(array, size, m);
+        }
+        tFinal = microsegundos();
+        ta = tFinal - tInicial;
 
-        return c;
+        tInicial = microsegundos();
+        for(i = 0; i <= cnt; i++) {
+            tipoArray(array, size);
+        }
+        tFinal = microsegundos();
+        tb = tFinal - tInicial;
+
+        tiempo = ta - tb;
     }
 
+    c.count = cnt;
+    c.tiempoMedio = tiempo/cnt;
+
+    return c;
+}
+
+chrono tardanzaOrd(int array[], int size,
+                   void (*tipoArray)(int array[], int size)) {
+    chrono c;
+    double tInicial, tFinal, tiempo, ta, tb;
+    int cnt = 1, i;
+
+    tipoArray(array, size);
+    tInicial = microsegundos();
+    ord_monticulo(array, size);
     tFinal = microsegundos();
+    tiempo = tFinal - tInicial;
+
+    while(tiempo < 500) {
+        cnt *= 10;
+
+        tInicial = microsegundos();
+        for(i = 0; i <= cnt; i++) {
+            tipoArray(array, size);
+            ord_monticulo(array, size);
+        }
+        tFinal = microsegundos();
+        ta = tFinal - tInicial;
+
+        tInicial = microsegundos();
+        for(i = 0; i <= cnt; i++) {
+            tipoArray(array, size);
+        }
+        tFinal = microsegundos();
+        tb = tFinal - tInicial;
+
+        tiempo = ta - tb;
+    }
 
     c.count = cnt;
-    c.tiempoMedio = (tFinal - tInicial) / cnt;
+    c.tiempoMedio = tiempo/cnt;
 
     return c;
 }
 
 void calentarProcesador(int inicialSize, int maxSize) {
-    int actualSize = inicialSize, cnt = 0;
+    int actualSize = inicialSize;
     int arrayNumbers[maxSize];
     monticulo m;
 
     do{
-        tardanza(arrayNumbers, actualSize, &m);
+        tardanzaCrear(arrayNumbers, actualSize, &m, ascendente);
 
-        cnt++;
         actualSize *= 2;
     } while(actualSize <= maxSize); //&& dato.tiempoMedio <= maxTime
 }
 
+
 void tabla(int inicialSize, int maxSize) {
-    int actualSize = inicialSize, cnt = 0;
+    int actualSize = inicialSize;
     int arrayNumbers[maxSize];
-    chrono array[MAX_SIZE];
+    chrono c;
     monticulo m;
     double TSu, TA, TSo;
 
@@ -162,49 +237,117 @@ void tabla(int inicialSize, int maxSize) {
     printf("  [N]\t\t[I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
 
     do {
-        array[cnt] = tardanza(arrayNumbers, actualSize, &m);
+        c = tardanzaCrear(arrayNumbers, actualSize, &m, ascendente);
 
-        TSu = array[cnt].tiempoMedio / pow(actualSize, 0.5);
-        TA = array[cnt].tiempoMedio / actualSize;
-        TSo = array[cnt].tiempoMedio /  pow(actualSize, 1.5);
+        TSu = c.tiempoMedio / pow(actualSize, 0.9);
+        TA = c.tiempoMedio / actualSize;
+        TSo = c.tiempoMedio /  pow(actualSize, 1.1);
 
-        printf("%8d\t%3d\t%15lf\t %14lf\t%14lf\t%14lf\n",
-               actualSize, array[cnt].count ,array[cnt].tiempoMedio, TSu, TA, TSo);
+        printf("%8d\t%4d\t%15lf\t %14lf\t%14lf\t%14lf\n",
+               actualSize, c.count , c.tiempoMedio, TSu, TA, TSo);
 
-        cnt++;
         actualSize *= 2;
     } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
+
+    printf("\n");
 }
 
 
+void test2() {
+    int nodosAInsertar[] = {2, 36, 5, 3, 1, 80, 10};
+    int i, size = sizeof(nodosAInsertar) / sizeof(nodosAInsertar[0]) - 1;
 
+    printf("Array antes de ord_monticulo: ");
+    for(i = 0; i <= size; i++){
+        printf("%d ", nodosAInsertar[i]);
+    }
 
-/**
- * Pasándole un array v, se rellenará con una cantidad n de elementos aleatorios
- * @param v - Un array de enteros
- * @param n - Tamaño del array
- */
-/*
-void aleatorio(int v [], int n) {
-    int i, m = 2 * n + 1;
+    ord_monticulo(nodosAInsertar, size);
 
-    for(i = 0; i < n; i++) {
-        v[i] = (rand() % m) - n;
+    printf("\nArray después de ord_monticulo: ");
+    for(i = 0; i <= size; i++){
+        printf("%d ", nodosAInsertar[i]);
     }
 }
-*/
-/**
- * Pasándole un array v, se rellenará con una cantidad n de elementos ordenados
- * de forma descendente
- * @param v - Un array de enteros
- * @param n - Tamaño del array
- */
-/*
-void descendente(int v[], int n) {
-    int i;
 
-    for(i = 0; i < n; i++) {
-        v[i] = n - i;
-    }
+
+void tablaOrdAscendente(int inicialSize, int maxSize) {
+    int actualSize = inicialSize;
+    int arrayNumbers[maxSize];
+    chrono c;
+    double TSu, TA, TSo;
+
+    printf("\n\n****************************************************\n");
+    printf("Inserción de n elementos ordenados ascendentemente en ");
+    printf("ord_monticulo.\n\n");
+    printf("  [N]\t\t[I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
+
+    do {
+        c = tardanzaOrd(arrayNumbers, actualSize, ascendente);
+
+        TSu = c.tiempoMedio / pow(actualSize, 0.9);
+        TA = c.tiempoMedio / actualSize;
+        TSo = c.tiempoMedio /  pow(actualSize, 1.1);
+
+        printf("%8d\t%4d\t%15lf\t %14lf\t%14lf\t%14lf\n",
+               actualSize, c.count , c.tiempoMedio, TSu, TA, TSo);
+
+        actualSize *= 2;
+    } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
+
+    printf("\n");
 }
-*/
+
+void tablaOrdDescendente(int inicialSize, int maxSize) {
+    int actualSize = inicialSize;
+    int arrayNumbers[maxSize];
+    chrono c;
+    double TSu, TA, TSo;
+
+    printf("\n\n****************************************************\n");
+    printf("Inserción de n elementos ordenados descendentemente en ");
+    printf("ord_monticulo.\n\n");
+    printf("  [N]\t\t[I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
+
+    do {
+        c = tardanzaOrd(arrayNumbers, actualSize, descendente);
+
+        TSu = c.tiempoMedio / pow(actualSize, 0.9);
+        TA = c.tiempoMedio / actualSize;
+        TSo = c.tiempoMedio /  pow(actualSize, 1.1);
+
+        printf("%8d\t%4d\t%15lf\t %14lf\t%14lf\t%14lf\n",
+               actualSize, c.count , c.tiempoMedio, TSu, TA, TSo);
+
+        actualSize *= 2;
+    } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
+
+    printf("\n");
+}
+
+void tablaOrdAleatorio(int inicialSize, int maxSize) {
+    int actualSize = inicialSize;
+    int arrayNumbers[maxSize];
+    chrono c;
+    double TSu, TA, TSo;
+
+    printf("\n\n****************************************************\n");
+    printf("Inserción de n elementos ordenados aleatoriamente en ");
+    printf("ord_monticulo.\n\n");
+    printf("  [N]\t\t[I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
+
+    do {
+        c = tardanzaOrd(arrayNumbers, actualSize, aleatorio);
+
+        TSu = c.tiempoMedio / pow(actualSize, 0.9);
+        TA = c.tiempoMedio / actualSize;
+        TSo = c.tiempoMedio /  pow(actualSize, 1.1);
+
+        printf("%8d\t%4d\t%15lf\t %14lf\t%14lf\t%14lf\n",
+               actualSize, c.count , c.tiempoMedio, TSu, TA, TSo);
+
+        actualSize *= 2;
+    } while (actualSize <= maxSize);  //&& dato.tiempoMedio <= maxTime
+
+    printf("\n");
+}

@@ -21,18 +21,27 @@ typedef struct chrono {
 }chrono;
 
 void inicializar_semilla();
-void ascendente(int v [], int n);
 double microsegundos();
+
+void ascendente(int v [], int n);
+void aleatorio(int v [], int n);
+void descendente(int v[], int n);
 
 void visualizar(monticulo m);
 void hijosYpadre(monticulo m);
 void test();
 
-chrono tardanza(int array[], int size, monticulo *m);
+chrono tardanzaCrear(int array[], int size, monticulo *m,
+                     void (*tipoArray)(int array[], int size));
 void calentarProcesador(int inicialSize, int maxSize);
 void tabla(int inicialSize, int maxSize);
 
-//void aleatorio(int v [], int n);
-//void descendente(int v[], int n);
+void test2();
+
+chrono tardanzaOrd(int array[], int size,
+                   void (*tipoArray)(int array[], int size));
+void tablaOrdAscendente(int inicialSize, int maxSize);
+void tablaOrdDescendente(int inicialSize, int maxSize);
+void tablaOrdAleatorio(int inicialSize, int maxSize);
 
 #endif //P4_MONTICULOS_FUNCIONESAUXILIARES_H
