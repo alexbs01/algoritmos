@@ -79,19 +79,27 @@ void visualizar(monticulo m) {
     }
 }
 
+int altura(int a) {
+    return (int) log2(a) + 1;
+}
+
+bool esUltimaAltura(int a, monticulo M) {
+    return (altura(a) == altura(M.ultimo));
+}
+
 void hijosYpadre(monticulo m) {
     int i;
 
     for(i = 0; i <= m.ultimo; i++) {
         printf("\nNodo %d: %d", i, m.vector[i]);
 
-        if(0 != m.vector[2 * i + 1] && (2 * i + 1) <= m.ultimo) {
+        if(!esUltimaAltura(i, m) && (2 * i + 1) <= m.ultimo) {
             printf("\n\tHijo Izquierdo: %d", m.vector[2 * i + 1]);
         } else {
             printf("\n\tNo tiene hijo izquierdo.");
         }
 
-        if(0 != m.vector[2 * i + 2] && (2 * i + 2) <= m.ultimo) {
+        if(!esUltimaAltura(i, m) && (2 * i + 2) <= m.ultimo) {
             printf("\n\tHijo Derecho: %d", m.vector[2 * i + 2]);
         } else {
             printf("\n\tNo tiene hijo derecho.");
@@ -101,7 +109,7 @@ void hijosYpadre(monticulo m) {
 
 void test() {
     //int nodosAInsertar[] = {1, 5, 3, 7, 9, 2};   //nodosAInsertar[] = {3, 1 ,2, 5, 4, 5}; Preguntar a Kike, dos 5 bb
-    int nodosAInsertar[] = {1, 1, 1, 1, 1, 1, 10};   //nodosAInsertar[] = {3, 1 ,2, 5, 4, 5}; Preguntar a Kike, dos 5 bb
+    int nodosAInsertar[] = {-9, -6, -1, 9, -2, 0, 0, -1, 5, 0};   //nodosAInsertar[] = {3, 1 ,2, 5, 4, 5}; Preguntar a Kike, dos 5 bb
     int i, j, size = sizeof(nodosAInsertar) / sizeof(nodosAInsertar[0]) - 1;
     monticulo m;
 
@@ -113,7 +121,7 @@ void test() {
     crear_monticulo(nodosAInsertar, size, &m);
     printf("\nNodos del monticulo ordenado: "); visualizar(m);
     printf("\nNúmero de nodos (Empezamos a contar en cero): %d", m.ultimo);
-
+    printf("\nAltura del montículo: %d", altura((m.ultimo)));
     hijosYpadre(m);
 
     printf("\nEliminamos el mayor del monticulo: %d", eliminar_mayor(&m));

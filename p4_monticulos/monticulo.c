@@ -21,11 +21,11 @@ void crear_monticulo(int const array[], int size, monticulo *m) {
 }
 
 void hundir(monticulo *m, int n) {
-    int j;
+    int j, hijoizq, hijoder;
 
     do {
-        int hijoizq = 2 * n + 1;
-        int hijoder = 2 * n + 2;
+        hijoizq = 2 * n + 1;
+        hijoder = 2 * n + 2;
         j = n;
 
         if((hijoder <= m->ultimo) && (m->vector[hijoder] > m->vector[n])) {
@@ -76,7 +76,7 @@ void ord_monticulo(int array[], int n) {
 
     crear_monticulo(array, n, &m);
 
-    for(i = n; i >= 0; i--) {
+    for (i = n; i >= 0; i--) {
         array[i] = eliminar_mayor(&m);
     }
 }

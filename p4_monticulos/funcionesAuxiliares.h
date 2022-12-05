@@ -28,6 +28,9 @@ void aleatorio(int v [], int n);
 void descendente(int v[], int n);
 
 void visualizar(monticulo m);
+
+int altura(int a);
+bool esUltimaAltura(int a, monticulo M);
 void hijosYpadre(monticulo m);
 void test();
 
