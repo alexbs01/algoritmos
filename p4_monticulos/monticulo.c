@@ -7,36 +7,51 @@
 #include "monticulo.h"
 
 
-void crear_monticulo(int const array[], int size, monticulo *m) {
+void crear_monticulo(int array[], int size, monticulo *M) {
     int i;
-
-    for(i = 0; i <= size; i++) {
-        m->vector[i] = array[i];
+    for(i = 0; i <= size - 1; i++){
+        M->vector[i] = array[i];
     }
-    m->ultimo = size;
-
-    for(i = m->ultimo/2; i >= 0; i--) {
-        hundir(m, i);
+    M->ultimo = size - 1;
+    for(i = M->ultimo / 2; i >= 0; i--){
+        hundir(M, i);
     }
 }
 
-void hundir(monticulo *m, int n) {
-    int j, hijoizq, hijoder;
+void hundir(monticulo *M, int n) {
+    /*int j = -1, hijoizq, hijoder;
 
-    do {
+    while(j != n) {
         hijoizq = 2 * n + 1;
         hijoder = 2 * n + 2;
         j = n;
 
-        if((hijoder <= m->ultimo) && (m->vector[hijoder] > m->vector[n])) {
+        if((hijoder <= M->ultimo) && (M->vector[hijoder] > M->vector[n])) {
             n = hijoder;
         }
-        if((hijoizq <= m->ultimo) && (m->vector[hijoizq] > m->vector[n])) {
+
+        if((hijoizq <= M->ultimo) && (M->vector[hijoizq] > M->vector[n])) {
             n = hijoizq;
         }
 
-        intercambiar(&m->vector[j], &m->vector[n]);
-    } while(j != n);
+        intercambiar(&M->vector[j], &M->vector[n]);
+    }*/
+    int hizq, hder, j=-1, aux,i = n;
+    while(j != i) {
+        hizq = 2 * i + 1;
+        hder = 2 * i + 2;
+        j = i;
+
+        if(hder <= M->ultimo && M->vector[hder] > M->vector[i]){
+            i = hder;
+        }
+        if(hizq <= M->ultimo && M->vector[hizq] > M->vector[i]){
+            i = hizq;
+        }
+        aux = M->vector[i];
+        M->vector[i] = M->vector[j];
+        M->vector[j] = aux;
+    }
 }
 
 void intercambiar(int *a, int *b) {
@@ -47,27 +62,29 @@ void intercambiar(int *a, int *b) {
 }
 
 
-int eliminar_mayor(monticulo *m) {
+int eliminar_mayor(monticulo *M) {
     int x;
 
-    if(monticulo_vacio(*m)) {
-        printf("Error: monticulo vacio");
+    if(M->ultimo == -1) {
+        //printf("Error: montículo vacío");
+        return -1;
+    } else {
+        x = M->vector[0];
+        M->vector[0] = M->vector[M->ultimo];
+        M->ultimo = M->ultimo - 1; // [2 7 3 1 5] 2
 
+        if(M->ultimo > -1) {
+            hundir(M, 0);
+        }
+
+        return x;
     }
 
-    x = m->vector[0];
-    m->vector[0] = m->vector[m->ultimo];
-    m->ultimo = m->ultimo - 1; // [2 7 3 1 5] 2
 
-    if(m->ultimo > 0) {
-        hundir(m, 0);
-    }
-
-    return x;
 }
 
-bool monticulo_vacio(monticulo m){
-    return (m.ultimo == -1);
+bool monticulo_vacio(monticulo M){
+    return (M.ultimo == -1);
 }
 
 void inicializarMonticulo(monticulo* M) {
@@ -75,13 +92,13 @@ void inicializarMonticulo(monticulo* M) {
 }
 
 void ord_monticulo(int array[], int n) {
-    monticulo m;
     int i;
+    monticulo M;
 
-    //inicializarMonticulo(&M);
-    crear_monticulo(array, n, &m);
+    inicializarMonticulo(&M);
+    crear_monticulo(array, n, &M);
 
-    for (i = n; i >= 0; i--) {
-        array[i] = eliminar_mayor(&m);
+    for(i = n - 1; i >= 0; i--){
+        array[i] = eliminar_mayor(&M);
     }
 }

@@ -184,19 +184,19 @@ chrono tardanzaCrear(int array[], int size, monticulo *m,
 chrono tardanzaOrd(int array[], int size,
                    void (*tipoArray)(int array[], int size)) {
     chrono c;
-    double tInicial, tFinal, tiempo, ta, tb;
+    double tInicial, tFinal, tiempoTotal, ta, tb;
     int cnt = 1, i;
 
     tipoArray(array, size);
 
+    // Comprobamos si el tiempo con una iteración es menor a 500
     tInicial = microsegundos();
     ord_monticulo(array, size);
     tFinal = microsegundos();
 
-    tiempo = tFinal - tInicial;
+    tiempoTotal = tFinal - tInicial;
 
-    while(tiempo < 500) {
-        cnt *= 10;
+    while(tiempoTotal <= 500) {
 
         tInicial = microsegundos();
         for(i = 0; i <= cnt; i++) {
@@ -204,6 +204,7 @@ chrono tardanzaOrd(int array[], int size,
             ord_monticulo(array, size);
         }
         tFinal = microsegundos();
+
         ta = tFinal - tInicial;
 
         tInicial = microsegundos();
@@ -213,11 +214,12 @@ chrono tardanzaOrd(int array[], int size,
         tFinal = microsegundos();
         tb = tFinal - tInicial;
 
-        tiempo = ta - tb;
+        tiempoTotal = ta - tb;
+        if(tiempoTotal <= 500) cnt *= 10;
     }
 
     c.count = cnt;
-    c.tiempoMedio = tiempo/cnt;
+    c.tiempoMedio = tiempoTotal/cnt;
 
     return c;
 }
@@ -294,7 +296,7 @@ void tablaOrdAscendente(int inicialSize, int maxSize) {
     printf("  [N]\t\t[I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
 
     do {
-        c = tardanzaOrd(arrayNumbers, actualSize - 1, ascendente);
+        c = tardanzaOrd(arrayNumbers, actualSize, ascendente);
 
         TSu = c.tiempoMedio / pow(actualSize, 0.9);
         TA = c.tiempoMedio / actualSize;
