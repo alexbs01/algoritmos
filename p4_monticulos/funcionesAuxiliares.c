@@ -79,10 +79,22 @@ void visualizar(monticulo m) {
     }
 }
 
+/**
+ * Pasándole una posición de un array, calcula en que altura del montículo se
+ * encuentra
+ * @param a - Posición de un array
+ * @return Altura del montículo en la que se encuentra el elemento del array
+ */
 int altura(int a) {
     return (int) log2(a) + 1;
 }
 
+/**
+ * Comprueba si el elemento del array se encuentra en la última altura del árbol
+ * @param a - Posición del array
+ * @param M - Montúculo a comprobar
+ * @return True si el nodo es una hoja, False si no lo es
+ */
 bool esUltimaAltura(int a, monticulo M) {
     return (altura(a) == altura(M.ultimo));
 }
@@ -149,9 +161,11 @@ chrono tardanzaCrear(int array[], int size, monticulo *m,
     int cnt = 1, i;
 
     tipoArray(array, size);
+
     tInicial = microsegundos();
     crear_monticulo(array, size, m);
     tFinal = microsegundos();
+
     tiempo = tFinal - tInicial;
 
     while(tiempo < 500) {
@@ -189,7 +203,6 @@ chrono tardanzaOrd(int array[], int size,
 
     tipoArray(array, size);
 
-    // Comprobamos si el tiempo con una iteración es menor a 500
     tInicial = microsegundos();
     ord_monticulo(array, size);
     tFinal = microsegundos();
@@ -203,6 +216,7 @@ chrono tardanzaOrd(int array[], int size,
             tipoArray(array, size);
             ord_monticulo(array, size);
         }
+
         tFinal = microsegundos();
 
         ta = tFinal - tInicial;
@@ -225,8 +239,7 @@ chrono tardanzaOrd(int array[], int size,
 }
 
 void calentarProcesador(int inicialSize, int maxSize) {
-    int actualSize = inicialSize;
-    int arrayNumbers[maxSize];
+    int actualSize = inicialSize, arrayNumbers[maxSize];
     monticulo m;
 
     do{
@@ -238,8 +251,7 @@ void calentarProcesador(int inicialSize, int maxSize) {
 
 
 void tabla(int inicialSize, int maxSize) {
-    int actualSize = inicialSize;
-    int arrayNumbers[maxSize];
+    int actualSize = inicialSize, arrayNumbers[maxSize];
     chrono c;
     monticulo m;
     double TSu, TA, TSo;
@@ -285,8 +297,7 @@ void test2() {
 
 
 void tablaOrdAscendente(int inicialSize, int maxSize) {
-    int actualSize = inicialSize;
-    int arrayNumbers[maxSize];
+    int actualSize = inicialSize, arrayNumbers[maxSize];
     chrono c;
     double TSu, TA, TSo;
 
@@ -312,8 +323,7 @@ void tablaOrdAscendente(int inicialSize, int maxSize) {
 }
 
 void tablaOrdDescendente(int inicialSize, int maxSize) {
-    int actualSize = inicialSize;
-    int arrayNumbers[maxSize];
+    int actualSize = inicialSize, arrayNumbers[maxSize];
     chrono c;
     double TSu, TA, TSo;
 
@@ -339,8 +349,7 @@ void tablaOrdDescendente(int inicialSize, int maxSize) {
 }
 
 void tablaOrdAleatorio(int inicialSize, int maxSize) {
-    int actualSize = inicialSize;
-    int arrayNumbers[maxSize];
+    int actualSize = inicialSize, arrayNumbers[maxSize];
     chrono c;
     double TSu, TA, TSo;
 
