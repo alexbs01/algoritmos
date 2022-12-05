@@ -15,7 +15,7 @@ void crear_monticulo(int const array[], int size, monticulo *m) {
     }
     m->ultimo = size;
 
-    for(i = size/2; i >= 0; i--) {
+    for(i = m->ultimo/2; i >= 0; i--) {
         hundir(m, i);
     }
 }
@@ -70,10 +70,15 @@ bool monticulo_vacio(monticulo m){
     return (m.ultimo == -1);
 }
 
+void inicializarMonticulo(monticulo* M) {
+    M->ultimo = -1;
+}
+
 void ord_monticulo(int array[], int n) {
     monticulo m;
     int i;
 
+    //inicializarMonticulo(&M);
     crear_monticulo(array, n, &m);
 
     for (i = n; i >= 0; i--) {

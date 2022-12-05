@@ -26,6 +26,7 @@ int eliminar_mayor(monticulo *m);
 
 bool monticulo_vacio(monticulo m);
 
+void inicializarMonticulo(monticulo* M);
 void ord_monticulo(int array[], int n);
 
 #endif //P4_MONTICULOS_MONTICULO_H

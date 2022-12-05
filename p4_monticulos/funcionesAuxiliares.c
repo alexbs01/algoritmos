@@ -8,7 +8,7 @@
 #include "monticulo.h"
 
 #define INICIAL_SIZE 500
-#define MAX_SIZE 256000
+#define MAX_SIZE 512000
 
 /**
  * Inicializa una seed para poder utilizar la función rand() correctamente
@@ -34,7 +34,7 @@ double microsegundos() {
 void ascendente(int v [], int n) {
     int i;
 
-    for(i = 0; i < n; i++) {
+    for(i = 0; i <= n; i++) {
         v[i] = i;
     }
 }
@@ -48,7 +48,7 @@ void ascendente(int v [], int n) {
 void descendente(int v[], int n) {
     int i;
 
-    for(i = 0; i < n; i++) {
+    for(i = 0; i <= n; i++) {
         v[i] = n - i;
     }
 }
@@ -61,7 +61,7 @@ void descendente(int v[], int n) {
 void aleatorio(int v [], int n) {
     int i, m = 2 * n + 1;
 
-    for(i = 0; i < n; i++) {
+    for(i = 0; i <= n; i++) {
         v[i] = (rand() % m) - n;
     }
 }
@@ -109,7 +109,7 @@ void hijosYpadre(monticulo m) {
 
 void test() {
     //int nodosAInsertar[] = {1, 5, 3, 7, 9, 2};   //nodosAInsertar[] = {3, 1 ,2, 5, 4, 5}; Preguntar a Kike, dos 5 bb
-    int nodosAInsertar[] = {-9, -6, -1, 9, -2, 0, 0, -1, 5, 0};   //nodosAInsertar[] = {3, 1 ,2, 5, 4, 5}; Preguntar a Kike, dos 5 bb
+    int nodosAInsertar[] = {9, -1, 0, -6, 5, 7, -3, -4, 2, 1};   //nodosAInsertar[] = {3, 1 ,2, 5, 4, 5}; Preguntar a Kike, dos 5 bb
     int i, j, size = sizeof(nodosAInsertar) / sizeof(nodosAInsertar[0]) - 1;
     monticulo m;
 
@@ -188,9 +188,11 @@ chrono tardanzaOrd(int array[], int size,
     int cnt = 1, i;
 
     tipoArray(array, size);
+
     tInicial = microsegundos();
     ord_monticulo(array, size);
     tFinal = microsegundos();
+
     tiempo = tFinal - tInicial;
 
     while(tiempo < 500) {
@@ -245,7 +247,7 @@ void tabla(int inicialSize, int maxSize) {
     printf("  [N]\t\t[I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
 
     do {
-        c = tardanzaCrear(arrayNumbers, actualSize, &m, ascendente);
+        c = tardanzaCrear(arrayNumbers, actualSize - 1, &m, ascendente);
 
         TSu = c.tiempoMedio / pow(actualSize, 0.9);
         TA = c.tiempoMedio / actualSize;
@@ -262,7 +264,8 @@ void tabla(int inicialSize, int maxSize) {
 
 
 void test2() {
-    int nodosAInsertar[] = {2, 36, 5, 3, 1, 80, 10};
+    int nodosAInsertar[20];// = {2, 36, 5, 3, 1, 80, 10};
+    aleatorio(nodosAInsertar, 20);
     int i, size = sizeof(nodosAInsertar) / sizeof(nodosAInsertar[0]) - 1;
 
     printf("Array antes de ord_monticulo: ");
@@ -291,7 +294,7 @@ void tablaOrdAscendente(int inicialSize, int maxSize) {
     printf("  [N]\t\t[I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
 
     do {
-        c = tardanzaOrd(arrayNumbers, actualSize, ascendente);
+        c = tardanzaOrd(arrayNumbers, actualSize - 1, ascendente);
 
         TSu = c.tiempoMedio / pow(actualSize, 0.9);
         TA = c.tiempoMedio / actualSize;
@@ -318,7 +321,7 @@ void tablaOrdDescendente(int inicialSize, int maxSize) {
     printf("  [N]\t\t[I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
 
     do {
-        c = tardanzaOrd(arrayNumbers, actualSize, descendente);
+        c = tardanzaOrd(arrayNumbers, actualSize - 1, descendente);
 
         TSu = c.tiempoMedio / pow(actualSize, 0.9);
         TA = c.tiempoMedio / actualSize;
@@ -345,7 +348,7 @@ void tablaOrdAleatorio(int inicialSize, int maxSize) {
     printf("  [N]\t\t[I]\t\t[T]\t\t[T/CSub]\t[T/CAjus]\t[T/CSobre]\n\n");
 
     do {
-        c = tardanzaOrd(arrayNumbers, actualSize, aleatorio);
+        c = tardanzaOrd(arrayNumbers, actualSize - 1, aleatorio);
 
         TSu = c.tiempoMedio / pow(actualSize, 0.9);
         TA = c.tiempoMedio / actualSize;
