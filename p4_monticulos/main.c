@@ -17,7 +17,8 @@ int main() {
     printf("\n\n*******************************************************\n");
     printf("N: Cantidad de números del array insertado en el monticulo.\n");
     printf("I: Numero de veces que se repite el algoritmo.\n");
-    printf("T: Tiempo medio de crear_monticulo en microsegundos (us).\n");
+    printf("T: Tiempo medio de crear_monticulo o de ord_monticulo en "
+           "microsegundos (us).\n");
     printf("T/CAjusTeo: Tiempo medio entre la Cota Ajustada Teórica.\n");
     printf("T/CSub: Tiempo medio entre la Cota Subestimada.\n");
     printf("T/CAjus: Tiempo medio entre la Cota Ajustada.\n");
