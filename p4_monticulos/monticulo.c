@@ -71,8 +71,6 @@ int eliminar_mayor(monticulo *M) {
     }
 }
 
-
-
 void inicializarMonticulo(monticulo* M) {
     M->ultimo = -1;
 }
@@ -84,7 +82,7 @@ void ord_monticulo(int array[], int n) {
     inicializarMonticulo(&M);
     crear_monticulo(array, n, &M);
 
-    for(i = n - 1; i >= 0; i--){
+    for(i = n-1; i >= 0; i--){
         array[i] = eliminar_mayor(&M);
     }
 }

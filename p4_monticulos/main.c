@@ -16,7 +16,9 @@ int main() {
 
     printf("\n\n*******************************************************\n");
     printf("N: Cantidad de números del array insertado en el monticulo.\n");
+    printf("I: Numero de veces que se repite el algoritmo.\n");
     printf("T: Tiempo medio de crear_monticulo en microsegundos (us).\n");
+    printf("T/CAjusTeo: Tiempo medio entre la Cota Ajustada Teórica.\n");
     printf("T/CSub: Tiempo medio entre la Cota Subestimada.\n");
     printf("T/CAjus: Tiempo medio entre la Cota Ajustada.\n");
     printf("T/CSobre: Tiempo medio entre la Cota Sobreestimada.");
@@ -27,7 +29,7 @@ int main() {
 
     printf("\n*******************************************************\n");
     test2();
-    printf("\n*******************************************************\n");
+    printf("\n\n*******************************************************\n");
 
     tablaOrdAscendente(INICIAL_SIZE, MAX_SIZE);
     tablaOrdDescendente(INICIAL_SIZE, MAX_SIZE);
