@@ -266,7 +266,7 @@ void tabla(int inicialSize, int maxSize) {
 
         TATeorica = c.tiempoMedio / actualSize;
         TSu = c.tiempoMedio / pow(actualSize, 0.9);
-        TAReal = c.tiempoMedio /  pow(actualSize, 1.0);
+        TAReal = c.tiempoMedio /  pow(actualSize, 1.02);
         TSo = c.tiempoMedio /  pow(actualSize, 1.1);
 
         printf("%8d\t%4d\t%15lf\t %14lf\t%14lf\t%14lf\t%14lf\n",
@@ -336,9 +336,9 @@ void tablaOrdAscendente(int inicialSize, int maxSize) {
     do {
         c = tardanzaOrd(arrayNumbers, actualSize, ascendente);
 
-        TATeorica = c.tiempoMedio / actualSize;
+        TATeorica = c.tiempoMedio / (actualSize * log (actualSize));
         TSu = c.tiempoMedio / pow(actualSize, 0.9);
-        TAReal = c.tiempoMedio / pow(actualSize, 1.08);
+        TAReal = c.tiempoMedio / pow(actualSize, 1.09);
         TSo = c.tiempoMedio /  pow(actualSize, 1.2);
 
         printf("%8d\t%4d\t%15lf\t %14lf\t%14lf\t%14lf\t%14lf\n",
@@ -365,9 +365,9 @@ void tablaOrdDescendente(int inicialSize, int maxSize) {
         c = tardanzaOrd(arrayNumbers, actualSize - 1,
                         descendente);
 
-        TATeorica = c.tiempoMedio / actualSize;
+        TATeorica = c.tiempoMedio / (actualSize * log (actualSize));
         TSu = c.tiempoMedio / pow(actualSize, 0.9);
-        TAReal = c.tiempoMedio / pow(actualSize, 1.08);
+        TAReal = c.tiempoMedio / pow(actualSize, 1.09);
         TSo = c.tiempoMedio /  pow(actualSize, 1.2);
 
         printf("%8d\t%4d\t%15lf\t %14lf\t%14lf\t%14lf\t%14lf\n",
@@ -393,9 +393,9 @@ void tablaOrdAleatorio(int inicialSize, int maxSize) {
     do {
         c = tardanzaOrd(arrayNumbers, actualSize - 1, aleatorio);
 
-        TATeorica = c.tiempoMedio / actualSize;
+        TATeorica = c.tiempoMedio / (actualSize * log (actualSize));
         TSu = c.tiempoMedio / pow(actualSize, 0.9);
-        TAReal = c.tiempoMedio / pow(actualSize, 1.08);
+        TAReal = c.tiempoMedio / pow(actualSize, 1.09);
         TSo = c.tiempoMedio /  pow(actualSize, 1.2);
 
         printf("%8d\t%4d\t%15lf\t %14lf\t%14lf\t%14lf\t%14lf\n",
