@@ -13,11 +13,10 @@
 ## Introducción
 El objetivo de esta práctica es **calcular la complejidad computacional**, de
 forma empírica y compararla con la teórica dada en el enunciado de la práctica,
-en la creación de montículos, y en la ordenación de elementos a través de estos
-usando arrays ordenados de forma ascendente, descendente y desordenados.
-
-La **reserva** y **liberado** de memoria se comprobó con **valgrind** para
-verificar que toda la memoria reservada para los nodos tiene su posterior free.
+en la creación de **montículos de máximos** (estructura con forma de árbol
+binario donde el padre de cada nodo tiene un valor igual o superior al de sus
+hijos), y en la ordenación de elementos a través de estos usando arrays
+ordenados de forma ascendente, descendente y desordenados.  
 
 Los **tiempos** de las siguientes tablas estarán en **microsegundos (us)**,
 además también se dará una cota subestimada, ajustada y sobreestimada
@@ -30,21 +29,19 @@ para ser mayor que 500 microsegundos. Una vez hecho esto se calcula la media.
 El **tamaño** de las entradas (los arrays) será de **razón 2** comenzando
 en 500 (500, 1000, 2000, ...) y terminando 512000.
 
-
 ## Nomenclatura de las tablas
 - **N**: Cantidad de números del array insertado en el montículo.
 - **I**: Número de veces que se repite el algoritmo.
 - **T**: Tiempo medio de crear_monticulo o de ord_monticulo en microsegundos (us).
 - **T/CAjusTeo**: Tiempo medio entre la Cota Ajustada Teórica.
 - **T/CSub**: Tiempo medio entre la Cota Subestimada.
-- **T/CAjus**: Tiempo medio entre la Cota Ajustada.
+- **T/CAjus**: Tiempo medio entre la Cota Ajustada calculada.
 - **T/CSobre**: Tiempo medio entre la Cota Sobreestimada.
-
 
 ## Inserción de n elementos ordenados ascendentemente en crear_monticulo:
 
 |   [N]  | [I] |     [T]     | [T/CAjusTeo] | [T/CSub] | [T/CAjus] | [T/CSobre] |
-|:------:|:---:|:-----------:|:------------:|:--------:|:---------:|:----------:|
+|-------:|----:|------------:|-------------:|---------:|----------:|-----------:|
 |    500 | 100 |    5.050000 |     0.010100 | 0.018803 |  0.008920 |   0.005425 |
 |   1000 | 100 |   10.470000 |     0.010470 | 0.020890 |  0.009119 |   0.005247 |
 |   2000 | 100 |   21.780000 |     0.010890 | 0.023288 |  0.009354 |   0.005092 |
@@ -69,7 +66,7 @@ Con esta tabla vemos que la cota ajustada está tendiendo a 0.009.
 ## Inserción de n elementos ordenados ascendentemente en ord_monticulo:
 
 |   [N]  | [I] |      [T]     | [T/CAjusTeo] | [T/CSub] | [T/CAjus] | [T/CSobre] |
-|:------:|:---:|:------------:|:------------:|:--------:|:---------:|:----------:|
+|-------:|----:|-------------:|-------------:|---------:|----------:|-----------:|
 |    500 | 100 |    30.760000 |     0.009899 | 0.114528 |  0.035165 |   0.017751 |
 |   1000 |  10 |   102.600000 |     0.014853 | 0.204714 |  0.055099 |   0.025772 |
 |   2000 |  10 |   195.700000 |     0.012873 | 0.209249 |  0.049371 |   0.021397 |
@@ -94,7 +91,7 @@ Con esta tabla vemos que la cota ajustada está tendiendo a 0.041.
 ## Inserción de n elementos ordenados descendentemente en ord_monticulo:
 
 |   [N]  | [I] |      [T]     | [T/CAjusTeo] | [T/CSub] | [T/CAjus] | [T/CSobre] |
-|:------:|:---:|:------------:|:------------:|:--------:|:---------:|:----------:|
+|-------:|----:|-------------:|-------------:|---------:|----------:|-----------:|
 |    500 | 100 |    25.630000 |     0.008248 | 0.095428 |  0.029300 |   0.014791 |
 |   1000 |  10 |    82.700000 |     0.011972 | 0.165008 |  0.044413 |   0.020773 |
 |   2000 |  10 |   203.000000 |     0.013354 | 0.217055 |  0.051212 |   0.022195 |
@@ -119,7 +116,7 @@ Con esta tabla vemos que la cota ajustada está tendiendo a 0.0425.
 ## Inserción de n elementos ordenados aleatoriamente en ord_monticulo:
 
 |   [N]  | [I] |      [T]      | [T/CAjusTeo] | [T/CSub] | [T/CAjus] | [T/CSobre] |
-|:------:|:---:|:-------------:|:------------:|:--------:|:---------:|:----------:|
+|-------:|----:|--------------:|-------------:|---------:|----------:|-----------:|
 |    500 |  10 |     51.400000 |     0.016542 | 0.191377 |  0.058761 |   0.029662 |
 |   1000 |  10 |    114.900000 |     0.016633 | 0.229256 |  0.061705 |   0.028862 |
 |   2000 |  10 |    246.300000 |     0.016202 | 0.263352 |  0.062136 |   0.026930 |
@@ -141,37 +138,29 @@ Con esta tabla vemos que la cota ajustada está tendiendo a 0.06.
 
 **No hay anomalías**.
 
-
-
-
-
-
-
+-----
 
 ## Conclusiones
 
 ### Complejidades
-
 Se calcularon a través de hacer una **nube de puntos** con las coordenadas
 de *(N, Tiempo)* múltiples veces, y calcular una **función exponencial** que
 pase lo más cerca posible por todos los puntos.
 
-#### Inserción
-- **Caso medio**: O(pow(n, 1.28))
+### Creación de montículos
+La creación de los montículos tiene una inserción de los elementos muy rápida,
+y sigue a la perfección la cota estimada teórica de O(N). Podemos ver en los
+tiempos de esta que el tiempo de cada fila es aproximadamente el doble de la
+anterior porque hacemos una inserción nueva con el doble de elementos.
 
-#### Búsqueda
-- **Caso medio**: O(pow(n, 1.25))
+### Ordenación por montículos
+Los tiempos de la ordenación por montículo a partir de arrays ordenados
+ascendente y descendentemente son prácticamente idénticos mientras que la de un
+array aleatorio presenta un tiempo bastante más superior (aproximadamente un
+30%). Sin embargo, los tres tipos de vectores tienen una complejidad de
+O(N log(N)) ya que para ordenar el array del montículo primero se tiene que
+crear el montículo desde cero y posteriormente ordenar el árbol creado.
 
-Tras el análisis de los tiempos de inserción y búsqueda, podemos concluir que
-por lo general, **la inserción es más rápida**.
 
-La inserción de n elementos en un árbol vacío, lleva consigo hacer una reserva
-de memoria para la creación de los nodos, esta reserva es relativamente
-costosa. Pero no es lo suficientemente lenta como para ser más lento que la
-búsqueda.
 
-La búsqueda de n elementos sobre un árbol de n elementos, se realiza con un
-array de n números aleatorios, que pueden coincidir con los que hay en el árbol
-o no. El caso en el que un elemento del array no esté en el árbol, hará que se
-tenga que bajar hasta una hoja, lo cual tiene un coste de tiempo superior al de
-reservar memoria y crear nodos para después insertarlos.
+
