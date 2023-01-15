@@ -1,4 +1,4 @@
-# Algoritmos Práctica 1, Sucesión de Fibonacci
+  # Algoritmos Práctica 1, Sucesión de Fibonacci
 
 Grupo: 3.1
 

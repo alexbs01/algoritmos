@@ -82,15 +82,17 @@ int esArbolVacio(arbol T) {
  * @return Retorna la posición del entero pos en el árbol
  */
 posicion buscar(int pos, arbol T) {
-    if(!esArbolVacio(T)) {
-        if(pos == T->elem) {
-            return T;
-        } else if(pos < T->elem) {
+    if(esArbolVacio(T)) {
+        return NULL;
+    } else {
+        if(pos < T->elem) {
             return buscar(pos, T->izq);
         } else if (pos > T->elem) {
             return buscar(pos, T->der);
+        }else {
+            return T;
         }
-    } else return NULL;
+    };
 }
 
 /**
@@ -105,9 +107,8 @@ arbol eliminarArbol(arbol T) {
 
         free(T);
         T = NULL;
-
-        return T;
     }
+    return T;
 }
 
 /**
@@ -116,7 +117,9 @@ arbol eliminarArbol(arbol T) {
  * @return Su hijo izquierdo
  */
 posicion hijoIzquierdo(arbol T) {
-    return T->izq;
+    if(T != NULL) {
+        return T->izq;
+    }
 }
 
 /**
@@ -125,7 +128,9 @@ posicion hijoIzquierdo(arbol T) {
  * @return Su hijo derecho
  */
 posicion hijoDerecho(arbol T) {
-    return T->der;
+    if(T != NULL) {
+        return T->der;
+    }
 }
 
 /**

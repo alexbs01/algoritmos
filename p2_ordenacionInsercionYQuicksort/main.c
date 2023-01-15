@@ -17,7 +17,12 @@ int main() {
     inicializar_semilla(); // Inicializamos la seed para obtener números aleatorios
 
     printf("Test de ordenación por inserción\n");
-    test(ord_ins);
+    test(ord_ins);//ESTE TEST TIENE QUE COMPROBAR OTRAS ORDENACIOENS DE ENTRADA APARTE DE LA ALEATORIA
+    //ADEMAS TIENES QUE USAR UNA FUNCION PRECALENTAR PROCESADOR
+
+
+
+
     printf("Test de ordenación con Quicksort\n");
     test(ordRapida);
 
@@ -47,3 +52,37 @@ int main() {
 
     return 0;
 }
+
+/*
+procedimiento Mediana 3 ( var T[i..j] )
+    centro := ( i+j ) div 2 ;
+    si T[i] > T[centro] entonces intercambiar ( T[i], T[centro] ) ;
+    si T[i] > T[j] entonces intercambiar ( T[i], T[j] ) ;
+    si T[centro] > T[j] entonces intercambiar ( T[centro], T[j] ) ;
+    intercambiar ( T[centro], T[j-1] )
+fin procedimiento*/
+
+
+
+/*Ordenaci  ́on R  ́apida (3)
+procedimiento Qsort ( var T[i..j] )
+
+ si i+UMBRAL <= j entonces
+    Mediana 3 ( T[i..j] ) ;
+    pivote := T[j-1] ; k := i ; m := j-1 ; {s ́olo con Mediana 3}
+    repetir
+    repetir k := k+1 hasta T[k] >= pivote ;
+        repetir m := m-1 hasta T[m] <= pivote ;
+        intercambiar ( T[k], T[m] )
+    hasta m <= k ;
+    intercambiar ( T[k], T[m] ) ; {deshace el  ́ultimo intercambio}
+    intercambiar ( T[k], T[j-1] ) ; {pivote en posici ́on k}
+    Qsort ( T[i..k-1] ) ;
+    Qsort ( T[k+1..j] )
+fin procedimiento
+
+procedimiento Quicksort ( var T[1..n] )
+    Qsort ( T[1..n] ) ;
+    Ordenaci ́on por Inserci ́on ( T[1..n] )
+fin procedimiento
+ */
