@@ -99,7 +99,7 @@ Con esta tabla vemos que la cota ajustada está tendiendo entre 0.01 y 0.03.
 - **CAjus**: pow(N, 1.25)
 - **CSobre**: pow(N, 1.5)
 
-Con esta tabla vemos que la cota ajustada está tendiendo entre 0.015 y 0.016.  
+Con esta tabla vemos que la cota ajustada está tendiendo a 0.015.  
 
 **No hay anomalías**.  
 

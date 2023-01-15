@@ -229,7 +229,7 @@ void tablaB(int inicialSize, int maxSize, const double arrayI[],
 void calentarProcesador(int inicialSize, int maxSize) {
     int actualSize = inicialSize, cnt = 0;
     int arrayNumbers[maxSize];
-    double arrayI[MAX_SIZE], arrayB[MAX_SIZE];
+    double arrayI[100], arrayB[100];
     arbol T = crearArbol();
 
     do{

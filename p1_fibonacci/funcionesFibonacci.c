@@ -1,7 +1,3 @@
-//
-// Created by alexb on 15/09/2022.
-//
-
 #include "funcionesFibonacci.h"
 #include <math.h>
 
@@ -54,69 +50,31 @@ double microsegundos() {
 }
 
 /* Función para calcular cuanto tarda Fib1 */
-countTemp tiempoFib1(int numero) {
-    double tiempoInicial, tiempoFinal;
-    int count = 1;
+chrono tiempoFib(int n, int (*tipoFib)(int n)) {
+    chrono c;
+    double tInicial, tFinal, tiempoTotal;
+    int cnt = 1, i;
 
-    do {
-        tiempoInicial = microsegundos();
-        for(int i = 0; i < count; i++) {
-            fib1(numero);
+    tInicial = microsegundos();
+    tipoFib(n);
+    tFinal = microsegundos();
+    tiempoTotal = tFinal - tInicial;
+
+    while(tiempoTotal <= 500) {
+        cnt *= 10;
+
+        tInicial = microsegundos();
+        for(i = 0; i < cnt; i++) {
+            tipoFib(n);
         }
-        tiempoFinal = microsegundos();
+        tFinal = microsegundos();
+        tiempoTotal = tFinal - tInicial;
+    }
 
-        if(tiempoFinal - tiempoInicial <= 500) { // Comprobamos si tardó menos de 500 us en ejecutarse
-            count *= 100;    // Si es el caso se vuelve a ejecutar multiplicando el número de iteraciones por 10
-        }
-    } while(tiempoFinal - tiempoInicial <= 500);
+    c.count = cnt;
+    c.temp = tiempoTotal / cnt;
 
-    struct chrono c = {count, ((tiempoFinal - tiempoInicial) / count)};
-
-    return c; // Retornamos la media de lo que tardó
-}
-
-/* Función para calcular cuanto tarda Fib2 */
-countTemp tiempoFib2(int numero) {
-    double tiempoInicial, tiempoFinal;
-    int count = 1;
-
-    do {
-        tiempoInicial = microsegundos();
-        for(int i = 0; i < count; i++) {
-            fib2(numero);
-        }
-        tiempoFinal = microsegundos();
-
-        if(tiempoFinal - tiempoInicial <= 500) {
-            count *= 100;
-        }
-    } while(tiempoFinal - tiempoInicial <= 500);
-
-    struct chrono c = {count, ((tiempoFinal - tiempoInicial) / count)};
-
-    return c; // Retornamos la media de lo que tardó
-}
-
-/* Función para calcular cuanto tarda Fib3 */
-countTemp tiempoFib3(int numero) {
-    double tiempoInicial, tiempoFinal;
-    int count = 1;
-
-    do {
-        tiempoInicial = microsegundos();
-        for(int i = 0; i < count; i++) {
-            fib3(numero);
-        }
-        tiempoFinal = microsegundos();
-
-        if(tiempoFinal - tiempoInicial <= 500) {
-            count *= 100;
-        }
-    } while(tiempoFinal - tiempoInicial <= 500);
-
-    struct chrono c = {count, ((tiempoFinal - tiempoInicial) / count)};
-
-    return c; // Retornamos la media de lo que tardó
+    return c; // Devolvemos la media de lo que tardo y el número de veces que repetimos
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -124,38 +82,52 @@ countTemp tiempoFib3(int numero) {
 /* Función para mostrar la tabla de las cotas de Fib1 */
 
 void cotasFib1(int n) {
+    chrono c;
 
-    double tiempoFib = tiempoFib1(n).temp;
-    int iteraciones = tiempoFib1(n).count;
-    double cotaSubestimada = tiempoFib1(n).temp / pow(1.1, n);
-    double cotaAjustada = tiempoFib1(n).temp / pow(((1+sqrt(5)) / 2), n);
-    double cotaSobreestimada = tiempoFib1(n).temp / pow(2, n);
+    c = tiempoFib(n, fib1);
 
-    printf("%10d| \t\t%6d\t   |\t %15lf|    %22lf|  %17lf|\t  %22lf|\n", n, iteraciones, tiempoFib, cotaSubestimada, cotaAjustada, cotaSobreestimada);
+    double tiempoFib = c.temp;
+    int iteraciones = c.count;
+    double cotaSubestimada = c.temp / pow(1.1, n);
+    double cotaAjustada = c.temp / pow(((1+sqrt(5)) / 2), n);
+    double cotaSobreestimada = c.temp / pow(2, n);
+
+    printf("%11d|%15d|%15lf|%23lf|%23lf|%23lf|\n",
+           n, iteraciones, tiempoFib, cotaSubestimada, cotaAjustada, cotaSobreestimada);
 }
 
 /* Función para mostrar la tabla de las cotas de Fib2 */
 
 void cotasFib2(int n) {
-    double tiempoFib = tiempoFib2(n).temp;
-    int iteraciones = tiempoFib2(n).count;
-    double cotaSubestimada = tiempoFib2(n).temp / pow(n, 0.8);
-    double cotaAjustada = tiempoFib2(n).temp / n;
-    double cotaSobreestimada = tiempoFib2(n).temp / (n * log10(n));
+    chrono c;
 
-    printf("%10d| \t\t%6d\t   |\t %15lf|    %22lf|  %17lf|\t  %22lf|\n", n, iteraciones, tiempoFib, cotaSubestimada, cotaAjustada , cotaSobreestimada);
+    c = tiempoFib(n, fib2);
+
+    double tiempoFib = c.temp;
+    int iteraciones = c.count;
+    double cotaSubestimada = c.temp / pow(n, 0.8);
+    double cotaAjustada = c.temp / n;
+    double cotaSobreestimada = c.temp / (n * log10(n));
+
+    printf("%11d|%15d|%15lf|%23lf|%23lf|%23lf|\n",
+           n, iteraciones, tiempoFib, cotaSubestimada, cotaAjustada, cotaSobreestimada);
 }
 
 /* Función para mostrar la tabla de las cotas de Fib3 */
 
 void cotasFib3(int n) {
-    double tiempoFib = tiempoFib3(n).temp;
-    int iteraciones = tiempoFib3(n).count;
-    double cotaSubestimada = tiempoFib3(n).temp / sqrt(log10(n));
-    double cotaAjustada = tiempoFib3(n).temp / log10(n);
-    double cotaSobreestimada = tiempoFib3(n).temp / pow(n, 0.5);
+    chrono c;
 
-    printf("%10d| \t\t%6d\t   |\t %15lf|    %22lf|  %17lf|\t  %22lf|\n", n, iteraciones, tiempoFib, cotaSubestimada, cotaAjustada, cotaSobreestimada);
+    c = tiempoFib(n, fib3);
+
+    double tiempoFib = c.temp;
+    int iteraciones = c.count;
+    double cotaSubestimada = c.temp / sqrt(log10(n));
+    double cotaAjustada = c.temp / log10(n);
+    double cotaSobreestimada = c.temp / pow(n, 0.5);
+
+    printf("%11d|%15d|%15lf|%23lf|%23lf|%23lf|\n",
+           n, iteraciones, tiempoFib, cotaSubestimada, cotaAjustada, cotaSobreestimada);
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -167,9 +139,8 @@ void tablaCotas() {
     int valoresParaFib1[] = {2, 4, 8, 16, 32};
     int valoresParaFib2y3[] = {1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000};
 
-
-    printf("\n    n\t  | Media de x iteraciones |\t  TiempoFib1(n)\t|\tCota subestimada   |   Cota Ajustada   |\tCota Sobreestimada\t|\n");
-    printf("----------|------------------------|--------------------|--------------------------|-------------------|--------------------------------|\n");
+    printf("   [N]\t\t[I]\t\t[T]\t\t   [T/CSub]\t\t[T/CAjus]\t"
+           "\t[T/CSobre]\t\n\n");
 
     for(int i = 0; i < sizeof(valoresParaFib1)/sizeof(valoresParaFib1[0]); i++) {
         cotasFib1(valoresParaFib1[i]);
@@ -177,8 +148,8 @@ void tablaCotas() {
 
     printf("\n");
 
-    printf("\n    n\t  | Media de x iteraciones |\t  TiempoFib2(n)\t|\tCota subestimada   |   Cota Ajustada   |\tCota Sobreestimada\t|\n");
-    printf("----------|------------------------|--------------------|--------------------------|-------------------|--------------------------------|\n");
+    printf("   [N]\t\t[I]\t\t[T]\t\t   [T/CSub]\t\t[T/CAjus]\t"
+           "\t[T/CSobre]\t\n\n");
 
     for(int i = 0; i < sizeof(valoresParaFib2y3)/sizeof(valoresParaFib2y3[0]); i++) {
         cotasFib2(valoresParaFib2y3[i]);
@@ -186,8 +157,8 @@ void tablaCotas() {
 
     printf("\n");
 
-    printf("\n    n\t  | Media de x iteraciones |\t  TiempoFib3(n)\t|\tCota subestimada   |   Cota Ajustada   |\tCota Sobreestimada\t|\n");
-    printf("----------|------------------------|--------------------|--------------------------|-------------------|--------------------------------|\n");
+    printf("   [N]\t\t[I]\t\t[T]\t\t   [T/CSub]\t\t[T/CAjus]\t"
+           "\t[T/CSobre]\t\n\n");
 
     for(int i = 0; i < sizeof(valoresParaFib2y3)/sizeof(valoresParaFib2y3[0]); i++) {
         cotasFib3(valoresParaFib2y3[i]);
@@ -197,14 +168,10 @@ void tablaCotas() {
 /*--------------------------------------------------------------------------------------------------------------------*/
 
 void test(int n) {
-    printf("\n\tn\t|\t fib1(n) \t|\t fib2(n) \t|\t fib3(n) \t|\n");        // ESTO ESTA NO TOCAR
-    printf("----------------|-----------------------|-----------------------|-----------------------|\n"); // ESTO ESTA NO TOCAR
+    printf("\n\tn|\tfib1(n)|\tfib2(n)|\tfib3(n)|\n");
+    printf("---------|-------------|---------------|---------------|\n");
 
-    for(int i = 1; i <= n; i++) {
-        printf("\t%8d|\t %15d|\t %15d|\t %15d|\n", i, fib1( i - 1), fib2(i - 1), fib3( i - 1)); // ESTO ESTA NO TOCAR
+    for(int i = 0; i <= n; i++) {
+        printf("%9d|%13d|%15d|%15d|\n", i, fib1( i), fib2(i), fib3( i));
     }
-    printf("\n");
-
-   // medicionDeTiempos();
-    tablaCotas();
 }

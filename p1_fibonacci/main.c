@@ -1,18 +1,14 @@
-/*
- * Login:
- *
- *
- * */
-
 #include <stdio.h>
 #include "funcionesFibonacci.h"
 
 int main() {
-    int n; // Número de elementos de la sucesión de Fibonacci que se verán como una tabla.
+    int n; // Número de entrada de las funciones de Fibonacci
 
-    printf("Introduzca hasta que numero n quiere ver la sucesion de fibonacci: ");
+    printf("Introduzca un numero para ver la sucesion de fibonacci: ");
     scanf("%d", &n);
 
     test(n);
+    printf("\n");
+    tablaCotas();
     return 0;
 }
