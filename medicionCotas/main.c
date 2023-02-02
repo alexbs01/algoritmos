@@ -11,20 +11,19 @@ int calentarProcesador(int n);
 
 int main() {
     //int numeroDeIteraciones[] = {500,1000,2000,4000,8000,16000,32000,64000,128000,256000,512000};
-    int numeroDeIteraciones[] = {1000
-            ,10000
-            ,100000
-            ,1000000
-            ,10000000
-            ,100000000
-            ,1000000000};
-    double tiempos[] = {0.040554
-            ,0.050300
-            ,0.061300
-            ,0.075900
-            ,0.087800
-            ,0.102900
-            ,0.115800};
+    int numeroDeIteraciones[] = {500,1000,2000,4000,8000,16000};
+    //int numeroDeIteraciones[] = {1000,10000,100000,1000000,10000000,100000000,1000000000};
+    double tiempos[] = {   744.000000
+            ,2624.000000
+            ,13112.000000
+            ,58045.000000
+            ,225416.000000
+            ,915923.000000
+
+
+
+
+    };
 
     float inicioIntervalo, finalIntervalo, salto;
     int seleccion;
@@ -175,7 +174,7 @@ void powNa(int numIter[], int size, double tiempos[], float iniInter, float finI
         iniInter += salto;
     } while(iniInter <= finInter);
 
-    printf("\nMínimo alcanzado en N^%f con varianza de %.15lf\n", minimo.n, minimo.varizanza);
+    printf("\nMínimo alcanzado en N^%.15f con varianza de %.15lf\n", minimo.n, minimo.varizanza);
 
     for(int i = 0; i < size; i++) {
         potencia = powf( (float)numIter[i], minimo.n);

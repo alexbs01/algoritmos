@@ -1,0 +1,39 @@
+# Algoritmos, examen práctico
+
+Grupo 3.1
+- AUTOR: Alejandro Becerra Suárez  LOGIN: a.becerr
+
+La práctica fue realizada con el siguiente dispositivo:
+
+- **Hardware**: AMD 9620P 3.2 GHz (16 GB RAM)
+- **OS**: Ubuntu 22.04.1 LTS x86_64
+- **Kernel**: 5.15.0-47-generic
+
+## Introducción
+
+......
+
+Los **tiempos** de las siguientes tablas estarán en **microsegundos (us)**, además también se dará una cota subestimada, ajustada y sobreestimada cada tiempo calculado.
+
+Cuando **un tiempo es inferior a 500 microsegundos**, se ejecutará 10 veces más
+que la última vez, guardando un contador de cuantas veces se tuvo que ejecutar para ser mayor que 500 microsegundos. Una vez hecho esto se calcula la media.
+
+El **tamaño** de las entradas (los arrays) será de **razón 2** comenzando en 500 (500, 1000, 2000, ...) y terminando 512000.
+
+## Nomenclatura de las tablas
+- **N**: Cantidad de números del array.
+- **I**: Número de veces que se repite el algoritmo.
+- **T**: Tiempo medio en microsegundos (us).
+- **T/CSub**: Tiempo medio entre la Cota Subestimada.
+- **T/CAjus**: Tiempo medio entre la Cota Ajustada calculada.
+- **T/CSobre**: Tiempo medio entre la Cota Sobreestimada.
+
+## Mediciones
+
+.........
+
+## Conclusiones
+
+Anomalías
+
+

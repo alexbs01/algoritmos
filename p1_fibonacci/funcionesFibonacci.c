@@ -138,11 +138,11 @@ void cotasFib3(int n) {
 void tablaCotas() {
     int valoresParaFib1[] = {2, 4, 8, 16, 32};
     int valoresParaFib2y3[] = {1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000};
-
+    int i;
     printf("   [N]\t\t[I]\t\t[T]\t\t   [T/CSub]\t\t[T/CAjus]\t"
            "\t[T/CSobre]\t\n\n");
 
-    for(int i = 0; i < sizeof(valoresParaFib1)/sizeof(valoresParaFib1[0]); i++) {
+    for(i = 0; i < sizeof(valoresParaFib1)/sizeof(valoresParaFib1[0]); i++) {
         cotasFib1(valoresParaFib1[i]);
     }
 
@@ -151,7 +151,7 @@ void tablaCotas() {
     printf("   [N]\t\t[I]\t\t[T]\t\t   [T/CSub]\t\t[T/CAjus]\t"
            "\t[T/CSobre]\t\n\n");
 
-    for(int i = 0; i < sizeof(valoresParaFib2y3)/sizeof(valoresParaFib2y3[0]); i++) {
+    for(i = 0; i < sizeof(valoresParaFib2y3)/sizeof(valoresParaFib2y3[0]); i++) {
         cotasFib2(valoresParaFib2y3[i]);
     }
 
@@ -160,7 +160,7 @@ void tablaCotas() {
     printf("   [N]\t\t[I]\t\t[T]\t\t   [T/CSub]\t\t[T/CAjus]\t"
            "\t[T/CSobre]\t\n\n");
 
-    for(int i = 0; i < sizeof(valoresParaFib2y3)/sizeof(valoresParaFib2y3[0]); i++) {
+    for(i = 0; i < sizeof(valoresParaFib2y3)/sizeof(valoresParaFib2y3[0]); i++) {
         cotasFib3(valoresParaFib2y3[i]);
     }
 }

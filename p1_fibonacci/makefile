@@ -7,7 +7,7 @@ main.o: main.c funcionesFibonacci.h
 	gcc -c main.c
 
 main: funcionesFibonacci.o main.o
-	gcc -Wall  -o fibonacci funcionesFibonacci.o main.o -lm
+	gcc -Wall  -o p1_fibonacci funcionesFibonacci.o main.o -lm
 
 clean:
-	rm -f main.o funcionesFibonacci.o
+	rm -f main.o funcionesFibonacci.o p1_fibonacci
