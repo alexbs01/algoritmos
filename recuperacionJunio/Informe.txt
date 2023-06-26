@@ -1,0 +1,121 @@
+# Algoritmos, examen práctico
+
+Grupo 3.1
+- AUTOR: Alejandro Becerra Suárez  LOGIN: a.becerra
+
+La práctica fue realizada con el siguiente dispositivo:
+
+- **Hardware**: AMD Ryzen 7 5800H 3.2 GHz (16 GB RAM)
+- **OS**: Ubuntu 22.04.2 LTS x86_64
+- **Kernel**: 5.19.0-41-generic
+
+## Introducción
+
+El objetivo es calcular de forma empírica la complejidad computacional del
+algoritmo de ordenación dado. Para ello, se pondrá a prueba con arrays ordenados
+de forma ascendente, descendete y desordenados de forma aleatoria.
+
+Los **tiempos** de las siguientes tablas estarán en **microsegundos (us)**,
+además también se dará una cota subestimada, ajustada y sobreestimada cada
+tiempo calculado.
+
+Cuando **un tiempo es inferior a 500 microsegundos**, se ejecutará
+multiplicado por 10 veces que la última vez, guardando un contador de cuantas
+veces se tuvo que ejecutar para ser mayor que 500 microsegundos. Una vez
+hecho esto se calcula la media.
+
+El **tamaño** de las entradas (los arrays) será de **razón 2**, comenzando
+en 500 (500, 1000, 2000, ...) y terminando 512000.
+
+Si una iteración tarda más de 500000 microsegundos, las siguientes iteraciones
+ya no se harán.
+
+Cuando se alcancen los 512000 elementos ordenados en el array o se superen los
+500000 microsegundos, las mediciones de esa tabla pararán y se pasará a la
+siguiente en caso de que la haya.
+
+## Nomenclatura de las tablas
+- **N**: Cantidad de números del array.
+- **I**: Número de veces que se repite el algoritmo.
+- **T**: Tiempo medio en microsegundos (us).
+- **T/CSub**: Tiempo medio entre la Cota Subestimada.
+- **T/CAjus**: Tiempo medio entre la Cota Ajustada calculada.
+- **T/CSobre**: Tiempo medio entre la Cota Sobreestimada.
+
+## Mediciones
+
+Tiempos de ordenación con array ALEATORIO:
+
+   [N]		  [I]		    [T]		    [T/CSub]	   [T/CAjus]	   [T/CSobre]
+
+     500	   10	     158.600000	     0.014186	    0.000675	    0.000183
+    1000	    1	     530.000000	     0.016760	    0.000568	    0.000133
+    2000	    1	    1914.000000	     0.021399	    0.000516	    0.000105
+    4000	    1	    7271.000000	     0.028741	    0.000494	    0.000087
+    8000	    1	   29755.000000	     0.041584	    0.000509	    0.000077
+   16000        1	  114716.000000	     0.056682	    0.000494	    0.000065
+   32000	    1	  466658.000000	     0.081522	    0.000506	    0.000057
+   64000        1	 1849333.000000	     0.114221	    0.000504	    0.000049
+
+- **CSub**: pow(n, 1.5)
+- **CAjus**: pow(n, 1.99)
+- **CSobre**: pow(n, 2.2)
+
+El tiempo entre la cota ajustada tiende a 0.00050
+
+*********************************************************
+Tiempos de ordenación con array ASCENDENTE:
+
+   [N]		  [I]		    [T]		    [T/CSub]	   [T/CAjus]	   [T/CSobre]
+
+     500	   10	    128.700000	     0.003321	    0.000548	    0.000277
+    1000	    1	    917.000000	     0.007284	    0.000983	    0.000460
+    2000	    1	   1798.000000	     0.004396	    0.000485	    0.000210
+    4000	    1	   7217.000000	     0.005431	    0.000490	    0.000197
+    8000	    1	  29583.000000	     0.006852	    0.000506	    0.000188
+   16000	    1	 113493.000000	     0.008090	    0.000488	    0.000168
+   32000	    1	 446053.000000	     0.009787	    0.000483	    0.000154
+   64000	    1	1778476.000000	     0.012010	    0.000485	    0.000144
+
+- **CSub**: pow(n, 1.7)
+- **CAjus**: pow(n, 1.99)
+- **CSobre**: pow(n, 2.1)
+
+El tiempo entre la cota ajustada tiende a 0.00048
+
+*********************************************************
+Tiempos de ordenación con array DESCENDENTE
+
+   [N]		  [I]		    [T]		    [T/CSub]	   [T/CAjus]	   [T/CSobre]
+
+     500	   10	   150.300000	     0.002084	    0.000640	    0.000323
+    1000	    1	   513.000000	     0.002042	    0.000550	    0.000257
+    2000	    1	  2032.000000	     0.002323	    0.000548	    0.000238
+    4000	    1	  8051.000000	     0.002643	    0.000547	    0.000220
+    8000	    1	 33796.000000	     0.003186	    0.000578	    0.000215
+   16000	    1	129458.000000	     0.003505	    0.000557	    0.000192
+   32000	    1	513409.000000	     0.003992	    0.000556	    0.000178
+
+- **CSub**: pow(n, 1.8)
+- **CAjus**: pow(n, 1.99)
+- **CSobre**: pow(n, 2.1)
+
+El tiempo entre la cota ajustada tiende a 0.00055
+
+## Conclusiones
+
+En general, presentó tiempos similares pero ligeramente mejores en los arrays
+ordenados de forma ascendente en todos los tamaños. Comparando los desordenados
+y los ordenados de forma descendente, estos últimos presentaron mejores tiempos
+en arrays de tamaño 500, 1000 y 2000. A partir de ahí, los desordenados
+mostraron mediciones mucho mejores, siendo el algoritmo capaz de ordenar 32000
+elementos desordenados antes de los 500000 microsegundos que es el tiempo
+límite para la última iteración, que no pasa con los arrays ordenados de forma
+descendente.
+
+Se detectaron anomalías en la segunda medición de cada tabla, que se corresponde
+con las mediciones que en una única vuelta superan el mínimo de 500
+microsegundos. A partir de ahí, el resto de mediciones son estables. Se
+intentaron solventar de diversas formas, pero no se logró.
+
+
