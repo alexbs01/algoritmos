@@ -13,7 +13,7 @@
 typedef struct nodo *posicion;
 typedef struct nodo *arbol;
 
-static struct nodo *crearNodo(int e); // Crea un nodo.
+
 arbol insertar(int e, arbol T); // Inserta una clave.
 
 arbol crearArbol(); // Inicializa un árbol binario.

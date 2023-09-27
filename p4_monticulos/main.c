@@ -14,7 +14,7 @@ int main() {
     test();
     inicializar_semilla();// Inicializamos la seed para obtener números aleatorios.
 
-    printf("\n\n*******************************************************\n");
+    printf("\n\n******************************************************\n");
     printf("N: Cantidad de números del array insertado en el monticulo.\n");
     printf("I: Numero de veces que se repite el algoritmo.\n");
     printf("T: Tiempo medio de crear_monticulo o de ord_monticulo en "
@@ -30,7 +30,7 @@ int main() {
 
     printf("\n*******************************************************\n");
     test2();
-    printf("\n\n*******************************************************\n");
+    printf("\n\n*****************************************************\n");
 
     tablaOrdAscendente(INICIAL_SIZE, MAX_SIZE);
     tablaOrdDescendente(INICIAL_SIZE, MAX_SIZE);

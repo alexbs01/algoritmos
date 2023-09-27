@@ -49,7 +49,7 @@ double microsegundos() {
     return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 
-/* Función para calcular cuanto tarda Fib1 */
+/* Función para calcular cuanto tarda Fib */
 chrono tiempoFib(int n, int (*tipoFib)(int n)) {
     chrono c;
     double tInicial, tFinal, tiempoTotal;

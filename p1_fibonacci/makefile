@@ -1,10 +1,10 @@
 all:main
 
 funcionesFibonacci.o: funcionesFibonacci.c funcionesFibonacci.h
-	gcc -c funcionesFibonacci.c
+	gcc -Wall -c funcionesFibonacci.c
 
 main.o: main.c funcionesFibonacci.h
-	gcc -c main.c
+	gcc -Wall -c main.c
 
 main: funcionesFibonacci.o main.o
 	gcc -Wall  -o p1_fibonacci funcionesFibonacci.o main.o -lm

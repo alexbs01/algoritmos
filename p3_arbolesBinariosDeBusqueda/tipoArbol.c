@@ -92,7 +92,7 @@ posicion buscar(int pos, arbol T) {
         }else {
             return T;
         }
-    };
+    }
 }
 
 /**
@@ -120,6 +120,8 @@ posicion hijoIzquierdo(arbol T) {
     if(T != NULL) {
         return T->izq;
     }
+
+    return NULL;
 }
 
 /**
@@ -131,6 +133,8 @@ posicion hijoDerecho(arbol T) {
     if(T != NULL) {
         return T->der;
     }
+
+    return NULL;
 }
 
 /**

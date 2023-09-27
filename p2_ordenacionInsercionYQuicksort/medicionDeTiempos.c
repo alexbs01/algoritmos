@@ -44,7 +44,7 @@ double microsegundos() {
 
 chrono tardanza(int array[], int size,
                 void (*tipoArray)(int v [], int n),void (*tipoOrd)(int v [], int n)) {
-    double tInicial, tFinal, ta, tb, Tiempo;
+    double tInicial, tFinal, ta, tb, Tiempo = 0;
     int count = 1, i;
     chrono c = {count, (Tiempo / count)};
 

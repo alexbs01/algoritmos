@@ -239,4 +239,6 @@ void calentarProcesador(int inicialSize, int maxSize) {
         cnt++;
         actualSize *= 2;
     } while(actualSize <= maxSize); //&& dato.tiempoMedio <= maxTime
+
+    arrayI[1] = arrayI[0] + arrayB[0];
 }
